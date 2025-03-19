@@ -1,4 +1,4 @@
-# TÍTULO DO PROJETO
+#NeuroPlay
 
 `CURSO`: ANÁLISE E DESENVOLVIMENTO DE SISTEMAS
 
@@ -6,20 +6,21 @@
 
 `SEMESTRE`: 1/2025
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+Com base no conceito de aplicação interativa, este projeto tem como propósito desenvolver um software voltado para crianças com Transtorno do Espectro Autista (TEA), auxiliando nos processos de alfabetização e reconhecimento de sentimentos. A interação seguirá o modelo de aplicativos como Mimo e Duolingo, utilizando jogos para tornar o aprendizado mais envolvente e eficaz, proporcionando uma experiência lúdica e acessível.
 
 ODS Alinhados:
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Ingrid Lorrane Esteves da Silva
+* Gabrielle Oliveira Pires
+* Ludmilla Caroline Gomes Dutra
+* Henrique de Souza Evangelista
+* Gabriel Filipe Azevedo Montalvao
 
 ## Orientador
 
-* Nome completo do professor 1
+* Cleia Marcia Gomes Amaral
 
 ## Instruções de utilização
 
@@ -82,7 +83,7 @@ Métricas e Feedbacks)
 * 0.1.1
     * CHANGE: Atualização das documentações. Código permaneceu inalterado.
 * 0.1.0
-    * Implementação da funcionalidade X pertencente ao processo P.
+    * XXX
 * 0.0.1
-    * Trabalhando na modelagem do processo de negócio.
+    * xxx
 
