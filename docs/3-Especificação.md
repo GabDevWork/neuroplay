@@ -2,86 +2,70 @@
 
 <span style="color:red">Pré-requisitos: <a href="2-Planejamento-Projeto.md"> Planejamento do Projeto do Software (Cronograma) </a></span>
 
-> Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição das histórias de usuários, dos requisitos funcionais e não funcionais além das restrições do projeto.
-
-> Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
 
 ## 3.1 Histórias de Usuários
-> Apresente aqui as histórias de usuário que são RELEVANTES para o projeto de sua solução. É esperado que haja pelo menos 10 histórias de usuário, dependendo do projeto escolhido para desenvolver.
-
-**OBS:** Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
-
-### a) Modifique o Quadro abaixo e insira as histórias de usuários para o seu projeto.
 
 |EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
 |--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
-|  xxxx              | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|  yyy               | Alterar permissões                 | Permitir que possam administrar contas |
-
-
-
-
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
-
+|Lucas, 10 anos  | Identificar sentimentos          | Entender e aceitar melhor meus sentimentos               |
+|Jessica, 32 anos       | Auxiliar minha filha na educação escolar                | Reforçar a introdução ao aprendizado da educação básica |
+|  Mateus, 26 anos             | Ajudar meus pacientes a identificar sentimentos           | Auxiliar no entendimento de sentimentos               |
+|  Sofia, 7 anos              | Manter o foco nas atividades e aprender brincando                 | Melhorar a concentração |
+|  Rafael, 9 anos            | Aprender com jogos interativos e coloridos                 | Aprender ler e escrever |
+|  Ana Clara, 27 anos             | Aprender brincando com jogos interativos                | tornar o aprendizado mais dinâmico |
+|  Marcos, 7 anos           | Encontrar atividades tranquilas e divertidas                | Ajudar no foco e aprendizado |
+|  Mariana, 24 anos             | Auxiliar com jogos de maneira lúdica e envolvente                | Estimular o desenvolvimento da fala  |
+| Pedro, 11 anos             | Praticar e melhorar minha comunicação                | Interagir socialmente e entender emoções  |
+|  Fernanda, 36 anos              | Explorar com minha filha novas habilidades                 | Desenvolver sua autonomia de maneira divertida |
 
 
 
 
 ## 3.2 Classificação dos Requisitos Funcionais x Requisitos não Funcionais 
 
-> Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-> - **[Requisitos Funcionais (RF)]**(https://pt.wikipedia.org/wiki/Requisito_funcional): correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-> - **[Requisitos Não Funcionais (RNF)]**(https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade, desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-
-> Lembre-se que cada requisito deve corresponder à uma e somente uma característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
-
-
-### a) Modifique os quadros abaixo, inserindo os Requisitos Funcionais e Não Funcionais do seu projeto. 
-
-Lembre-se de classificá-los de acordo com a prioridade: ALTA, MÉDIA ou BAIXA.
-
 ### Requisitos Funcionais
 
 |ID    | Descrição do Requisito                  | Prioridade |
 |------|-----------------------------------------|------------|
-|RF-001| Permitir que o usuário cadastre tarefas |    ALTA    | 
-|RF-002| Emitir um relatório de tarefas no mês   |    MÉDIA   |
+|RF-001| Realizar Cadastro |    ALTA    | 
+|RF-002| Criar jogos simples, intuitivos e objetivos  |    ALTA   |
+|RF-003| Deixar o site colorido, com cores mais leves  |    MÉDIA   |
+|RF-004| Salvar a progressão do aluno  |    ALTA   |
+|RF-005| Atualizar as recompensas na medida que sobe de nível  |    ALTA   |
+|RF-006| Apresentar mensagens de erro ou sucesso, com mensagens encorajadoras   |    MÉDIA   |
+|RF-007| Criar atividades que ajudem na alfabetização   |    ALTA   |
+|RF-008| Permitir que o usuário recupere a senha  |    BAIXA   |
 
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito                                            |Prioridade |
 |-------|-------------------------------------------------------------------|-----------|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel |    MÉDIA  | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s             |    BAIXA  | 
+|RNF-001| O sistema deve ser responsivo para rodar em dispositivos moveis e desktops. |    ALTA  | 
+|RNF-002| Deve processar requisições do usuário em no máximo 3s.            |    ALTA  | 
+|RNF-003| O sistema deve seguir a LGPD para proteção dos Dados.            |    ALTA  | 
+|RNF-004| O sistema deve ser bem documentado para facilitar manutenções.             |    MÉDIA  | 
+|RNF-005| Deve ser devensolvido em código limpo e com boas práticas de desenvolvimento.          |    MÉDIA  | 
+|RNF-006| O sistema deve oferecer uma interface amigável e intuitiva para os usuários.            |    alta  | 
+|RNF-007| O sistema deve ser compatível com diferentes navegadores e sistemas operacionais.           |    MÉDIA  | 
 
 
-
-### b) Modifique o Quadro abaixo e insira as Restrições para o seu projeto.
-
-O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ## Restrições
 
 |ID| Restrição                                               |
 |--|---------------------------------------------------------|
 |01| O software deve ser compatível com Windows e Linux.     |
-|02| O sistema deve ser desenvolvido utilizando Java e MySQL.|
+|02| O sistema deve ser desenvolvido utilizando React e MySQL.|
+|03| Implementação de sistema de pontos, recompensas e ranking.|
+|04| O conteúdo deve ser desenvolvido por especialistas para garantir precisão gramatical e contextual.|
+|05| Evitar vieses culturais e oferecer exemplos que representem diferentes realidades.|
+|06| Não utilizar materiais protegidos sem  permissão.|
+|07| Simplicidade para que usuários possam utilizar sem dificuldade.|
+|08| Correção de erros em tempo real e explicações claras sobre respostas erradas.|
+|09| Evitar que os usuários desistam ao longo do aprendizado.|
+|10| Proteção de dados dos usuários, incluindo menores de idade.|
+|11| Proteção contra fraudes e vazamentos de dados.|
+|12| Custos com hospedagem e manutenção da plataforma.|
 
-**Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.**
 
-> **Links Úteis**:
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
