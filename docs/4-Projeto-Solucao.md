@@ -5,13 +5,11 @@
 ## 4.1. Arquitetura da solução
 
 
-......  COLOQUE AQUI O SEU TEXTO E O DIAGRAMA DE ARQUITETURA .......
-
- Inclua um diagrama da solução e descreva os módulos e as tecnologias que fazem parte da solução. Discorra sobre o diagrama.
+O usuário acessa via navegador pela WEB a página de acesso da aplicação, a aplicação acessa o servidor que faze uma conexão via API com o banco de dados MySQL que retorna para API com os dados de leitura ou gravação, a API retorna para o servidor que retorna para os usuário que estão conectador através do navegador.
  
- **Exemplo do diagrama de Arquitetura**:
+ **Diagrama de Arquitetura**:
  
- ![Exemplo de Arquitetura](./images/DR_Arquitetura.png)
+ ![Exemplo de Arquitetura](./images/DR_arqui_solu.png)
  
  >FONTE: https://www.researchgate.net/figure/Figura-2-Diagrama-de-arquitectura-del-sistema_fig1_361400461 
  
