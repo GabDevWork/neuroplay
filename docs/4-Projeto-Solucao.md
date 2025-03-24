@@ -9,7 +9,7 @@ O usuário acessa via navegador pela WEB a página de acesso da aplicação, a a
  
  **Diagrama de Arquitetura**:
  
- ![Exemplo de Arquitetura](./images/DR_Arquitetura-solucao.PNG)
+ ![Exemplo de Arquitetura](./images/DR_Arquitetura-solucao.png)
  
  >FONTE: https://www.researchgate.net/figure/Figura-2-Diagrama-de-arquitectura-del-sistema_fig1_361400461 
  
@@ -157,7 +157,8 @@ Git: Um sistema de controle de versão que rastreia alterações em arquivos de 
 GitHub: Plataforma de hospedagem de código-fonte que utiliza o Git, facilitando a colaboração e o gerenciamento de projetos, além de manter um histórico claro de alterações e acelerar o ciclo de desenvolvimento.
 
 Ilustração
- ![Exemplo de ilustração](./images/ilustracao-fuxo.PNG)
+
+: ![Exemplo de ilustração](./images/ilustracao-fuxo.png)
 
 
 | **Dimensão**   | **Tecnologia**  |
