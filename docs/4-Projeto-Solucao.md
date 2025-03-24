@@ -158,7 +158,7 @@ GitHub: Plataforma de hospedagem de código-fonte que utiliza o Git, facilitando
 
 Ilustração
 
-: ![Exemplo de ilustração](./images/ilustracao-fuxo.png)
+ ![Exemplo de ilustração](./images/ilustracao-fuxo.png)
 
 
 | **Dimensão**   | **Tecnologia**  |
