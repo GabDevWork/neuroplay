@@ -27,9 +27,11 @@ Pessoas neuro divergentes Transtorno do Espectro Autista (TEA): caracterizado po
 
 ## 1.3 Objetivos
 
+> ### 1.3.1 Objetivo Geral
+
 Com base no conceito de aplicação interativa, este projeto tem como propósito desenvolver um software voltado para crianças com Transtorno do Espectro Autista (TEA), auxiliando nos processos de alfabetização e reconhecimento de sentimentos. A interação seguirá o modelo de aplicativos como Mimo e Duolingo, utilizando jogos para tornar o aprendizado mais envolvente e eficaz, proporcionando uma experiência lúdica e acessível.
 
-> ### 1.3.1 Objetivo específicos
+> ### 1.3.2 Objetivo Específicos
 
 - Auxiliar na identificação de sentimentos por meio de jogos com figuras representando emoções;
 - Apoiar o aprendizado da leitura e escrita com atividades repetitivas que reforcem a fixação do conteúdo.
