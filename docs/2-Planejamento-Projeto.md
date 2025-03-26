@@ -7,22 +7,28 @@
 > Apresente a divisão de papéis entre os membros do grupo em cada sprint. O desejável é que, em cada sprint, o aluno assuma papéis diferentes na disciplina. Siga o modelo do exemplo abaixo:
 
 ### Sprint 1
-- _Scrum master_: Gabrielle
-- Protótipos: Gabriel
-- Testes: Lud e Henrique
-- Documentação: Ingrid
+- _Scrum master_: Ingrid
+- Introdução: Gabrielle
+- Contexto: Ingrid
+- Problema: Henrique
+- Objetivo: Ludmilla
+- Justificativas e Participantes do processo: Gabriel
+- Listagem dos processos: Ingrid, Gabriel e Gabrielle
+- Apresentação: Gabrielle e Gabriel
 
 ### Sprint 2
-- _Scrum master_: Gabriele
-- Protótipos: Gabriel
-- Testes: Lud e Henrique
-- Documentação: Ingrid
+- _Scrum master_: Ingrid
+- História do Usuário: Gabrielle
+- Requisitos Funcionais: Ludmilla
+- Organização de Tarefas e Requisitos Não Funcionais: Ingrid
+- Restrições: Henrique
 
 ### Sprint 3
-- _Scrum master_: AlunaY
-- Desenvolvedor _front-end_: AlunoX
-- Desenvolvedor _back-end_: AlunoK
-- Testes: AlunaZ
+- _Scrum master_: Ingrid
+- Arquitetura da solução e Tecnologias: Henrique
+- Wireframes e Protótipos: Gabriel
+- Modelo de Dados e Esquema Relacional: Ludmilla
+- Modelo Físico e Modelo DER: Ingrid
 
 ### Sprint 4
 - _Scrum master_: AlunaY
@@ -82,10 +88,13 @@ Atualizado em: 21/04/2024
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| AlunaX        | Home-Page        | 01/02/2024     | 07/03/2024 | ✔️    | 05/01/2005      |
-| AlunaZ        | CSS Unificado    | 03/02/2024     | 10/03/2024 | 📝    |                 |
-| AlunoY        | Página de login  | 01/02/2024     | 07/03/2024 | ⌛     |                 |
-| AlunoK        | Script de login  |  01/01/2024    | 12/03/2024 | ❌    |       |
+| Henrique       | Arquitetura da solução        | 19/03/2025     | 26/03/2025 | ✔️    |  24/03/2025     |
+| Gabriel        | Wireframes e Protótipo    | 19/03/2025      | 02/04/2025 | 📝    |                 |
+| Ingrid        | Modelo ER | 19/03/2025     | 16/04/2025 |  ✔️     |   26/03/2025              |
+| Ludmilla        | Esquema Relacional | 19/03/2025     | 23/04/2025 | 📝     |               |
+| Ingrid        | Modelo Físico | 19/03/2025    | 30/04/2025 | 📝    |       |
+| Henrique        | Tecnologias | 19/03/2025    | 30/04/2025 | 📝    |       |
+
 
 Legenda:
 - ✔️: terminado
