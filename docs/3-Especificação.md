@@ -28,13 +28,13 @@
 |ID    | Descrição do Requisito                  | Prioridade |
 |------|-----------------------------------------|------------|
 |RF-001| Realizar Cadastro |    ALTA    | 
-|RF-002| Criar jogos simples, intuitivos e objetivos  |    ALTA   |
-|RF-003| Deixar o site colorido, com cores mais leves  |    MÉDIA   |
+|RF-002| Disponibilizar jogos simples, intuitivos e objetivos  |    ALTA   |
+|RF-003| Utilizar cores mais leves  |    MÉDIA   |
 |RF-004| Salvar a progressão do aluno  |    ALTA   |
 |RF-005| Atualizar as recompensas na medida que sobe de nível  |    ALTA   |
 |RF-006| Apresentar mensagens de erro ou sucesso, com mensagens encorajadoras   |    MÉDIA   |
-|RF-007| Criar atividades que ajudem na alfabetização   |    ALTA   |
-|RF-008| Permitir que o usuário recupere a senha  |    BAIXA   |
+|RF-007| Apresentar atividades que ajudem na alfabetização   |    ALTA   |
+|RF-008| Permitir que o usuário recupere a senha  |    MÉDIA   |
 
 
 ### Requisitos não Funcionais
@@ -46,8 +46,8 @@
 |RNF-003| O sistema deve seguir a LGPD para proteção dos Dados.            |    ALTA  | 
 |RNF-004| O sistema deve ser bem documentado para facilitar manutenções.             |    MÉDIA  | 
 |RNF-005| Deve ser devensolvido em código limpo e com boas práticas de desenvolvimento.          |    MÉDIA  | 
-|RNF-006| O sistema deve oferecer uma interface amigável e intuitiva para os usuários.            |    alta  | 
-|RNF-007| O sistema deve ser compatível com diferentes navegadores e sistemas operacionais.           |    MÉDIA  | 
+|RNF-006| O sistema deve oferecer uma interface amigável e intuitiva para os usuários.            |    ALTA  | 
+|RNF-007| O sistema deve ser compatível com diferentes navegadores e sistemas operacionais.           |    BAIXA  | 
 
 
 
@@ -62,10 +62,8 @@
 |05| Evitar vieses culturais e oferecer exemplos que representem diferentes realidades.|
 |06| Não utilizar materiais protegidos sem  permissão.|
 |07| Simplicidade para que usuários possam utilizar sem dificuldade.|
-|08| Correção de erros em tempo real e explicações claras sobre respostas erradas.|
-|09| Evitar que os usuários desistam ao longo do aprendizado.|
-|10| Proteção de dados dos usuários, incluindo menores de idade.|
-|11| Proteção contra fraudes e vazamentos de dados.|
-|12| Custos com hospedagem e manutenção da plataforma.|
+|08| Evitar que os usuários desistam ao longo do aprendizado.|
+|09| Proteção contra fraudes e vazamentos de dados.|
+|10| Custos com hospedagem e manutenção da plataforma.|
 
 
