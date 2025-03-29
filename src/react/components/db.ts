@@ -1,0 +1,13 @@
+import mysql from 'mysql2/promise';
+
+const pool = mysql.createPool({
+    host: '192.168.1.34',
+    user: 'neuroplay',
+    password: 'neuroplay',
+    database: 'neuroplay',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
+
+export default pool;

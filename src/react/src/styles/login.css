@@ -1,0 +1,140 @@
+.bodyLogin {
+  background-image: url(../../public/images/campo.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+
+.signInArea{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.signInAreaLogo{
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 125px;
+}
+
+.signInAreaLogoImg{
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+    box-shadow: 2px 2px 15px 0px #535353;
+}
+
+.signInBox{
+    background-color: #fff;
+    margin-bottom: 25px;
+    border-radius: 50px;
+    box-shadow: 0px 2px 15px 0px #535353;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+}
+
+.textUser{
+    margin-top: 130px;
+    font-size: 16px;
+}
+
+.userInput{
+    height: 20px;
+    width: 340px;
+    border: none; 
+    outline: none;
+    border-bottom: 2px solid #000; 
+}
+
+.textPassword{
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.passwordInput{
+    height: 20px;
+    width: 340px;
+    border: none; 
+    outline: none;
+    border-bottom: 2px solid #000; 
+}
+
+.buttonEnter{
+    height: 35px;
+    width: 160px;
+    border-radius: 50px;
+    margin-top: 30px;
+    background: #1246ff;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 0px 2px 2px 0px #474747;
+    cursor: pointer;
+}
+
+.signinGoogle{
+    height: 35px;
+    width: 280px;
+    border-radius: 50px;
+    margin-top: 20px;
+    background: #fff;
+    color: #000;
+    font-size: 15px;
+    box-shadow: 0px 2px 2px 0px #bbbbbb;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.googleIcon{
+    margin-right: 15px;
+}
+
+.signinFacebook{
+    height: 35px;
+    width: 280px;
+    border-radius: 50px;
+    margin-top: 10px;
+    background: #fff;
+    color: #000;
+    font-size: 15px;
+    box-shadow: 0px 2px 2px 0px #bbbbbb;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.facebookIcon{
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.textRecoverPass{
+    margin-top: 30px;
+    font-size: 15px;
+}
+
+.textFirstAccess{
+    font-size: 15px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    cursor: pointer;
+}

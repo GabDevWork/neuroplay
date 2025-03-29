@@ -1,0 +1,27 @@
+@import url(menuTop.css);
+@import url(index.css);
+@import url(login.css);
+@import url(cadastro.css);
+@import url(therapistRegister.css);
+@import url(teacherRegister.css);
+@import url(studentRegister.css);
+@import url(studantRegisterAge.css);
+@import url(studantRegisterDiagnostic.css);
+@import url(alerts.css);
+@import url(studantRegisterUser.css);
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
+}
