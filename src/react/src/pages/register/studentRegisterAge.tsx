@@ -35,6 +35,14 @@ export default function StudantAgeRegister(){
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
       }
+    }else if (studentAge == "0" || studentAge >= "110"){
+      setshowAlerts(true)
+      dataAlerts = {
+        alertType: 1,
+        alertText: "Adicione uma idade válida",
+        alertButtons: ["Editar"],
+        alertsCommans: [()=>{setshowAlerts(false)}]
+      }
     }else{
       registerNameStudent();
     }
@@ -45,10 +53,8 @@ export default function StudantAgeRegister(){
       const idReq = "2";
       const endpoint = `/api/apiRegisterStudent?idReq=${idReq}&id=${idStudent}&idade=${studentAge}`; 
       const response = await fetch(endpoint, {method: "POST", cache: "reload"})
-      const data = await response.json()
       if(response.status === 200){
-        console.log(data)
-        // router.push("/register/studentRegisterDiagnostic")
+        router.push("/register/studentRegisterDiagnostic")
       }
       else{
         setshowAlerts(true)
@@ -76,7 +82,7 @@ export default function StudantAgeRegister(){
           </div>
           <div className="registerStudantAgeBox">
             <h1 className="textStudentAge">Agora digite sua idade:</h1>
-            <input type="text" className="ageStudantInput" value={studentAge} onChange={(evt)=>setStudentAge(evt.target.value)}></input>
+            <input type="number" className="ageStudantInput" value={studentAge} onChange={(evt)=>setStudentAge(evt.target.value)}></input>
             <h1 className="textStudentAgeHelp">Peça ajuda de seus pais,</h1>
             <h1 className="textStudentAgeHelp2">se necessário</h1>
             <button className="buttonRegisterStudantAge" onClick={()=>AuthenticationsAlerts()}>Próximo</button>

@@ -45,7 +45,7 @@ export default function TeacherRegister(){
             alertsCommans: [()=>{setshowAlerts(false)}]
         }
     }
-    else if (nameTeacher == ""){
+    else if (nameTeacher == "" || nameTeacher == "null" || nameTeacher == "NULL" || nameTeacher == "Null"){
         setshowAlerts(true)
         dataAlerts = {
             alertType: 1,
@@ -54,7 +54,7 @@ export default function TeacherRegister(){
             alertsCommans: [()=>{setshowAlerts(false)}]
         }
     }
-    else if (emailTeacher == ""){
+    else if (emailTeacher == "" || emailTeacher == "null" || emailTeacher == "NULL" || emailTeacher == "Null"){
         setshowAlerts(true)
         dataAlerts = {
             alertType: 1,
@@ -63,7 +63,7 @@ export default function TeacherRegister(){
             alertsCommans: [()=>{setshowAlerts(false)}]
         }
     }
-    else if (userTeacher == ""){
+    else if (userTeacher == "" || userTeacher == "null" || userTeacher == "NULL" || userTeacher == "Null"){
         setshowAlerts(true)
         dataAlerts = {
             alertType: 1,
@@ -104,9 +104,17 @@ export default function TeacherRegister(){
             setshowAlerts(true)
             dataAlerts = {
                 alertType: 1,
-                alertText: "Cadastro concluido",
+                alertText: "Usuário cadastrado com sucesso",
                 alertButtons: ["Ok"],
                 alertsCommans: [()=>{router.push("/login")}]
+            }
+        }else if (response.status === 400){
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 1,
+                alertText: "Usuário indisponivel, escolha outro",
+                alertButtons: ["Editar"],
+                alertsCommans: [()=>{setshowAlerts(false)}]
             }
         }
     } catch (error){

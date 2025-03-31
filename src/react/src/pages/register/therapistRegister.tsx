@@ -1,10 +1,129 @@
 import MenuTop from "../../../components/menuTop"
 import Image from "next/image"
+import { useRouter } from "next/router";
+import { useState } from "react";
+import Alerts from "../../../components/alerts/alerts";
+import { TypeDataAlerts } from "../../../components/type";
+
+let dataAlerts:TypeDataAlerts ={
+    alertType: 0,
+    alertText: "",
+    alertButtons: [],
+    alertsCommans: [],
+}
 
 export default function TherapistRegister(){
 
+  const router = useRouter()
+  const [nameTherapist, setNameTherapist] = useState("")
+  const [emailTherapist, setEmailTherapist] = useState("")
+  const [userTherapist, setUserTherapist] = useState("")
+  const [passwordTherapist, setpasswordTherapist] = useState("")
+  const [validatedpassword, setvalidatedpasswoord] = useState("")
+  const [showAlerts, setshowAlerts] = useState(false)
+  const [messagePassword, setMessagePassword] = useState("");
+
+  const checkPasswordMatch = (password: string, confirmPassword: string) => {
+    if (password.length < 8 && confirmPassword.length < 8) {
+        setMessagePassword("❌ Digite pelo menos 8 caracteres!");
+    } else if (password === confirmPassword && password !== ""){
+        setMessagePassword("✔ Senhas conferem!");
+    }    
+    else {
+        setMessagePassword("❌ As senhas não conferem!");
+    }
+  }
+
+  function AuthenticationsAlerts(){
+    if (passwordTherapist != validatedpassword){
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 1,
+            alertText: "Senhas não conferem",
+            alertButtons: ["Editar"],
+            alertsCommans: [()=>{setshowAlerts(false)}]
+        }
+    }
+    else if (nameTherapist == "" || nameTherapist == "null" || nameTherapist == "NULL" || nameTherapist == "Null"){
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 1,
+            alertText: "Adicione o seu nome completo",
+            alertButtons: ["Editar"],
+            alertsCommans: [()=>{setshowAlerts(false)}]
+        }
+    }
+    else if (emailTherapist == "" || emailTherapist == "null" || emailTherapist == "NULL" || emailTherapist == "Null"){
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 1,
+            alertText: "Adicione um e-mail válido",
+            alertButtons: ["Editar"],
+            alertsCommans: [()=>{setshowAlerts(false)}]
+        }
+    }
+    else if (userTherapist == "" || userTherapist == "null" || userTherapist == "NULL" || userTherapist == "Null"){
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 1,
+            alertText: "Adicione um usuário válido",
+            alertButtons: ["Editar"],
+            alertsCommans: [()=>{setshowAlerts(false)}]
+        }
+    }
+    else if (passwordTherapist == "" && validatedpassword == ""){
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 1,
+            alertText: "Cadastre uma senha",
+            alertButtons: ["Editar"],
+            alertsCommans: [()=>{setshowAlerts(false)}]
+        }
+    }
+    else if (passwordTherapist.length < 8){
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 1,
+            alertText: "A senha deve conter pelo menos 8 caracteres",
+            alertButtons: ["Editar"],
+            alertsCommans: [()=>{setshowAlerts(false)}]
+        }
+    }
+    else{
+        registerTeacher();
+    }
+  }
+
+  const registerTeacher = async () => {
+    try{
+        const descricao = "Terapeuta"
+        const endpoint = `/api/apiRegisterProfessional?nome=${nameTherapist}&descricao=${descricao}&email=${emailTherapist}&username=${userTherapist}&password=${passwordTherapist}`; 
+        const response = await fetch(endpoint, {method: "POST", cache: "reload"})
+        if(response.status === 200){
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 1,
+                alertText: "Usuário cadastrado com sucesso",
+                alertButtons: ["Ok"],
+                alertsCommans: [()=>{router.push("/login")}]
+            }
+        }else if (response.status === 400){
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 1,
+                alertText: "Usuário indisponivel, escolha outro",
+                alertButtons: ["Editar"],
+                alertsCommans: [()=>{setshowAlerts(false)}]
+            }
+        }
+    } catch (error){
+        console.error("Error parsing response:", error);
+    }
+  }
+
   return (
     <div className="bodytherapistRegister">
+        {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
         <div>
             <MenuTop/>
         </div>
@@ -15,26 +134,29 @@ export default function TherapistRegister(){
             <div className="registerTherapistBox">
                 <div>
                     <h1 className="textNameTherapist">Nome Completo</h1>
-                    <input type="text" className="nameTherapistInput"></input>
+                    <input type="text" className="nameTherapistInput" value={nameTherapist} onChange={(evt)=>{setNameTherapist(evt.target.value)}}></input>
                 </div>
                 <div>
                     <h1 className="textEmailTherapist">Email</h1>
-                    <input type="text" className="emailTherapistInput"></input>
+                    <input type="text" className="emailTherapistInput" value={emailTherapist} onChange={(evt)=>{setEmailTherapist(evt.target.value)}}></input>
                 </div>
                 <div>
                     <h1 className="textUserTherapist">Nome de usuário</h1>
-                    <input type="text" className="userTherapistInput"></input>
+                    <input type="text" className="userTherapistInput" value={userTherapist} onChange={(evt)=>{setUserTherapist(evt.target.value)}}></input>
                 </div>
                 <div>
                     <h1 className="textTherapistPassword">Senha</h1>
-                    <input type="text" className="passwordTherapistInput"></input>
+                    <input type="password" className="passwordTherapistInput" value={passwordTherapist} onChange={(evt)=>{const newPassword = evt.target.value;setpasswordTherapist(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
                 </div>
                 <div>
                     <h1 className="textTherapistPasswordValidated">Senha</h1>
-                    <input type="text" className="passwordValidatedTherapistInput"></input>
+                    <input type="password" className="passwordValidatedTherapistInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTherapist, newConfirmPassword);}}></input>
                 </div>
-                <button className="buttonRegisterTherapist">Cadastrar</button>
-                <h1 className="textHaveAccessTherapist">Possuo cadastro</h1>
+                <div className="MessageValidatedPasswordTherapist">
+                    <h1 className="textMessageValidatedPasswordTherapist" style={{ color: passwordTherapist !== validatedpassword ? "red" : passwordTherapist.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>
+                </div>
+                <button className="buttonRegisterTherapist" onClick={()=>AuthenticationsAlerts()}>Cadastrar</button>
+                <h1 className="textHaveAccessTherapist" onClick={()=>router.push("/login")}>Possuo cadastro</h1>
             </div>
         </div>
     </div>

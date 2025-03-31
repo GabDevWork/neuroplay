@@ -6,7 +6,7 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
   try{
     const connection = await pool.getConnection();
     const [rows_user]:any[] = await connection.query(`
-      SELECT user_professional, user_studant FROM Studant, Professional WHERE user_studant = ? AND password_studant = ? OR user_professional = ? AND password_professional = ?;
+      SELECT user_professional, user_student FROM student, professional WHERE user_student = ? AND password_student = ? OR user_professional = ? AND password_professional = ?;
         `,[username, password, username, password]
       );
     connection.release();

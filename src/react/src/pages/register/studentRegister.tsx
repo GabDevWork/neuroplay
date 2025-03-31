@@ -27,7 +27,16 @@ export default function StudantRegister(){
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
       }
-    }else{
+    }else if (studentName == "null" || studentName == "NULL" || studentName == "Null"){
+      setshowAlerts(true)
+      dataAlerts = {
+        alertType: 1,
+        alertText: "Adicione um nome valido",
+        alertButtons: ["Editar"],
+        alertsCommans: [()=>{setshowAlerts(false)}]
+      }
+    }
+    else{
       registerNameStudent();
     }
   }
