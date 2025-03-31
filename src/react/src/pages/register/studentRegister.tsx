@@ -37,16 +37,21 @@ export default function StudantRegister(){
       const idReq = "1";
         const endpoint = `/api/apiRegisterStudent?idReq=${idReq}&nome=${studentName}`; 
         const response = await fetch(endpoint, {method: "POST", cache: "reload"})
+        const data = await response.json();
         if(response.status === 200){
-            setshowAlerts(true)
-            dataAlerts = {
-                alertType: 1,
-                alertText: "Cadastro concluido",
-                alertButtons: ["Ok"],
-                alertsCommans: [()=>{router.push("/register/studentRegisterAge")}]
-            }
+          localStorage.setItem("id_student", data.id_student);
+          router.push("/register/studentRegisterAge")
         }
-    }catch (error){
+        else{
+          setshowAlerts(true)
+          dataAlerts = {
+            alertType: 1,
+            alertText: "Cadastro não concluido, tente novamente mais tarde",
+            alertButtons: ["Ok"],
+            alertsCommans: [()=>{setshowAlerts(false)}]
+          }
+        }
+    }catch(error){
       console.error("Error parsing response:", error);
     }
   }
