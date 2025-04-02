@@ -39,7 +39,7 @@ _Apresente o modelo de dados por meio de um modelo relacional que contemple todo
 
 #### 4.3.1 Modelo ER
 
-![Modelo DER](./images/MER.drawio.png)
+![Modelo DER](./images/MER.drawio1.png)
 
 
 #### 4.3.2 Esquema Relacional
