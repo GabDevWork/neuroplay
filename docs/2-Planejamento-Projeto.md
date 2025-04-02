@@ -89,9 +89,9 @@ Atualizado em: 21/04/2024
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
 | Henrique       | Arquitetura da solução        | 19/03/2025     | 26/03/2025 | ✔️    |  24/03/2025     |
-| Gabriel        | Wireframes e Protótipo    | 19/03/2025      | 02/04/2025 | 📝    |                 |
+| Gabriel        | Wireframes e Protótipo    | 19/03/2025      | 02/04/2025 | ✔️     |     28/03/2025            |
 | Ingrid        | Modelo ER | 19/03/2025     | 16/04/2025 |  ✔️     |   26/03/2025              |
-| Ludmilla        | Esquema Relacional | 19/03/2025     | 23/04/2025 | 📝     |               |
+| Ludmilla        | Esquema Relacional | 19/03/2025     | 23/04/2025 | ✔️      |    02/04/2025           |
 | Ingrid        | Modelo Físico | 19/03/2025    | 30/04/2025 | 📝    |       |
 | Henrique        | Tecnologias | 19/03/2025    | 30/04/2025 | 📝    |       |
 
