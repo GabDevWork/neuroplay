@@ -16,24 +16,14 @@ O usuário acessa via navegador pela WEB a página de acesso da aplicação, a a
 
 ### 4.2. Wireframes/Mockups de telas
 
-![Exemplo de Wireframe](images/wireframe-example.png)
-
 Link Prototipo: https://www.figma.com/design/6XlrwMVRBARnI8rGhep71O/NeuroPlay?node-id=1-2&p=f
 
-
-## Modelo ER
-
-O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.]
-
-As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER”.
-
-> - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
 
 
 ### 4.3. Modelo de dados
 
 
-O desenvolvimento da solução proposta requer a existência de bases de dados que permitam efetuar os cadastros de dados e controles associados aos processos identificados, assim como recuperações.
+(colocar uma descrição aqui) O desenvolvimento da solução proposta requer a existência de bases de dados que permitam efetuar os cadastros de dados e controles associados aos processos identificados, assim como recuperações.
 Utilizando a notação do DER (Diagrama Entidade e Relacionamento), elaborem um modelo, na ferramenta visual indicada na disciplina, que contemple todas as entidades e atributos associados às atividades dos processos identificados. Deve ser gerado um único DER que suporte todos os processos escolhidos, visando, assim, uma base de dados integrada. O modelo deve contemplar, também, o controle de acesso de usuários (partes interessadas dos processos) de acordo com os papéis definidos nos modelos do processo de negócio.
 _Apresente o modelo de dados por meio de um modelo relacional que contemple todos os conceitos e atributos apresentados na modelagem dos processos._
 
@@ -43,15 +33,9 @@ _Apresente o modelo de dados por meio de um modelo relacional que contemple todo
 
 
 #### 4.3.2 Esquema Relacional
-**OBS:** Se o aluno utilizar BD NoSQL, ele não precisará fazer essa parte, mas caso haja interesse basta perguntar a prof de BD NoSQL. 
 
-O Esquema Relacional corresponde à representação dos dados em tabelas juntamente com as restrições de integridade e chave primária.
- 
-As referências abaixo irão auxiliá-lo na geração do artefato “Esquema Relacional”.
 
-> - [Criando um modelo relacional - Documentação da IBM](https://www.ibm.com/docs/pt-br/cognos-analytics/10.2.2?topic=designer-creating-relational-model)
-
-![Exemplo de um modelo relacional](images/modeloRelacional.png "Exemplo de Modelo Relacional.")
+![Exemplo de um modelo relacional](./images/EsqRel_NeuroPlay.drawio.png)
 ---
 
 
