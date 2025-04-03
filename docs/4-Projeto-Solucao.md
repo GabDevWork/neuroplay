@@ -4,7 +4,7 @@
 
 ## 4.1. Arquitetura da solução
 
-A arquitetura da aplicação Neuroplay pode ser iniciada com o usuário acessando a aplicação via navegador web. Na página de acesso, a usuário digita login e senha. Em seguida, a aplicação acessa o servidor enviando requisições, que faz a conexão com a API validando usuario, senha, perguntas e atividades no banco de dados no MySQL Workbench.
+A arquitetura da aplicação Neuroplay pode ser iniciada com o usuário acessando a aplicação via navegador web. Na página de acesso, o usuário digita login e senha. Em seguida, a aplicação acessa o servidor enviando requisições, que faz a conexão com a API validando usuario, senha, perguntas e atividades no banco de dados no MySQL Workbench.
 
  
  **Diagrama de Arquitetura**:
