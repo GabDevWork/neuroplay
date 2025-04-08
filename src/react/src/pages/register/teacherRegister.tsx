@@ -22,6 +22,8 @@ export default function TeacherRegister(){
   const [validatedpassword, setvalidatedpasswoord] = useState("")
   const [showAlerts, setshowAlerts] = useState(false)
   const [messagePassword, setMessagePassword] = useState("");
+  const [messageEmail, setMessageEmail] = useState("");
+  const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
 
 
   const checkPasswordMatch = (password: string, confirmPassword: string) => {
@@ -34,6 +36,14 @@ export default function TeacherRegister(){
         setMessagePassword("❌ As senhas não conferem!");
     }
   };
+
+  const checkEmail = (email: string)=> {
+    if (regEx.test(email)){
+        setMessageEmail("✔ E-mail válido")
+    }else{
+        setMessageEmail("❌ E-mail inválido")
+    }
+  }
 
   function AuthenticationsAlerts(){
     if (passwordTeacher != validatedpassword){
@@ -54,7 +64,7 @@ export default function TeacherRegister(){
             alertsCommans: [()=>{setshowAlerts(false)}]
         }
     }
-    else if (emailTeacher == "" || emailTeacher == "null" || emailTeacher == "NULL" || emailTeacher == "Null"){
+    else if (regEx.test(emailTeacher) == false || emailTeacher == "null" || emailTeacher == "NULL" || emailTeacher == "Null"){
         setshowAlerts(true)
         dataAlerts = {
             alertType: 1,
@@ -116,7 +126,15 @@ export default function TeacherRegister(){
                 alertButtons: ["Editar"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
             }
-        }
+        }else{
+            setshowAlerts(true)
+            dataAlerts = {
+              alertType: 1,
+              alertText: "Cadastro não concluido, tente novamente mais tarde",
+              alertButtons: ["Ok"],
+              alertsCommans: [()=>{setshowAlerts(false)}]
+            }
+          }
     } catch (error){
         console.error("Error parsing response:", error);
     }
@@ -139,7 +157,8 @@ export default function TeacherRegister(){
                 </div>
                 <div>
                     <h1 className="textEmailTeacher">Email</h1>
-                    <input type="text" className="emailTeacherInput" value={emailTeacher} onChange={(evt)=>{setEmailTeacher(evt.target.value)}}></input>
+                    <input type="text" className="emailTeacherInput" value={emailTeacher} onChange={(evt)=>{setEmailTeacher(evt.target.value);checkEmail(evt.target.value)}}></input>
+                    <h1 className="ValidatedEmailTeacher" style={{ color: messageEmail === "❌ E-mail inválido" ? "red" : "green" }}>{messageEmail}</h1>
                 </div>
                 <div>
                     <h1 className="textUserTeacher">Nome de usuário</h1>

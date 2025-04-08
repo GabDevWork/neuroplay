@@ -22,15 +22,25 @@ export default function TherapistRegister(){
   const [validatedpassword, setvalidatedpasswoord] = useState("")
   const [showAlerts, setshowAlerts] = useState(false)
   const [messagePassword, setMessagePassword] = useState("");
+  const [messageEmail, setMessageEmail] = useState("");
+  const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
 
   const checkPasswordMatch = (password: string, confirmPassword: string) => {
     if (password.length < 8 && confirmPassword.length < 8) {
-        setMessagePassword("❌ Digite pelo menos 8 caracteres!");
+        setMessagePassword("❌ Digite pelo menos 8 caracteres");
     } else if (password === confirmPassword && password !== ""){
-        setMessagePassword("✔ Senhas conferem!");
+        setMessagePassword("✔ Senhas conferem");
     }    
     else {
-        setMessagePassword("❌ As senhas não conferem!");
+        setMessagePassword("❌ As senhas não conferem");
+    }
+  }
+
+  const checkEmail = (email: string)=> {
+    if (regEx.test(email)){
+        setMessageEmail("✔ E-mail válido")
+    }else{
+        setMessageEmail("❌ E-mail inválido")
     }
   }
 
@@ -53,7 +63,7 @@ export default function TherapistRegister(){
             alertsCommans: [()=>{setshowAlerts(false)}]
         }
     }
-    else if (emailTherapist == "" || emailTherapist == "null" || emailTherapist == "NULL" || emailTherapist == "Null"){
+    else if (regEx.test(emailTherapist) == false || emailTherapist == "" || emailTherapist == "null" || emailTherapist == "NULL" || emailTherapist == "Null"){
         setshowAlerts(true)
         dataAlerts = {
             alertType: 1,
@@ -115,7 +125,15 @@ export default function TherapistRegister(){
                 alertButtons: ["Editar"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
             }
-        }
+        }else{
+            setshowAlerts(true)
+            dataAlerts = {
+              alertType: 1,
+              alertText: "Cadastro não concluido, tente novamente mais tarde",
+              alertButtons: ["Ok"],
+              alertsCommans: [()=>{setshowAlerts(false)}]
+            }
+          }
     } catch (error){
         console.error("Error parsing response:", error);
     }
@@ -138,7 +156,8 @@ export default function TherapistRegister(){
                 </div>
                 <div>
                     <h1 className="textEmailTherapist">Email</h1>
-                    <input type="text" className="emailTherapistInput" value={emailTherapist} onChange={(evt)=>{setEmailTherapist(evt.target.value)}}></input>
+                    <input type="text" className="emailTherapistInput" value={emailTherapist} onChange={(evt)=>{setEmailTherapist(evt.target.value);checkEmail(evt.target.value)}}></input>
+                    <h1 className="ValidatedEmailTherapist" style={{ color: messageEmail === "❌ E-mail inválido" ? "red" : "green" }}>{messageEmail}</h1>
                 </div>
                 <div>
                     <h1 className="textUserTherapist">Nome de usuário</h1>

@@ -123,12 +123,18 @@
     .textMessageValidatedPasswordTherapist{
         font-size: 15px;
     }
+
+    .ValidatedEmailTherapist{
+        margin-top: 5px;
+        font-size: 15px;
+    }
+
   
   .buttonRegisterTherapist{
       height: 35px;
       width: 230px;
       border-radius: 50px;
-      margin-top: 30px;
+      margin-top: 15px;
       background: #1246ff;
       color: #fff;
       outline: none;
@@ -141,6 +147,8 @@
   
   .textHaveAccessTherapist{
       font-size: 15px;
-      margin-bottom: 15px;
-      margin-top: 15px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      text-decoration: underline;
+      cursor: pointer;
   }
