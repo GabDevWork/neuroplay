@@ -41,51 +41,103 @@ _Apresente o modelo de dados por meio de um modelo relacional que contemple todo
 
 #### 4.3.3 Modelo Físico
 
-
-Insira aqui o script de criação das tabelas do banco de dados. 
-**OBS:** Se o aluno utilizar BD NoSQL, ele derá incluir o script aqui também. 
-
-Veja um exemplo:
-
 <code>
 
- -- Criação da tabela Médico
-CREATE TABLE Medico (
-    MedCodigo INTEGER PRIMARY KEY,
-    MedNome VARCHAR(100)
+ -- Criação do banco de Dados
+create database neuro_play;
+
+-- Utilizando o Banco para as querys seguintes
+use neuro_play;
+
+-- Criação da tabela Profissional
+CREATE TABLE Profissional(
+pro_id INT PRIMARY KEY NOT NULL auto_increment,
+pro_nome VARCHAR(100),
+pro_usuário VARCHAR(30) UNIQUE NOT NULL,
+pro_senha VARCHAR(30) NOT NULL,
+pro_email VARCHAR(30) UNIQUE,
+pro_tipo VARCHAR(30) CHECK ( pro_tipo in ('Terapeuta', 'Pedagogo'))
 );
 
 
--- Criação da tabela Paciente
-CREATE TABLE Paciente (
-    PacCodigo INTEGER PRIMARY KEY,
-    PacNome VARCHAR(100)
+-- Criação da tabela Criança
+CREATE TABLE Crianca (
+cri_id INT PRIMARY KEY NOT NULL auto_increment,
+cri_nome VARCHAR(100),
+cri_senha VARCHAR(30) NOT NULL,
+cri_usuário VARCHAR(30) UNIQUE NOT NULL,
+cri_idade INT,
+cri_pro_id INT,
+cri_necessidade VARCHAR(30) CHECK(cri_necessidade in('Autista', 'TDH' )),
+foreign key (cri_pro_id) REFERENCES Profissional (pro_id)
 );
 
--- Criação da tabela Consulta
-CREATE TABLE Consulta (
-    ConCodigo INTEGER PRIMARY KEY,
-    MedCodigo INTEGER,
-    PacCodigo INTEGER,
-    Data DATE,
-    FOREIGN KEY (MedCodigo) REFERENCES Medico(MedCodigo),
-    FOREIGN KEY (PacCodigo) REFERENCES Paciente(PacCodigo)
+-- Criação da tabela Nivel
+CREATE TABLE Nivel (
+ni_id INT PRIMARY KEY NOT NULL auto_increment,
+ni_nome VARCHAR(30),
+ni_dificuldade INT
 );
 
--- Criação da tabela Medicamento
-CREATE TABLE Medicamento (
-    MdcCodigo INTEGER PRIMARY KEY,
-    MdcNome VARCHAR(100)
+-- Criação Tabela Atividade
+CREATE TABLE Atividade (
+at_id INT NOT NULL auto_increment,
+at_ni_id INT,
+at_pergunta VARCHAR(255),
+at_opcaoa VARCHAR(255),
+at_opcaob VARCHAR(255),
+at_opcaoc VARCHAR(255),
+at_opcaod VARCHAR(255),
+at_resposta VARCHAR(255),
+PRIMARY KEY (at_id, at_ni_id),
+foreign key (at_ni_id) REFERENCES Nivel (ni_id)
 );
 
--- Criação da tabela Prescricao
-CREATE TABLE Prescricao (
-    ConCodigo INTEGER,
-    MdcCodigo INTEGER,
-    Posologia VARCHAR(200),
-    PRIMARY KEY (ConCodigo, MdcCodigo),
-    FOREIGN KEY (ConCodigo) REFERENCES Consulta(ConCodigo),
-    FOREIGN KEY (MdcCodigo) REFERENCES Medicamento(MdcCodigo)
+
+-- Criação da tabela Selo
+CREATE TABLE Selo (
+se_id INT PRIMARY KEY NOT NULL auto_increment,
+se_nome VARCHAR(100),
+se_foto VARCHAR(255)
+);
+
+-- Criação da tabela Animal
+CREATE TABLE Animal (
+an_id INT PRIMARY KEY NOT NULL auto_increment,
+an_nome VARCHAR(100),
+an_foto VARCHAR(255)
+);
+
+-- Criação da Tabela Progresso
+CREATE TABLE Progresso(
+pro_id INT PRIMARY KEY NOT NULL auto_increment,
+pro_cri_id INT,
+pro_ni_id INT,
+pro_at_id INT,
+pro_data DATE,
+foreign key (pro_cri_id) REFERENCES Crianca (cri_id),
+foreign key (pro_ni_id) REFERENCES Nivel (ni_id),
+foreign key (pro_at_id) REFERENCES Atividade (at_id)
+);
+
+-- Criação da Tabela Progresso dos selo
+CREATE TABLE Progresso_selo(
+prose_id INT PRIMARY KEY NOT NULL auto_increment,
+prose_pro_id INT,
+prose_se_id INT,
+prose_data DATE,
+foreign key (prose_pro_id) REFERENCES Progresso (pro_id),
+foreign key (prose_se_id) REFERENCES Selo (se_id)
+);
+
+-- Criação da Tabela Progresso dos Animais
+CREATE TABLE Progresso_animal(
+proan_id INT PRIMARY KEY NOT NULL auto_increment,
+proan_pro_id INT,
+proan_an_id INT,
+proan_data DATE,
+foreign key (proan_pro_id) REFERENCES Progresso (pro_id),
+foreign key (proan_an_id) REFERENCES Animal (an_id)
 );
 
 </code>
