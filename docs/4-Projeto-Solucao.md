@@ -170,7 +170,7 @@ React: Um framework que simplifica o desenvolvimento de sites responsivos e visu
 
 Back-end
 
-API e React: Utilizado no back-end, sua versatilidade permite que ele seja usado oferecendo flexibilidade e agilidade, permitindo o desenvolvimento de aplicações de forma simples e adaptável às necessidades do projeto.
+API e React: Utilizado no back-end, sua versatilidade permite que o aplicação NeuroPlay se conecte a serviços externos e troque dados oferecendo flexibilidade e agilidade, permitindo o desenvolvimento de aplicações de forma simples e adaptável às necessidades do projeto.
 
 IDE Padrão
 
