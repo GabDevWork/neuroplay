@@ -12,7 +12,7 @@ let dataAlerts:TypeDataAlerts = {
   alertsCommans: []
 }
 
-export default function StudantRegister(){
+export default function StudentRegister(){
 
   const router = useRouter()
   const [studentName, setStudentName] = useState("")

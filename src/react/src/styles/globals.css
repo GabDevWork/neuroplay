@@ -9,6 +9,7 @@
 @import url(studantRegisterDiagnostic.css);
 @import url(alerts.css);
 @import url(studantRegisterUser.css);
+@import url(childRegister.css);
 
 :root {
   --background: #ffffff;

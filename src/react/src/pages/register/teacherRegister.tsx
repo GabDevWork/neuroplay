@@ -110,13 +110,22 @@ export default function TeacherRegister(){
         const descricao = "Professor"
         const endpoint = `/api/apiRegisterProfessional?nome=${nameTeacher}&descricao=${descricao}&email=${emailTeacher}&username=${userTeacher}&password=${passwordTeacher}`; 
         const response = await fetch(endpoint, {method: "POST", cache: "reload"})
+        const data = await response.json();
         if(response.status === 200){
             setshowAlerts(true)
             dataAlerts = {
                 alertType: 1,
                 alertText: "Usuário cadastrado com sucesso",
                 alertButtons: ["Ok"],
-                alertsCommans: [()=>{router.push("/login")}]
+                alertsCommans: [()=>{setshowAlerts(false)}]
+            }
+            localStorage.setItem("id", data.id);
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 1,
+                alertText: "Deseja cadastrar um aluno?",
+                alertButtons: ["Cadastrar agora", "Cadastrar depois"],
+                alertsCommans: [()=>{router.push("/register/childRegister")}, ()=>{router.push("/login")}]
             }
         }else if (response.status === 400){
             setshowAlerts(true)

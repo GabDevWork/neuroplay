@@ -12,7 +12,7 @@ let dataAlerts:TypeDataAlerts = {
   alertsCommans: []
 }
 
-export default function StudantAgeRegister(){
+export default function StudentAgeRegister(){
 
   const router = useRouter();
   const [showAlerts, setshowAlerts] = useState(false);
@@ -35,7 +35,7 @@ export default function StudantAgeRegister(){
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
       }
-    }else if (studentAge == "0" || studentAge >= "110"){
+    }else if (parseInt(studentAge) == 0 || parseInt(studentAge) >= 20){
       setshowAlerts(true)
       dataAlerts = {
         alertType: 1,

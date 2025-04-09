@@ -12,7 +12,7 @@ let dataAlerts:TypeDataAlerts ={
   alertsCommans: [],
 }
 
-export default function StudantRegisterUser(){
+export default function StudentRegisterUser(){
 
   const [passworStudent, setpasswordStudent] = useState("")
   const [validatedpassword, setvalidatedpasswoord] = useState("")

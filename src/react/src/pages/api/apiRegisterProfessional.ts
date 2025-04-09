@@ -23,7 +23,7 @@ export default async function RegisterProfessional(req: NextApiRequest, res: Nex
         (?, ?, ?, ?, ?, ?);`,[newId, descricao, nome, email, username, password]
           );
         connection.release();
-        res.status(200).json({message:"ok"})
+        res.status(200).json({'id': newId})
       }catch(error){
         console.error(error)
         res.status(500).json({message:"Internal Server Error"});

@@ -109,6 +109,7 @@ export default function TherapistRegister(){
         const descricao = "Terapeuta"
         const endpoint = `/api/apiRegisterProfessional?nome=${nameTherapist}&descricao=${descricao}&email=${emailTherapist}&username=${userTherapist}&password=${passwordTherapist}`; 
         const response = await fetch(endpoint, {method: "POST", cache: "reload"})
+        const data = await response.json();
         if(response.status === 200){
             setshowAlerts(true)
             dataAlerts = {
@@ -116,6 +117,14 @@ export default function TherapistRegister(){
                 alertText: "Usuário cadastrado com sucesso",
                 alertButtons: ["Ok"],
                 alertsCommans: [()=>{router.push("/login")}]
+            }
+            localStorage.setItem("id", data.id);
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 1,
+                alertText: "Deseja cadastrar um paciente?",
+                alertButtons: ["Cadastrar agora", "Cadastrar depois"],
+                alertsCommans: [()=>{router.push("/register/childRegister")}, ()=>{router.push("/login")}]
             }
         }else if (response.status === 400){
             setshowAlerts(true)

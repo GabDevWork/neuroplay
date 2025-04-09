@@ -25,9 +25,18 @@
     margin: 5px;
 }
 
+.boxButtonAlerts{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 .buttonAlerts{
-    height: 30px;
-    width: 100px;
+    height: 45px;
+    width: 120px;
+    padding: 5px;
     border-radius: 50px;
     background: #1246ff;
     color: #fff;

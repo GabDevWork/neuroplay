@@ -12,7 +12,7 @@ let dataAlerts:TypeDataAlerts = {
   alertsCommans: []
 }
 
-export default function StudantDiagnosticRegister(){
+export default function StudentDiagnosticRegister(){
 
   const router = useRouter()
   const [studentDiagnostic, setStudentDiagnostic] = useState("")
