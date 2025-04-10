@@ -84,7 +84,7 @@ Legenda:
 
 ## Sprint 3
 
-Atualizado em: 08/04/2025
+Atualizado em: 09/04/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
@@ -93,7 +93,7 @@ Atualizado em: 08/04/2025
 | Ingrid        | Modelo ER | 19/03/2025     | 16/04/2025 |  ✔️     |   26/03/2025              |
 | Ludmilla        | Esquema Relacional | 19/03/2025     | 23/04/2025 | ✔️      |    02/04/2025           |
 | Ingrid        | Modelo Físico | 19/03/2025    | 30/04/2025 | ✔️     |  08/04/2025     |
-| Henrique        | Tecnologias | 19/03/2025    | 30/04/2025 | 📝    |       |
+| Henrique        | Tecnologias | 19/03/2025    | 30/04/2025 | ✔️    |   08/04/2025    |
 
 
 Legenda:
