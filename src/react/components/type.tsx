@@ -4,3 +4,10 @@ export type TypeDataAlerts = {
     alertButtons: string[],
     alertsCommans: (()=> void)[],
 }
+
+export type TypeDataActivity = {
+    activityQuestion: string,
+    activityAlternatives: string[],
+    activityAnswer: string,
+    activityComand: (()=> void)[],
+}

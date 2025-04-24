@@ -80,7 +80,7 @@ export default function StudentDiagnosticRegister(){
                 <option value="TDAH">TDAH</option>
                 <option value="Dislexia">Dislexia</option>
                 <option value="TEA">TEA</option>
-                <option value="Outro">Outros</option>
+                <option value="Outro">Outro</option>
               </select>
               <h1 className="textStudentAgeHelp">Peça ajuda de seus pais,</h1>
               <h1 className="textStudentAgeHelp2">se necessário</h1>

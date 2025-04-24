@@ -6,8 +6,12 @@ export default async function RegisterProfessional(req: NextApiRequest, res: Nex
   try{
     const connection = await pool.getConnection();
     const [rowsUser]:any[] = await connection.query(`
-      SELECT * FROM professional WHERE user_professional = ?;
-        `,[username]
+      SELECT prof_user AS username FROM professional 
+      WHERE prof_user = ?
+      UNION
+      SELECT stu_user AS username FROM student
+      WHERE stu_user = ?;
+        `,[username, username]
       );
     connection.release();
     if (Array.isArray(rowsUser) && rowsUser.length > 0) {
@@ -15,13 +19,12 @@ export default async function RegisterProfessional(req: NextApiRequest, res: Nex
     }else{
       try{
         const connection = await pool.getConnection();
-        const [result]:any[] = await connection.query("SELECT MAX(id_professional) AS lastId FROM professional");
+        const [result]:any[] = await connection.query("SELECT MAX(prof_id) AS lastId FROM professional");
         const lastId = (result)[0].lastId || 0;
         const newId = lastId + 1;  
         const [rows_user]:any[] = await connection.query(`
-          insert into professional (id_professional, desc_professional, name_professional, email_professional, user_professional, password_professional) values
-        (?, ?, ?, ?, ?, ?);`,[newId, descricao, nome, email, username, password]
-          );
+          INSERT INTO professional (prof_id, prof_desc, prof_name, prof_email, prof_user, prof_password) VALUES (?, ?, ?, ?, ?, ?);`,[newId, descricao, nome, email, username, password]
+        );
         connection.release();
         res.status(200).json({'id': newId})
       }catch(error){

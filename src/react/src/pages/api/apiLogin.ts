@@ -6,7 +6,13 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
   try{
     const connection = await pool.getConnection();
     const [rows_user]:any[] = await connection.query(`
-      SELECT user_professional, user_student FROM student, professional WHERE user_student = ? AND password_student = ? OR user_professional = ? AND password_professional = ?;
+      SELECT prof_user AS username, prof_desc AS role 
+      FROM professional 
+      WHERE prof_user = ? AND prof_password = ?
+      UNION
+      SELECT stu_user AS username, 'Estudante' AS role 
+      FROM student 
+      WHERE stu_user = ? AND stu_password = ?
         `,[username, password, username, password]
       );
     connection.release();

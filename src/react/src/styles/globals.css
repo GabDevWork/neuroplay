@@ -10,6 +10,8 @@
 @import url(alerts.css);
 @import url(studantRegisterUser.css);
 @import url(childRegister.css);
+@import url(home.css);
+@import url(activity.css);
 
 :root {
   --background: #ffffff;

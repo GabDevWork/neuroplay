@@ -1,0 +1,327 @@
+.bodyHome {
+    background-image: url(../../public/images/trailHorizontal.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: start;
+  }
+
+  @media (max-width: 1030px) {
+    .bodyHome {
+      background-image: url(../../public/images/trailVertical.png) !important;
+    }
+
+    .homeBox{
+      flex-direction: column !important;
+    }
+
+    .columActivy1{
+      margin-left: 0px !important;
+      height: 27vh !important;
+      width: 100vw;;
+    }
+
+    .cardActivity1{
+      margin-top: 120px !important;
+      margin-left: 450px;
+      height: 60px !important;
+      width: 130px !important;
+    }
+
+    .columActivy2{
+      margin-left: 0px !important;
+      height: 12vh !important;
+      width: 100vw;
+    }
+
+    .cardActivity2{
+      margin-left: 230px;
+      margin-top: 0px !important;
+      height: 60px !important;
+      width: 130px !important;
+    }
+
+    .columActivy3{
+      margin-left: 0px !important;
+      height: 15vh !important;
+      width: 100vw;
+    }
+
+    .cardActivity3{
+      margin-left: 580px;
+      margin-top: 0px !important;
+      height: 60px !important;
+      width: 130px !important;
+    }
+
+    .columActivy4{
+      margin-left: 0px !important;
+      height: 20vh !important;
+      width: 100vw;
+    }
+
+    .cardActivity4{
+      margin-left: 310px;
+      margin-top: 0px !important;
+      height: 60px !important;
+      width: 130px !important;
+    }
+  }
+
+  @media (max-width: 930px) {
+
+    .columActivy1{
+      margin-left: 0px !important;
+      height: 27vh !important;
+      width: 100vw;;
+    }
+
+    .cardActivity1{
+      margin-top: 120px !important;
+      margin-left: 410px;
+      height: 60px !important;
+      width: 130px !important;
+    }
+
+    .columActivy2{
+      margin-left: 0px !important;
+      height: 12vh !important;
+      width: 100vw;
+    }
+
+    .cardActivity2{
+      margin-left: 280px;
+      margin-top: 0px !important;
+      height: 60px !important;
+      width: 130px !important;
+    }
+
+    .columActivy3{
+      margin-left: 0px !important;
+      height: 15vh !important;
+      width: 100vw;
+    }
+
+    .cardActivity3{
+      margin-left: 520px;
+      margin-top: 0px !important;
+      height: 60px !important;
+      width: 130px !important;
+    }
+
+    .columActivy4{
+      margin-left: 0px !important;
+      height: 20vh !important;
+      width: 100vw;
+    }
+
+    .cardActivity4{
+      margin-left: 210px;
+      margin-top: 0px !important;
+      height: 60px !important;
+      width: 130px !important;
+    }
+  }
+
+  @media (max-width: 875px) {
+
+    .cardActivity1{
+      margin-left: 375px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity2{
+      margin-left: 235px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity3{
+      margin-left: 490px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity4{
+      margin-left: 240px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+  }
+
+  @media (max-width: 790px) {
+
+    .cardActivity1{
+      margin-left: 320px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity2{
+      margin-left: 310px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity3{
+      margin-left: 425px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity4{
+      margin-left: 150px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+  }
+
+  @media (max-width: 740px) {
+
+    .cardActivity1{
+      margin-left: 290px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .columActivy2{
+      margin-left: 0px !important;
+      height: 15vh !important;
+      width: 100vw;
+    }
+
+    .cardActivity2{
+      margin-left: 350px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity3{
+      margin-left: 250px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity4{
+      margin-left: 210px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+  }
+
+  @media (max-width: 580px) {
+
+    .cardActivity1{
+      margin-left: 260px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .columActivy2{
+      margin-left: 0px !important;
+      height: 15vh !important;
+      width: 100vw;
+    }
+
+    .cardActivity2{
+      margin-left: 370px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity3{
+      margin-left: 190px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+
+    .cardActivity4{
+      margin-left: 250px;
+      height: 60px !important;
+      width: 100px !important;
+    }
+  }
+
+  .homeBox{
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .columActivy1{
+    height: 87vh;
+    margin-left: 80px;
+    display: flex;
+}
+
+  .cardActivity1{
+    display: flex;
+    margin-top: 220px; 
+    border: solid 2px #d14a6e;
+    height: 60px;
+    width: 120px;
+    border-radius: 50%;
+    background-color: #fc5b8c;
+    box-shadow: 0px 5px 10px 0px #535353;
+    cursor: pointer;
+}
+
+.columActivy2{
+  height: 87vh;
+  margin-left: 80px;
+  display: flex;
+}
+
+.cardActivity2{
+  display: flex;
+  margin-top: 310px;
+  border: solid 2px #0fb446;;
+  height: 60px;
+  width: 120px;
+  border-radius: 50%;
+  background-color: #1cdb5c;
+  box-shadow: 0px 5px 10px 0px #535353;
+  cursor: pointer;
+}  
+
+.columActivy3{
+  height: 87vh;
+  margin-left: 80px;
+  display: flex;
+}
+
+.cardActivity3{
+  display: flex;
+  margin-top: 240px;
+  border: solid 2px #1094c9;
+  height: 60px;
+  width: 120px;
+  border-radius: 50%;
+  background-color: #28c0fc;
+  box-shadow: 0px 5px 10px 0px #535353;
+  cursor: pointer;
+}  
+
+.columActivy4{
+  height: 87vh;
+  display: flex;
+}
+
+.cardActivity4{
+  display: flex;
+  margin-top: 390px;
+  border: solid 2px #d14a6e;
+  height: 60px;
+  width: 120px;
+  border-radius: 50%;
+  background-color: #fc5b8c;
+  box-shadow: 0px 5px 10px 0px #535353;
+  cursor: pointer;
+}

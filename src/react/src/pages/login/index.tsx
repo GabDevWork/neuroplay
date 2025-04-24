@@ -2,22 +2,50 @@ import MenuTop from "../../../components/menuTop"
 import Image from "next/image"
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { TypeDataAlerts } from "../../../components/type";
+import Alerts from "../../../components/alerts/alerts";
 
+let dataAlerts:TypeDataAlerts ={
+    alertType: 0,
+    alertText: "",
+    alertButtons: [],
+    alertsCommans: [],
+  }
 
 export default function Login(){
 
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
   const router = useRouter();
+  const [showAlerts, setshowAlerts] = useState(false);
 
   const LoginUser = async()=>{
     try{
         const endpont = `/api/apiLogin?username=${user}&password=${password}`;
         const response=await fetch(endpont,{method: "GET", cache:"reload"})
+        const data = await response.json();
         if(response.status === 200){
-            router.push("/home")
-        }else {
-            console.error("Falha no login:", await response.json());
+            if (data.role == "Professor" || data.role == "Terapeuta"){
+                router.push("/home/homeProfessional")
+            }else if (data.role == "Estudante"){
+                router.push("/home/homeStudent")
+            }
+        }else if (response.status === 401){
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 1,
+                alertText: "Usuario ou senha incorretos",
+                alertButtons: ["Editar"],
+                alertsCommans: [()=>{setshowAlerts(false)}]
+            }
+        }else{
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 1,
+                alertText: "Erro inesperado no servidor, tente novamente mais tarde",
+                alertButtons: ["Ok"],
+                alertsCommans: [()=>{setshowAlerts(false)}]
+            }
         }
     }catch(error){
         console.log(error)
@@ -26,6 +54,7 @@ export default function Login(){
 
  return (
     <div className="bodyLogin">
+        {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
         <div>
             <MenuTop/>
         </div>
