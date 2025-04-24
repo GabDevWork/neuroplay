@@ -23,9 +23,7 @@ Link Prototipo: https://www.figma.com/design/6XlrwMVRBARnI8rGhep71O/NeuroPlay?no
 ### 4.3. Modelo de dados
 
 
-(colocar uma descrição aqui) O desenvolvimento da solução proposta requer a existência de bases de dados que permitam efetuar os cadastros de dados e controles associados aos processos identificados, assim como recuperações.
-Utilizando a notação do DER (Diagrama Entidade e Relacionamento), elaborem um modelo, na ferramenta visual indicada na disciplina, que contemple todas as entidades e atributos associados às atividades dos processos identificados. Deve ser gerado um único DER que suporte todos os processos escolhidos, visando, assim, uma base de dados integrada. O modelo deve contemplar, também, o controle de acesso de usuários (partes interessadas dos processos) de acordo com os papéis definidos nos modelos do processo de negócio.
-_Apresente o modelo de dados por meio de um modelo relacional que contemple todos os conceitos e atributos apresentados na modelagem dos processos._
+Deseja-se criar um banco de dados para a aplicação interativa, para armazenar as informações dos usuários assim como seu progresso, as atividdaes para que possam ser apresentadas na tela assim como os selos vinculados a cada usuário. Utilizando um Modelo Mysql com um modelo Relacional.
 
 #### 4.3.1 Modelo ER
 
