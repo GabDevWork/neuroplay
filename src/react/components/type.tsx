@@ -5,9 +5,11 @@ export type TypeDataAlerts = {
     alertsCommans: (()=> void)[],
 }
 
-export type TypeDataActivity = {
-    activityQuestion: string,
-    activityAlternatives: string[],
-    activityAnswer: string,
-    activityComand: (()=> void)[],
+export type TypeDataLevel = {
+    levelId: number, 
+    levelDescription: string,
+    levelAnimalDesc: string,
+    levelAnimalPhoto: string,
+    levelStampPhoto: string,
+    activityComand: (()=> (void))[],
 }

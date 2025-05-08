@@ -26,8 +26,10 @@ export default function Login(){
         const data = await response.json();
         if(response.status === 200){
             if (data.role == "Professor" || data.role == "Terapeuta"){
+                localStorage.setItem("id", data.id);
                 router.push("/home/homeProfessional")
             }else if (data.role == "Estudante"){
+                localStorage.setItem("id", data.id);
                 router.push("/home/homeStudent")
             }
         }else if (response.status === 401){

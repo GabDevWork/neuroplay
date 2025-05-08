@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-.boxActivity{
+.boxActivityContent{
     height:70%;
     width: 60%;
     background-color: #fff;
@@ -24,6 +24,93 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+}
+
+.boxIntro{
+    height:100%;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px 0px #8d8d8d;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     gap: 20px;
 }
 
+.boxIntroDontShow{
+    display: none;
+}
+
+.boxActivity{
+    height:100%;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px 0px #8d8d8d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.boxActivityDontShow{
+    display: none;
+}
+
+.activityQuestion{
+    font-size: 40px;
+}
+
+.questionsOptions{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px
+}
+
+.Option{
+    border: solid 1px #0ff;
+    border-radius: 10px;
+    height: 100px;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.boxLevelStampDontShow{
+    display: none;
+}
+
+.boxLevelStamp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.IntroDesc{
+    font-size: 50px;
+    margin-top: 80px;
+}
+
+.IntroAnimalPhoto{
+    height: 200px;
+    width: 200px;
+}
+
+.boxAnimalDescriptionDontShow{
+    display: none;
+}
+.boxAnimalDescription{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

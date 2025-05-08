@@ -11,8 +11,8 @@ export default async function RegisterProfessional(req: NextApiRequest, res: Nex
       UNION
       SELECT stu_user AS username FROM student
       WHERE stu_user = ?;
-        `,[username, username]
-      );
+      `,[username, username]
+    );
     connection.release();
     if (Array.isArray(rowsUser) && rowsUser.length > 0) {
       res.status(400).json({message: "Bad Request"});
