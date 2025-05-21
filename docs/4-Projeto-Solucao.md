@@ -27,7 +27,7 @@ Deseja-se criar um banco de dados para a aplicação interativa, para armazenar 
 
 #### 4.3.1 Modelo ER
 
-![Modelo DER](./images/MER.drawio1.png)
+![Modelo DER](./images/MER_Final.drawio1.png)
 
 
 #### 4.3.2 Esquema Relacional
@@ -54,7 +54,7 @@ pro_nome VARCHAR(100),
 pro_usuário VARCHAR(30) UNIQUE NOT NULL,
 pro_senha VARCHAR(30) NOT NULL,
 pro_email VARCHAR(30) UNIQUE,
-pro_tipo VARCHAR(30) CHECK ( pro_tipo in ('Terapeuta', 'Pedagogo'))
+pro_tipo VARCHAR(30) CHECK ( pro_tipo in ('Terapeuta', 'Professor'))
 );
 
 
@@ -66,15 +66,37 @@ cri_senha VARCHAR(30) NOT NULL,
 cri_usuário VARCHAR(30) UNIQUE NOT NULL,
 cri_idade INT,
 cri_pro_id INT,
-cri_necessidade VARCHAR(30) CHECK(cri_necessidade in('Autista', 'TDH' )),
+cri_necessidade VARCHAR(30) CHECK(cri_necessidade in('Dislexia', 'TDAH', 'TEA', 'Outro')),
 foreign key (cri_pro_id) REFERENCES Profissional (pro_id)
+);
+
+
+-- Criação da tabela Animal
+CREATE TABLE Animal (
+an_id INT PRIMARY KEY NOT NULL auto_increment,
+an_descricao VARCHAR(255),
+an_nome VARCHAR(100),
+an_foto VARCHAR(255)
+);
+
+
+-- Criação da tabela Selo
+CREATE TABLE Selo (
+se_id INT PRIMARY KEY NOT NULL auto_increment,
+se_nome VARCHAR(100),
+se_foto VARCHAR(255)
 );
 
 -- Criação da tabela Nivel
 CREATE TABLE Nivel (
 ni_id INT PRIMARY KEY NOT NULL auto_increment,
 ni_nome VARCHAR(30),
-ni_dificuldade INT
+ni_descricao VARCHAR(30),
+ni_dificuldade INT,
+ni_id_an INT,
+ni_id_se INT,
+foreign key (ni_id_an) REFERENCES Animal (an_id),
+foreign key (ni_id_se) REFERENCES Selo (se_id)
 );
 
 -- Criação Tabela Atividade
@@ -91,31 +113,14 @@ PRIMARY KEY (at_id, at_ni_id),
 foreign key (at_ni_id) REFERENCES Nivel (ni_id)
 );
 
-
--- Criação da tabela Selo
-CREATE TABLE Selo (
-se_id INT PRIMARY KEY NOT NULL auto_increment,
-se_nome VARCHAR(100),
-se_foto VARCHAR(255)
-);
-
--- Criação da tabela Animal
-CREATE TABLE Animal (
-an_id INT PRIMARY KEY NOT NULL auto_increment,
-an_nome VARCHAR(100),
-an_foto VARCHAR(255)
-);
-
 -- Criação da Tabela Progresso
 CREATE TABLE Progresso(
 pro_id INT PRIMARY KEY NOT NULL auto_increment,
 pro_cri_id INT,
 pro_ni_id INT,
-pro_at_id INT,
 pro_data DATE,
 foreign key (pro_cri_id) REFERENCES Crianca (cri_id),
 foreign key (pro_ni_id) REFERENCES Nivel (ni_id),
-foreign key (pro_at_id) REFERENCES Atividade (at_id)
 );
 
 -- Criação da Tabela Progresso dos selo
