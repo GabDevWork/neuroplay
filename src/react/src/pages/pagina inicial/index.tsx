@@ -1,10 +1,10 @@
 import Image from "next/image";
-import MenuTop from "../../../components/menuTop";
+import MenuTop from "../../../components/Top/menuTop";
 
 export default function Home(){
   return (
     <div>
-      <MenuTop/>
+        <MenuTop menuOptions={false}/>
     </div>
   );
 }

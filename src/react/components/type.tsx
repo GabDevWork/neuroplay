@@ -6,10 +6,12 @@ export type TypeDataAlerts = {
 }
 
 export type TypeDataLevel = {
+    levelStudentId: string,
     levelId: number, 
     levelDescription: string,
     levelAnimalDesc: string,
     levelAnimalPhoto: string,
     levelStampPhoto: string,
+    levelRepeat: boolean,
     activityComand: (()=> (void))[],
 }

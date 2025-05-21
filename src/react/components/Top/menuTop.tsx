@@ -1,0 +1,55 @@
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+interface DataMenu{
+  menuOptions: boolean,
+}
+
+export default function MenuTop(props: DataMenu){
+
+  const [seeOptions, setSeeOptions] = useState(false)
+  const [imgLogo, setImgLogo] = useState("")
+  const [seeMenuDropDown, setSeeMenuDropDown] = useState("")
+  const router = useRouter();
+
+  useEffect(() => {
+    if(props.menuOptions == true){
+      setSeeOptions(true)
+      setImgLogo("logoimgOptions")
+    }else{
+      setImgLogo("logoimg")
+    }
+  }, [props.menuOptions])
+
+  function seeMenu(){
+    if(seeMenuDropDown == ""){
+      setSeeMenuDropDown("Select")
+    }else{
+      setSeeMenuDropDown("")
+    }
+  }
+
+  return (
+    <div className="menuTop">
+      <div className="menuBox">
+          <div className="textLogo">
+              <h1 className="textLogoNeuro">Neuro</h1>
+              <h1 className="textLogoPlay">Play</h1>
+          </div>
+          <div className="BoximageLogo">
+            <Image src="/images/logo.jpeg" alt="logo" width={70} height={65} className={imgLogo}/>
+            {seeOptions &&
+              <Image src="/images/menu.svg" alt="logo" width={30} height={30} className="optionsImg" onClick={()=>{seeMenu()}}/>
+            }
+            <div className={`MenuDropDown${seeMenuDropDown}`}>
+              <h1 className={`option${seeMenuDropDown}`} onClick={()=>router.push("/home/homeStudent")}>Niveis</h1>
+              <h1 className={`option${seeMenuDropDown}`} onClick={()=>router.push("/perfil")}>Perfil</h1>
+              <h1 className={`option${seeMenuDropDown}`} onClick={()=>router.push("/stamp")}>Selos</h1>
+              <h1 className={`option${seeMenuDropDown}`} onClick={()=>router.push("/")}>Sair</h1>
+            </div>
+          </div>
+      </div>
+    </div>
+  );
+}

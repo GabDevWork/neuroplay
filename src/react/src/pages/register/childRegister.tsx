@@ -1,4 +1,4 @@
-import MenuTop from "../../../components/menuTop"
+import MenuTop from "../../../components/Top/menuTop"
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Alerts from "../../../components/alerts/alerts";
@@ -94,7 +94,7 @@ export default function ChildRegister(){
         <div className="bodyChildRegister">
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
             <div>
-                <MenuTop/>
+                <MenuTop menuOptions={false}/>
             </div>
             <div className="registerChildArea">
                 <div className="registerChildLogo">

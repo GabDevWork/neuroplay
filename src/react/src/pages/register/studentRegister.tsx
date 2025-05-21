@@ -1,4 +1,4 @@
-import MenuTop from "../../../components/menuTop"
+import MenuTop from "../../../components/Top/menuTop"
 import Image from "next/image"
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -69,7 +69,7 @@ export default function StudentRegister(){
     <div className="bodyStudentRegister">
       {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
         <div>
-            <MenuTop/>
+            <MenuTop menuOptions={false}/>
         </div>
         <div className="registerAreaStudent">
             <div className="registerStudantLogo">

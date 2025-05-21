@@ -12,6 +12,7 @@
 @import url(childRegister.css);
 @import url(home.css);
 @import url(activity.css);
+@import url(stamp.css);
 
 :root {
   --background: #ffffff;

@@ -1,5 +1,5 @@
 import Image from "next/image"
-import MenuTop from "../../../components/menuTop"
+import MenuTop from "../../../components/Top/menuTop"
 import { useState } from "react"
 import { useRouter } from "next/router";
 
@@ -20,7 +20,7 @@ export default function Login(){
 
   return (
     <div className="bodyCadastro">
-        <MenuTop/>
+        <MenuTop menuOptions={false}/>
         <h1 className="textWhoYou">Diga-me quem é você:</h1>
         <div className="boxOptionsRegister">
             {

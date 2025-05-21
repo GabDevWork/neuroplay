@@ -1,49 +1,43 @@
-import MenuTop from "../../../components/menuTop"
+import MenuTop from "../../../components/Top/menuTop"
 import Activy from "../../../components/activity/activity"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import { TypeDataLevel, TypeDataAlerts } from "../../../components/type"
 import Alerts from "../../../components/alerts/alerts"
 
-let dataLevel:TypeDataLevel ={
-    levelId: 0,
-    levelDescription: "",
-    levelAnimalDesc: "",
-    levelAnimalPhoto: "",
-    levelStampPhoto: "",
-    activityComand: [],
-}
-
 let dataAlerts:TypeDataAlerts ={
     alertType: 0,
     alertText: "",
     alertButtons: [],
     alertsCommans: [],
-  }
-
-const levels = [1,2,3,4,5,6,7]
+}
 
 export default function Home(){
 
+    const [dataLevel, setDataLevel] = useState<TypeDataLevel | null>(null);
+    const [idStudent, setIdStudent] = useState("")
     const [showActivity, setShowActivity] = useState(false);
     const [showAlerts, setshowAlerts] = useState(false);
-    const [cardsActivities, setCardsActivities] = useState([0])
+    const [cardsActivities, setCardsActivities] = useState([1,2,3,4,5])
     const [currentLevel, setCurrentLevel] = useState(0)
+    const [currentMap, setCurrentMap] = useState("1Map")
 
     useEffect(() => {
         const storedId = localStorage.getItem("id");
         if (storedId) {
             getProgress(storedId);
+            setIdStudent(storedId);
         }
     }, [showActivity])
 
-    async function getProgress(id: string) {
+    const getProgress = async (id: string) =>{
         try{
             const endpoint = `/api/apiLevels?idStudent=${id}&action=getProgressLevel`; 
             const response = await fetch(endpoint, {method: "GET", cache: "reload"})
             const data = await response.json();
             if(response.status === 200){
-                setCurrentLevel(data.levelProgress)
+                setCurrentLevel(data.prog_id)
+                return data.prog_id;
             }
             else{
                 setshowAlerts(true)
@@ -60,7 +54,9 @@ export default function Home(){
     }
 
     async function getActivity(indexLevel: number){
-        if(indexLevel > currentLevel){
+        const progress = await getProgress(idStudent)
+        
+        if(indexLevel > currentLevel && indexLevel > progress){
             setshowAlerts(true)
             dataAlerts = {
                 alertType: 1,
@@ -68,7 +64,8 @@ export default function Home(){
                 alertButtons: ["Ok"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
             }
-        }else if (indexLevel < currentLevel){
+        }
+        else if (indexLevel < currentLevel && indexLevel < progress){
             setshowAlerts(true)
             dataAlerts = {
                 alertType: 1,
@@ -77,21 +74,23 @@ export default function Home(){
                 alertsCommans: [()=>{setshowAlerts(false)}, ()=>{seeLastActivitie(indexLevel)}]
             }
         }
-        else if (indexLevel == currentLevel){
+        else if (indexLevel == currentLevel || indexLevel == progress){
             try{
                 const endpoint = `/api/apiLevels?idLevel=${indexLevel}&action=getDataLevel`; 
                 const response = await fetch(endpoint, {method: "GET", cache: "reload"})
                 const data = await response.json();
                 if(response.status === 200){
-                    setShowActivity(true);
-                    dataLevel = {
+                    setDataLevel({
+                        levelStudentId: idStudent,
                         levelId: indexLevel,
                         levelDescription: data.lev_description,
                         levelAnimalDesc: data.animal_description,
                         levelAnimalPhoto: data.animal_photo,
                         levelStampPhoto: data.stamp_photo,
+                        levelRepeat: false,
                         activityComand: [()=>{setShowActivity(false)}],
-                    }
+                    });
+                    setShowActivity(true);
                 }
                 else{
                     setshowAlerts(true)
@@ -115,15 +114,17 @@ export default function Home(){
             const response = await fetch(endpoint, {method: "GET", cache: "reload"})
             const data = await response.json();
             if(response.status === 200){
-                setShowActivity(true);
-                dataLevel = {
+                setDataLevel({
+                    levelStudentId: idStudent,
                     levelId: indexLevel,
                     levelDescription: data.lev_description,
                     levelAnimalDesc: data.animal_description,
                     levelAnimalPhoto: data.animal_photo,
                     levelStampPhoto: data.stamp_photo,
+                    levelRepeat: true,
                     activityComand: [()=>{setShowActivity(false)}],
-                }
+                });
+                setShowActivity(true);
             }
             else{
                 setshowAlerts(true)
@@ -139,30 +140,65 @@ export default function Home(){
         }
     }
 
+    function ChangeMap(comand: string){
+        if (currentMap == "1Map"){
+            setCurrentMap("2Map")
+            setCardsActivities([6,7,8,9,10])
+        }else if(currentMap == "2Map" && comand == "next"){
+            setCurrentMap("3Map")
+            setCardsActivities([11,12,13,14,15])
+        }else if (currentMap == "2Map" && comand == "previous"){
+            setCurrentMap("1Map")
+            setCardsActivities([1,2,3,4,5])
+        }
+    }
+
     return(
-        <div className="bodyHome">
+        <div className={`bodyHome${currentMap}`}>
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
             <div>
-                <MenuTop/>
+                <MenuTop menuOptions={true}/>
             </div>
             <div className="homeBox">
-                {levels.map((i, index)=>(
-                    <div className="columActivity" onClick={()=>getActivity(i)}>
-                        <div className={`columActivy${index+1}`}>
-                            {i == currentLevel ? 
-                                <div className={`cardActivity${index+1}`}></div>
+                {currentMap != "1Map" ?
+                    <div className="previousPage">
+                        <Image className="previousPageImage" alt="seta" height={100} width={100} src={"/images/arrow_back.svg"} onClick={()=>{ChangeMap("previous")}}></Image>
+                    </div>:""
+                }
+                {cardsActivities.map((i)=>(
+                    <div className="columActivity">
+                        <div className={`columActivy${i}`}>
+                            {i <= currentLevel ? 
+                                <div className={`cardActivity${i}`}></div>
                                 :
-                                <div className={`cardActivity${index+1}`} style={{ opacity: 0.5 }}></div>
+                                <div className={`cardActivity${i}`} style={{ opacity: 0.7 }}></div>
                             }
-                            <div className={`levelNumber${i}`}>{i}</div>
+                            {i <= currentLevel ?
+                                <div className={`levelNumber${i}`} onClick={()=>getActivity(i)}>
+                                    {/* {i} */}
+                                    <Image className="levelNumberImg" alt="animal" height={100} width={100} src={`/images/num${i}.png`}/>
+                                </div>:
+                                <div className={`levelNumber${i}`} onClick={()=>getActivity(i)}>
+                                    {/* {i} */}
+                                    <Image className="levelNumberImg" alt="animal" style={{ opacity: 0.7 }} height={100} width={100} src={`/images/num${i}.png`}/>
+                                </div>
+                            }
                         </div>
                     </div>
                 ))}
-                <div className="nextPage">
-                    <Image className="nextPageImage" alt="seta" height={100} width={100} src={"/images/arrow_right.svg"}></Image>
-                </div>
+                {currentMap != "1Map" ?
+                    <div className="previousPage">
+                        <Image className="nextPageImage" alt="seta" height={100} width={100} src={"/images/arrow_forward.svg"} onClick={()=>{ChangeMap("next")}}></Image>
+                    </div>
+                    :
+                    <div className="previousPage">
+                        <Image className="nextPageImage" alt="seta" height={100} width={100} src={"/images/arrow_right.svg"} onClick={()=>{ChangeMap("next")}}></Image>
+                    </div>
+                }
             </div>
-            {showActivity&& <Activy dataLevel={dataLevel}/>}
+            {showActivity && dataLevel && (
+                <Activy dataLevel={dataLevel} comandNextLevel={getActivity} />
+            )}
         </div>
     )
 }
