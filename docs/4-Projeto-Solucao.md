@@ -27,7 +27,7 @@ Deseja-se criar um banco de dados para a aplicação interativa, para armazenar 
 
 #### 4.3.1 Modelo ER
 
-![Modelo DER](./images/MER_Final.drawio1.png)
+![Modelo DER](./images/MER_Final.drawio.png)
 
 
 #### 4.3.2 Esquema Relacional
