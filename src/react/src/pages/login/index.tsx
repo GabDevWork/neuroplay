@@ -43,7 +43,7 @@ export default function Login(){
         }else{
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 5,
                 alertText: "Erro inesperado no servidor, tente novamente mais tarde",
                 alertButtons: ["Ok"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
@@ -71,9 +71,16 @@ export default function Login(){
                 </div>
                 <div>
                     <h1 className="textPassword">Senha</h1>
-                    <input type="password" className="passwordInput" value={password} onChange={(evt)=>{setPassword(evt.target.value)}}></input>
+                    <input type="password" className="passwordInput" value={password} onChange={(evt)=>{setPassword(evt.target.value)}} onKeyDown={(e) => 
+                        {
+                            if (e.key === 'Enter') {
+                                LoginUser()
+                            }
+                        }}>
+                    </input>
                 </div>
-                <button className="buttonEnter" onClick={()=>{LoginUser()}}>Entrar</button>
+                <button className="buttonEnter" onClick={()=>{LoginUser()}}>Entrar
+                </button>
                 <button className="signinGoogle">
                     <Image className="googleIcon" alt="google" height={20} width={20} src={"/images/google_icon.png"}/>
                     Entrar com o Google

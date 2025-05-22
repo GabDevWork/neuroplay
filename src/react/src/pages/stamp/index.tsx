@@ -55,7 +55,7 @@ export default function Stamp(){
             else{
                 setshowAlerts(true)
                 dataAlerts = {
-                    alertType: 1,
+                    alertType: 5,
                     alertText: "Erro ao carregar atividade, tente novamente mais tarde",
                     alertButtons: ["Ok"],
                     alertsCommans: [()=>{setshowAlerts(false)}]

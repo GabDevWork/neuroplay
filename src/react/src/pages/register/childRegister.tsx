@@ -20,6 +20,11 @@ export default function ChildRegister(){
     const [childAge, setChildAge] = useState("");
     const [childDiagnostic, setChildDiagnostic] = useState("");
     const [showAlerts, setshowAlerts] = useState(false);
+    const [childUser, setChildUser] = useState("");
+    const [childPassword, setChildPassword] = useState("")
+    const [validatedpassword, setvalidatedpasswoord] = useState("")
+    const [messagePassword, setMessagePassword] = useState("");
+
 
     useEffect(() => {
         const storedId = localStorage.getItem("id");
@@ -28,11 +33,22 @@ export default function ChildRegister(){
         }
     }, []);
 
+    const checkPasswordMatch = (password: string, confirmPassword: string) => {
+        if (password.length < 8 && confirmPassword.length < 8) {
+            setMessagePassword("❌ Digite pelo menos 8 caracteres");
+        } else if (password === confirmPassword && password !== ""){
+            setMessagePassword("✔ Senhas conferem");
+        }    
+        else {
+            setMessagePassword("❌ As senhas não conferem");
+        }
+    }
+
     function AuthenticationsAlerts(){
         if (childName == "" || childName == "null" || childName == "NULL" || childName == "Null"){
           setshowAlerts(true)
           dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Adicione um nome",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -41,7 +57,7 @@ export default function ChildRegister(){
         else if (parseInt(childAge) == 0 || parseInt(childAge) >= 20){
           setshowAlerts(true)
           dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Digite uma idade válida",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -50,7 +66,7 @@ export default function ChildRegister(){
         else if (childDiagnostic == ""){
             setshowAlerts(true)
             dataAlerts = {
-              alertType: 1,
+              alertType: 2,
               alertText: "Adicione um diagnostico",
               alertButtons: ["Editar"],
               alertsCommans: [()=>{setshowAlerts(false)}]
@@ -64,12 +80,12 @@ export default function ChildRegister(){
     const RegisterUserStudent = async () => {
         try{
             const idReq = "5";
-            const endpoint = `/api/apiRegisterStudent?idReq=${idReq}&idProfessional=${idProfessional}&nameChild=${childName}&ageChild=${childAge}&diagnosticChild=${childDiagnostic}`; 
+            const endpoint = `/api/apiRegisterStudent?idReq=${idReq}&idProfessional=${idProfessional}&nameChild=${childName}&ageChild=${childAge}&diagnosticChild=${childDiagnostic}&userChild=${childUser}&passwordChild=${childPassword}`; 
             const response = await fetch(endpoint, {method: "POST", cache: "reload"})
             if(response.status === 200){
                 setshowAlerts(true)
                 dataAlerts = {
-                    alertType: 1,
+                    alertType: 3,
                     alertText: `${childName} Cadastrado(a) com sucesso`,
                     alertButtons: ["Login", "Cadastrar mais crianças"],
                     alertsCommans: [()=>{router.push("/login")}, ()=>{setshowAlerts(false)}]
@@ -79,7 +95,7 @@ export default function ChildRegister(){
             else{
                 setshowAlerts(true)
                 dataAlerts = {
-                    alertType: 1,
+                    alertType: 5,
                     alertText: "Cadastro não concluido, tente novamente mais tarde",
                     alertButtons: ["Ok"],
                     alertsCommans: [()=>{setshowAlerts(false)}]
@@ -118,6 +134,27 @@ export default function ChildRegister(){
                             <option value="TEA">TEA</option>
                             <option value="Outro">Outros</option>
                         </select>
+                    </div>
+                    <div>
+                        <h1 className="textUserTherapist">Nome de usuário</h1>
+                        <input type="text" className="userTherapistInput" value={childUser} onChange={(evt)=>{setChildUser(evt.target.value)}}></input>
+                    </div>
+                    <div>
+                        <h1 className="textTherapistPassword">Senha</h1>
+                        <input type="password" className="passwordTherapistInput" value={childPassword} onChange={(evt)=>{const newPassword = evt.target.value;setChildPassword(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                    </div>
+                    <div>
+                        <h1 className="textTherapistPasswordValidated">Senha</h1>
+                        <input type="password" className="passwordValidatedTherapistInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(childPassword, newConfirmPassword);}} onKeyDown={(e) => 
+                            {
+                                if (e.key === 'Enter') {
+                                    AuthenticationsAlerts()
+                                }
+                            }}>
+                        </input>
+                    </div>
+                    <div className="MessageValidatedPasswordTherapist">
+                        <h1 className="textMessageValidatedPasswordTherapist" style={{ color: childPassword !== validatedpassword ? "red" : childPassword.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>
                     </div>
                     <button className="buttonRegisterChild" onClick={()=>AuthenticationsAlerts()}>Cadastrar</button>
                 </div>

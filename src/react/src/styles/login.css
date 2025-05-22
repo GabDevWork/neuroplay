@@ -86,6 +86,23 @@
     font-size: 20px;
     box-shadow: 0px 2px 2px 0px #474747;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+.buttonEnter:hover{
+    height: 35px;
+    width: 160px;
+    border-radius: 50px;
+    margin-top: 30px;
+    background: #5b7fff;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 0px 2px 2px 0px #474747;
+    cursor: pointer;
+    transition: 0.5s;
 }
 
 .signinGoogle{
@@ -101,6 +118,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.5s;
+}
+
+.signinGoogle:hover{
+    height: 35px;
+    width: 280px;
+    border-radius: 50px;
+    margin-top: 20px;
+    background: #cacaca;
+    color: #000;
+    font-size: 15px;
+    box-shadow: 0px 2px 2px 0px #bbbbbb;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
 }
 
 .googleIcon{
@@ -120,7 +154,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.5s;
 }
+
+.signinFacebook:hover{
+    height: 35px;
+    width: 280px;
+    border-radius: 50px;
+    margin-top: 10px;
+    background: #cacaca;
+    color: #000;
+    font-size: 15px;
+    box-shadow: 0px 2px 2px 0px #bbbbbb;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
 
 .facebookIcon{
     margin-right: 10px;

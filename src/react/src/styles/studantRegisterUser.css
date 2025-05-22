@@ -105,18 +105,36 @@
   font-size: 15px;
 }
   
-  .buttonUserRegisterStudant{
-      height: 35px;
-      width: 230px;
-      border-radius: 50px;
-      margin-top: 15px;
-      margin-bottom: 10px;
-      background: #1246ff;
-      color: #fff;
-      outline: none;
-      border: none;
-      font-weight: bold;
-      font-size: 20px;
-      box-shadow: 0px 2px 2px 0px #474747;
-      cursor: pointer;
-  }
+.buttonUserRegisterStudant{
+  height: 35px;
+  width: 230px;
+  border-radius: 50px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background: #1246ff;
+  color: #fff;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  box-shadow: 0px 2px 2px 0px #474747;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.buttonUserRegisterStudant:hover{
+  height: 35px;
+  width: 230px;
+  border-radius: 50px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background: #5e80fa;
+  color: #fff;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  box-shadow: 0px 2px 2px 0px #474747;
+  cursor: pointer;
+  transition: 0.5s;
+}

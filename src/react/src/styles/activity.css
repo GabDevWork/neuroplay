@@ -29,6 +29,7 @@
     position: absolute;
     height: 12vh;
     width: 12vh;
+    top: 160;
     margin-left: 42%;
     transition: 0.5s;
     cursor: pointer;
@@ -36,11 +37,15 @@
 
 .closeActivity:hover{
     position: absolute;
-    height: 15vh;
-    width: 15vh;
+    height: 13vh;
+    width: 13vh;
     margin-left: 42%;
     transition: 0.5s;
     cursor: pointer;
+}
+
+.closeActivityDontShow{
+    display: none;
 }
 
 .boxIntro{
@@ -104,7 +109,7 @@
 
 .buttonIntro:hover{
     height: 35px;
-    width: 230px;
+    width: 205px;
     border-radius: 50px;
     margin-bottom: 20px;
     background: #6984e7;
@@ -166,8 +171,8 @@
 .Option:hover{
     box-shadow: 0px 5px 15px 0px #8d8d8d;
     border-radius: 10px;
-    height: 102px;
-    width: 63%;
+    height: 100px;
+    width: 61%;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -42,7 +42,7 @@ export default function Home(){
             else{
                 setshowAlerts(true)
                 dataAlerts = {
-                    alertType: 1,
+                    alertType: 5,
                     alertText: "Erro ao carregar atividade, tente novamente mais tarde",
                     alertButtons: ["Ok"],
                     alertsCommans: [()=>{setshowAlerts(false)}]
@@ -59,7 +59,7 @@ export default function Home(){
         if(indexLevel > currentLevel && indexLevel > progress){
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 2,
                 alertText: `Para fazer esse nível, conclua o nível ${currentLevel} primeiro`,
                 alertButtons: ["Ok"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
@@ -68,7 +68,7 @@ export default function Home(){
         else if (indexLevel < currentLevel && indexLevel < progress){
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 2,
                 alertText: "Você já concluiu esse nível! Deseja faze-lo novamente?",
                 alertButtons: ["Procurar outro nível",`Realizar o nível ${indexLevel} novamente`],
                 alertsCommans: [()=>{setshowAlerts(false)}, ()=>{seeLastActivitie(indexLevel)}]
@@ -95,7 +95,7 @@ export default function Home(){
                 else{
                     setshowAlerts(true)
                     dataAlerts = {
-                        alertType: 1,
+                        alertType: 5,
                         alertText: "Erro ao carregar atividade, tente novamente mais tarde",
                         alertButtons: ["Ok"],
                         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -129,7 +129,7 @@ export default function Home(){
             else{
                 setshowAlerts(true)
                 dataAlerts = {
-                    alertType: 1,
+                    alertType: 5,
                     alertText: "Erro ao carregar atividade, tente novamente mais tarde",
                     alertButtons: ["Ok"],
                     alertsCommans: [()=>{setshowAlerts(false)}]

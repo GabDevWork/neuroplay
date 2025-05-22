@@ -48,7 +48,7 @@ export default function TherapistRegister(){
     if (passwordTherapist != validatedpassword){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Senhas não conferem",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -57,7 +57,7 @@ export default function TherapistRegister(){
     else if (nameTherapist == "" || nameTherapist == "null" || nameTherapist == "NULL" || nameTherapist == "Null"){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Adicione o seu nome completo",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -66,7 +66,7 @@ export default function TherapistRegister(){
     else if (regEx.test(emailTherapist) == false || emailTherapist == "" || emailTherapist == "null" || emailTherapist == "NULL" || emailTherapist == "Null"){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Adicione um e-mail válido",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -75,7 +75,7 @@ export default function TherapistRegister(){
     else if (userTherapist == "" || userTherapist == "null" || userTherapist == "NULL" || userTherapist == "Null"){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Adicione um usuário válido",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -84,7 +84,7 @@ export default function TherapistRegister(){
     else if (passwordTherapist == "" && validatedpassword == ""){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Cadastre uma senha",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -93,7 +93,7 @@ export default function TherapistRegister(){
     else if (passwordTherapist.length < 8){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "A senha deve conter pelo menos 8 caracteres",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -113,7 +113,7 @@ export default function TherapistRegister(){
         if(response.status === 200){
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 3,
                 alertText: "Usuário cadastrado com sucesso",
                 alertButtons: ["Ok"],
                 alertsCommans: [()=>{router.push("/login")}]
@@ -121,7 +121,7 @@ export default function TherapistRegister(){
             localStorage.setItem("id", data.id);
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 2,
                 alertText: "Deseja cadastrar um paciente?",
                 alertButtons: ["Cadastrar agora", "Cadastrar depois"],
                 alertsCommans: [()=>{router.push("/register/childRegister")}, ()=>{router.push("/login")}]
@@ -129,7 +129,7 @@ export default function TherapistRegister(){
         }else if (response.status === 400){
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 2,
                 alertText: "Usuário indisponivel, escolha outro",
                 alertButtons: ["Editar"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
@@ -137,7 +137,7 @@ export default function TherapistRegister(){
         }else{
             setshowAlerts(true)
             dataAlerts = {
-              alertType: 1,
+              alertType: 5,
               alertText: "Cadastro não concluido, tente novamente mais tarde",
               alertButtons: ["Ok"],
               alertsCommans: [()=>{setshowAlerts(false)}]
@@ -178,7 +178,13 @@ export default function TherapistRegister(){
                 </div>
                 <div>
                     <h1 className="textTherapistPasswordValidated">Senha</h1>
-                    <input type="password" className="passwordValidatedTherapistInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTherapist, newConfirmPassword);}}></input>
+                    <input type="password" className="passwordValidatedTherapistInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTherapist, newConfirmPassword);}} onKeyDown={(e) => 
+                        {
+                            if (e.key === 'Enter') {
+                                AuthenticationsAlerts()
+                            }
+                        }}>
+                    </input>
                 </div>
                 <div className="MessageValidatedPasswordTherapist">
                     <h1 className="textMessageValidatedPasswordTherapist" style={{ color: passwordTherapist !== validatedpassword ? "red" : passwordTherapist.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>

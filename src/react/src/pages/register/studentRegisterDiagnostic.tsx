@@ -30,7 +30,7 @@ export default function StudentDiagnosticRegister(){
     if (studentDiagnostic == ""){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Adicione seu diagnostico",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -51,7 +51,7 @@ export default function StudentDiagnosticRegister(){
       else{
         setshowAlerts(true)
         dataAlerts = {
-          alertType: 1,
+          alertType: 5,
           alertText: "Cadastro não concluido, tente novamente mais tarde",
           alertButtons: ["Ok"],
           alertsCommans: [()=>{setshowAlerts(false)}]

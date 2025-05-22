@@ -30,7 +30,7 @@ export default function StudentAgeRegister(){
     if (studentAge == ""){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Adicione sua idade",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -38,7 +38,7 @@ export default function StudentAgeRegister(){
     }else if (parseInt(studentAge) == 0 || parseInt(studentAge) >= 20){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Adicione uma idade válida",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -59,7 +59,7 @@ export default function StudentAgeRegister(){
       else{
         setshowAlerts(true)
         dataAlerts = {
-          alertType: 1,
+          alertType: 5,
           alertText: "Cadastro não concluido, tente novamente mais tarde",
           alertButtons: ["Ok"],
           alertsCommans: [()=>{setshowAlerts(false)}]
@@ -82,7 +82,13 @@ export default function StudentAgeRegister(){
           </div>
           <div className="registerStudantAgeBox">
             <h1 className="textStudentAge">Agora digite sua idade:</h1>
-            <input type="number" className="ageStudantInput" value={studentAge} onChange={(evt)=>setStudentAge(evt.target.value)}></input>
+            <input type="number" className="ageStudantInput" value={studentAge} onChange={(evt)=>setStudentAge(evt.target.value)} onKeyDown={(e) => 
+              {
+                if (e.key === 'Enter') {
+                    AuthenticationsAlerts()
+                }
+              }}>
+            </input>
             <h1 className="textStudentAgeHelp">Peça ajuda de seus pais,</h1>
             <h1 className="textStudentAgeHelp2">se necessário</h1>
             <button className="buttonRegisterStudantAge" onClick={()=>AuthenticationsAlerts()}>Próximo</button>

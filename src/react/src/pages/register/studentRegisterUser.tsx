@@ -44,7 +44,7 @@ export default function StudentRegisterUser(){
     if (userStudent == ""){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Adicione um usuário",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -53,7 +53,7 @@ export default function StudentRegisterUser(){
     else if (userStudent == "null" || userStudent == "NULL" || userStudent == "Null"){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Digite um usuário válido",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -62,7 +62,7 @@ export default function StudentRegisterUser(){
     else if (passworStudent == "null" || passworStudent == "NULL" || passworStudent == "Null"){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Digite uma senha válida",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -71,7 +71,7 @@ export default function StudentRegisterUser(){
     else if (passworStudent != validatedpassword){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Senhas não conferem",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -80,7 +80,7 @@ export default function StudentRegisterUser(){
     else if (passworStudent == "" && validatedpassword == ""){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Cadastre uma senha",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -89,7 +89,7 @@ export default function StudentRegisterUser(){
     else if (passworStudent.length < 8){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "A senha deve conter pelo menos 8 caracteres",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -109,7 +109,7 @@ export default function StudentRegisterUser(){
         localStorage.removeItem("id_student");
         setshowAlerts(true)
         dataAlerts = {
-          alertType: 1,
+          alertType: 3,
           alertText: "Usuário cadastrado com sucesso",
           alertButtons: ["Ok"],
           alertsCommans: [()=>{router.push("/login")}]
@@ -117,7 +117,7 @@ export default function StudentRegisterUser(){
       }else if (response.status === 400){
         setshowAlerts(true)
         dataAlerts = {
-          alertType: 1,
+          alertType: 2,
           alertText: "Usuário indisponivel, escolha outro",
           alertButtons: ["Editar"],
           alertsCommans: [()=>{setshowAlerts(false)}]
@@ -126,7 +126,7 @@ export default function StudentRegisterUser(){
       else{
         setshowAlerts(true)
         dataAlerts = {
-          alertType: 1,
+          alertType: 5,
           alertText: "Cadastro não concluido, tente novamente mais tarde",
           alertButtons: ["Ok"],
           alertsCommans: [()=>{setshowAlerts(false)}]
@@ -155,7 +155,13 @@ export default function StudentRegisterUser(){
               <h1 className="textStudentPassword">Digite sua senha:</h1>
               <input type="password" className="passStudantInput" value={passworStudent} onChange={(evt)=>{const newPassword = evt.target.value;setpasswordStudent(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
               <h1 className="textStudentPassword">Confirme sua senha:</h1>
-              <input type="password" className="confirmPassStudantInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passworStudent, newConfirmPassword);}}></input>
+              <input type="password" className="confirmPassStudantInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passworStudent, newConfirmPassword);}} onKeyDown={(e) => 
+                {
+                  if (e.key === 'Enter') {
+                    AuthenticationsAlerts()
+                  }
+                }}>
+              </input>
               <div className="MessageValidatedPasswordStudente">
                   <h1 className="textMessageValidatedPasswordStudent" style={{ color: passworStudent !== validatedpassword ? "red" : passworStudent.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>
               </div>

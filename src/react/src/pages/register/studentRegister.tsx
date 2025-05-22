@@ -22,7 +22,7 @@ export default function StudentRegister(){
     if (studentName == ""){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Adicione seu nome",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -30,7 +30,7 @@ export default function StudentRegister(){
     }else if (studentName == "null" || studentName == "NULL" || studentName == "Null"){
       setshowAlerts(true)
       dataAlerts = {
-        alertType: 1,
+        alertType: 2,
         alertText: "Adicione um nome valido",
         alertButtons: ["Editar"],
         alertsCommans: [()=>{setshowAlerts(false)}]
@@ -54,7 +54,7 @@ export default function StudentRegister(){
         else{
           setshowAlerts(true)
           dataAlerts = {
-            alertType: 1,
+            alertType: 5,
             alertText: "Cadastro não concluido, tente novamente mais tarde",
             alertButtons: ["Ok"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -79,7 +79,13 @@ export default function StudentRegister(){
               <h1 className="textHelloStudent">Olá aluno, seja</h1>
               <h1 className="textwelcomeStudent">bem-vindo!</h1>
               <h1 className="textStudentName">Digite seu nome:</h1>
-              <input type="text" className="nameStudantInput" value={studentName} onChange={(evt)=>setStudentName(evt.target.value)}></input>
+              <input type="text" className="nameStudantInput" value={studentName} onChange={(evt)=>setStudentName(evt.target.value)} onKeyDown={(e) => 
+                {
+                  if (e.key === 'Enter') {
+                    AuthenticationsAlerts()
+                  }
+                }}>
+              </input>
               <button className="buttonRegisterStudant" onClick={()=>AuthenticationsAlerts()}>Próximo</button>
             </div>
         </div>

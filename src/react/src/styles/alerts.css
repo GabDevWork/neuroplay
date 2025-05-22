@@ -35,8 +35,8 @@
 
 .buttonAlerts{
     height: 45px;
-    min-width: 120px;
-    padding: 5px;
+    width: 150px;
+    padding: 05px;
     border-radius: 50px;
     background: #1246ff;
     color: #fff;
@@ -46,4 +46,21 @@
     box-shadow: 0px 2px 2px 0px #474747;
     cursor: pointer;
     font-size: 15px;
+    transition: 0.5s;
+}
+
+.buttonAlerts:hover{
+    height: 45px;
+    width: 150px;
+    padding: 05px;
+    border-radius: 50px;
+    background: #6984e7;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    box-shadow: 0px 2px 2px 0px #474747;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.5s;
 }

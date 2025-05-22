@@ -49,7 +49,7 @@ export default function TeacherRegister(){
     if (passwordTeacher != validatedpassword){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Senhas não conferem",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -58,7 +58,7 @@ export default function TeacherRegister(){
     else if (nameTeacher == "" || nameTeacher == "null" || nameTeacher == "NULL" || nameTeacher == "Null"){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Adicione o seu nome completo",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -67,7 +67,7 @@ export default function TeacherRegister(){
     else if (regEx.test(emailTeacher) == false || emailTeacher == "null" || emailTeacher == "NULL" || emailTeacher == "Null"){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Adicione um e-mail válido",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -76,7 +76,7 @@ export default function TeacherRegister(){
     else if (userTeacher == "" || userTeacher == "null" || userTeacher == "NULL" || userTeacher == "Null"){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Adicione um usuário válido",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -85,7 +85,7 @@ export default function TeacherRegister(){
     else if (passwordTeacher == "" && validatedpassword == ""){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "Cadastre uma senha",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -94,7 +94,7 @@ export default function TeacherRegister(){
     else if (passwordTeacher.length < 8){
         setshowAlerts(true)
         dataAlerts = {
-            alertType: 1,
+            alertType: 2,
             alertText: "A senha deve conter pelo menos 8 caracteres",
             alertButtons: ["Editar"],
             alertsCommans: [()=>{setshowAlerts(false)}]
@@ -114,7 +114,7 @@ export default function TeacherRegister(){
         if(response.status === 200){
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 3,
                 alertText: "Usuário cadastrado com sucesso",
                 alertButtons: ["Ok"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
@@ -122,7 +122,7 @@ export default function TeacherRegister(){
             localStorage.setItem("id", data.id);
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 2,
                 alertText: "Deseja cadastrar um aluno?",
                 alertButtons: ["Cadastrar agora", "Cadastrar depois"],
                 alertsCommans: [()=>{router.push("/register/childRegister")}, ()=>{router.push("/login")}]
@@ -130,7 +130,7 @@ export default function TeacherRegister(){
         }else if (response.status === 400){
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
+                alertType: 2,
                 alertText: "Usuário indisponivel, escolha outro",
                 alertButtons: ["Editar"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
@@ -138,7 +138,7 @@ export default function TeacherRegister(){
         }else{
             setshowAlerts(true)
             dataAlerts = {
-              alertType: 1,
+              alertType: 5,
               alertText: "Cadastro não concluido, tente novamente mais tarde",
               alertButtons: ["Ok"],
               alertsCommans: [()=>{setshowAlerts(false)}]
@@ -179,7 +179,13 @@ export default function TeacherRegister(){
                 </div>
                 <div>
                     <h1 className="textTeacherPasswordValidated">Confirme sua senha</h1>
-                    <input type="password" className="passwordValidatedTeacherInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTeacher, newConfirmPassword);}}></input>
+                    <input type="password" className="passwordValidatedTeacherInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTeacher, newConfirmPassword);}} onKeyDown={(e) => 
+                        {
+                            if (e.key === 'Enter') {
+                                AuthenticationsAlerts()
+                            }
+                        }}>
+                    </input>
                 </div>
                 <div className="MessageValidatedPasswordTeacher">
                     <h1 className="textMessageValidatedPasswordTeacher" style={{ color: passwordTeacher !== validatedpassword ? "red" : passwordTeacher.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>

@@ -33,6 +33,7 @@ export default function Activy(props: dataActivity) {
     const [seeLevelStamp, setLevelStamp] = useState("boxLevelStampDontShow");
     const [seeAnimalDescription, setAnimalDescription] = useState("boxAnimalDescriptionDontShow")
     const [seeLevelConclusion, setSeeLevelConclusion] = useState("boxLevelConclusionDontShow")
+    const [seeCloseActivity, setSeeCloseActivity] = useState("closeActivity")
     let currentActivity = activities[currentIndex];
     const [showAlerts, setshowAlerts] = useState(false);
     const now =  Date.now()
@@ -48,8 +49,8 @@ export default function Activy(props: dataActivity) {
         if (option === currentActivity.answer) {
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
-                alertText: "Resposta correta!",
+                alertType: 3,
+                alertText: "Muito bem, a esposta está correta!",
                 alertButtons: ["Proxima pergunta"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
             }
@@ -58,8 +59,8 @@ export default function Activy(props: dataActivity) {
         else{
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 1,
-                alertText: "Resposta incorreta, voltaremos nela mais tarde!",
+                alertType: 4,
+                alertText: `Resposta incorreta, a resposta correta é ${currentActivity.answer}`,
                 alertButtons: ["Proxima pergunta"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
             }
@@ -93,6 +94,7 @@ export default function Activy(props: dataActivity) {
             if(props.dataLevel.levelRepeat === false){
                 setLevelStamp("boxLevelStamp")
                 setSeeActivity("boxActivityDontShow")
+                setSeeCloseActivity("closeActivityDontShow")
             }
             else{
                 setSeeLevelConclusion("boxLevelConclusion")
@@ -131,7 +133,7 @@ export default function Activy(props: dataActivity) {
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
                 <MenuTop menuOptions={false}/>
             <div className="boxActivityContent">
-                    <Image className="closeActivity" alt="Sair" height={100} width={100} src={"/images/close.svg"} onClick={()=>{props.dataLevel.activityComand[0]()}}/>
+                <Image className={seeCloseActivity} alt="Sair" height={100} width={100} src={"/images/close.svg"} onClick={()=>{props.dataLevel.activityComand[0]()}}/>
                 <div className={seeIntro}>
                     <div className="IntroDesc">
                         <h1 className="introDescText">{props.dataLevel.levelDescription}</h1>

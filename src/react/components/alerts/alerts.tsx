@@ -9,8 +9,16 @@ export default function Alerts(props: AlertsProps){
 
     let imgIcon:string=""
 
-    //1=alert, 2=question, 3=ok, 4=no, 5=danger
+    //1=alert, 2=info, 3=right answer, 4=wrong answer, 5=error
     if (props.dataAlert.alertType == 1){
+        imgIcon="/images/alert.svg"
+    }else if (props.dataAlert.alertType == 2){
+        imgIcon="/images/alert.svg"
+    }else if (props.dataAlert.alertType == 3){
+        imgIcon="/images/rigth.svg"
+    }else if (props.dataAlert.alertType == 4){
+        imgIcon="/images/wrong.svg"
+    }else if (props.dataAlert.alertType == 5){
         imgIcon="/images/warning.svg"
     }
 
