@@ -33,7 +33,7 @@ Deseja-se criar um banco de dados para a aplicação interativa, para armazenar 
 #### 4.3.2 Esquema Relacional
 
 
-![Exemplo de um modelo relacional](./images/EsqRel_NeuroPlay.drawio.png)
+![Exemplo de um modelo relacional](./images/DER_Final.jpg)
 ---
 
 
