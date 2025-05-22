@@ -31,9 +31,10 @@ export default function Activy(props: dataActivity) {
     const [seeIntro, setSeeIntro] = useState("boxIntro");
     const [seeActivity, setSeeActivity] = useState("boxActivityDontShow");
     const [seeLevelStamp, setLevelStamp] = useState("boxLevelStampDontShow");
-    const [seeAnimalDescription, setAnimalDescription] = useState("boxAnimalDescriptionDontShow")
-    const [seeLevelConclusion, setSeeLevelConclusion] = useState("boxLevelConclusionDontShow")
-    const [seeCloseActivity, setSeeCloseActivity] = useState("closeActivity")
+    const [seeAnimalDescription, setAnimalDescription] = useState("boxAnimalDescriptionDontShow");
+    const [seeLevelConclusion, setSeeLevelConclusion] = useState("boxLevelConclusionDontShow");
+    const [seeCloseActivity, setSeeCloseActivity] = useState("closeActivity");
+    const [wrongActivitys, setWrongActivityes] = useState(0);
     let currentActivity = activities[currentIndex];
     const [showAlerts, setshowAlerts] = useState(false);
     const now =  Date.now()
@@ -57,10 +58,13 @@ export default function Activy(props: dataActivity) {
             nextActivity()
         }
         else{
+            let tmp_wrongActivitys = wrongActivitys
+            tmp_wrongActivitys = tmp_wrongActivitys+1
+            setWrongActivityes(tmp_wrongActivitys)
             setshowAlerts(true)
             dataAlerts = {
                 alertType: 4,
-                alertText: `Resposta incorreta, a resposta correta é ${currentActivity.answer}`,
+                alertText: `Resposta incorreta, a resposta correta é: ${currentActivity.answer}`,
                 alertButtons: ["Proxima pergunta"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
             }
@@ -88,9 +92,22 @@ export default function Activy(props: dataActivity) {
     function nextActivity() {
         if (currentIndex + 1 < activities.length) {
             setCurrentIndex(currentIndex + 1);
-            // setRightAnswer(null); 
         }
         else{
+            confirmPerformance()
+        }   
+    }
+
+    function confirmPerformance(){
+        if (wrongActivitys >= 2){
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 4,
+                alertText: `burro!`,
+                alertButtons: ["começar do inicio"],
+                alertsCommans: [()=>{setshowAlerts(false)}]
+            }
+        }else{
             if(props.dataLevel.levelRepeat === false){
                 setLevelStamp("boxLevelStamp")
                 setSeeActivity("boxActivityDontShow")
@@ -100,7 +117,7 @@ export default function Activy(props: dataActivity) {
                 setSeeLevelConclusion("boxLevelConclusion")
                 setSeeActivity("boxActivityDontShow")
             }
-        }   
+        }
     }
 
     const editDate=()=>{
@@ -133,13 +150,14 @@ export default function Activy(props: dataActivity) {
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
                 <MenuTop menuOptions={false}/>
             <div className="boxActivityContent">
-                <Image className={seeCloseActivity} alt="Sair" height={100} width={100} src={"/images/close.svg"} onClick={()=>{props.dataLevel.activityComand[0]()}}/>
+                <button className={seeCloseActivity} onClick={()=>{props.dataLevel.activityComand[0]()}}>Fechar atividade</button>
                 <div className={seeIntro}>
                     <div className="IntroDesc">
                         <h1 className="introDescText">{props.dataLevel.levelDescription}</h1>
                     </div>
-                    <div className="IntroAnimalPhoto">
-                        <Image className="IntroAnimalPhoto_Img" alt="Animal" height={100} width={100} src={`/images/${props.dataLevel.levelAnimalPhoto}`} />
+                    <div className="IntroDesc">
+                        <h1 className="introDescText">Escute o seu som:</h1>
+                        <Image className="introDescAudio" alt="Animal" height={100} width={100} src="/images/volume_up.svg"/>
                     </div>
                     <button className="buttonIntro" onClick={getActivity}>Começar</button>
                 </div>
@@ -147,7 +165,7 @@ export default function Activy(props: dataActivity) {
                     {currentActivity && 
                         (
                             <>
-                                <div className="activityQuestion">{currentActivity.question}</div>
+                                <div className="activityQuestion"><h1 className="activityQuestionText">{currentActivity.question}</h1></div>
                                 <div className="questionsOptions">
                                     {currentActivity.optionA != ''?<div className="Option" onClick={()=> checkAnswer(currentActivity.optionA)}>{currentActivity.optionA}</div>:''}
                                     {currentActivity.optionB != ''?<div className="Option" onClick={()=> checkAnswer(currentActivity.optionB)}>{currentActivity.optionB}</div>:''}
@@ -164,7 +182,7 @@ export default function Activy(props: dataActivity) {
                             <div>Parabéns! Você foi muito bem</div>
                             <Image className="IntroAnimalPhoto" alt="Animal" height={100} width={100} src={`/images/${props.dataLevel.levelStampPhoto}`} />
                             <div>Você conquistou um selo!</div>
-                            <button onClick={seeDescription}>Saiba mais sobre o selo</button>
+                            <button className="" onClick={seeDescription}>Saiba mais sobre o selo</button>
                         </div>
                         <div className={seeAnimalDescription}>
                             <div>{props.dataLevel.levelAnimalDesc}</div>
@@ -172,14 +190,18 @@ export default function Activy(props: dataActivity) {
                             <button onClick={()=>{saveProgress(), setAnimalDescription("boxAnimalDescriptionDontShow"),setSeeLevelConclusion("boxLevelConclusion")}}>concluir nivel</button>
                         </div>
                         <div className={seeLevelConclusion}>
-                            a
+                            <div>Ver selos</div>
+                            <div>
+                                <h1>você completou</h1>
+                                <h1>{`/10`}</h1>
+                            </div>
                             <button onClick={()=>{props.dataLevel.activityComand[0](), props.comandNextLevel(props.dataLevel.levelId+1), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Próxima ativiade</button>
                             <button onClick={()=>{props.dataLevel.activityComand[0](), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Ir para o caminho de níveis</button>
                         </div>
                     </>:
                     <>
                         <div className={seeLevelConclusion}>
-                            a
+                            <div>Ver selos</div>
                             <button onClick={()=>{props.dataLevel.activityComand[0](), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Ir para o caminho de níveis</button>
                         </div>
                     </>

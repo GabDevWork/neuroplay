@@ -72,7 +72,7 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
       try{
         const connection = await pool.getConnection();
         const [progress]:any[] = await connection.query(`
-          SELECT MAX(prog_id) AS prog_id FROM progress WHERE prog_stu_id = ?;
+          SELECT MAX(prog_lev_id) AS prog_id FROM progress WHERE prog_stu_id = ?;
         `,[idStudent]);
         connection.release();
         if (Array.isArray(progress) && progress.length > 0) {
