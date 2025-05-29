@@ -13,7 +13,8 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
                         prog_stu_id AS studentId,
                         ps.progSta_sta_id AS stampId,
                         sta.sta_photo AS stampPhoto,
-                        ani.ani_name AS aniName
+                        ani.ani_name AS aniName,
+                        ani_desc AS aniDesc
                     FROM 
                         progress p
                     LEFT JOIN 

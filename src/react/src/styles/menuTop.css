@@ -18,6 +18,24 @@
     width: 50%;
 }
 
+ @media (max-width: 450px) {
+    .textLogo{
+        flex-direction: column !important;
+        align-items: start !important;
+        line-height: 0.8;
+    }
+
+    .textLogoNeuro{
+        margin-bottom: 0px !important;
+        margin-left: 15px !important;
+    }
+
+    .textLogoPlay{
+        margin-bottom: 0px !important;
+        margin-left: 15px !important;
+    }
+ }
+
 .textLogoNeuro{
     color: #fff;
     font-size: 6vh;
@@ -64,8 +82,8 @@
 .MenuDropDown{
     position: absolute;
     top: 90;
-    right: 34;
-    width: 10vw;
+    right: 5;
+    width: 150px;
     height: 0vh;
     display: flex;
     flex-direction: column;
@@ -79,7 +97,7 @@
 
 .MenuDropDownSelect{
     position: absolute;
-    margin-top: 40vh;
+    top: 91;
     right: 5;
     width: 150px;
     height: 200px;
@@ -94,23 +112,15 @@
     z-index: 100;
 }
 
-.option{
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 0px 10px 0px;
-    width: 100%;
-    transition: 0.8s;
-}
-
 .optionSelect{
     padding: 5px 0px 10px 0px;
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: 0.8s;
+    transition: 0.5s;
 }
 
 .optionSelect:hover{
@@ -118,5 +128,5 @@
     width: 100%;
     cursor: pointer;
     background-color: #fcd108;
-    transition: 0.8s;
+    transition: 0.5s;
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { TypeDataLevel, TypeDataAlerts } from "../type";
 import Alerts from "../alerts/alerts";
 import MenuTop from "../Top/menuTop";
+import { useRouter } from "next/router";
 
 export interface dataActivity {
     dataLevel: TypeDataLevel,
@@ -35,9 +36,11 @@ export default function Activy(props: dataActivity) {
     const [seeLevelConclusion, setSeeLevelConclusion] = useState("boxLevelConclusionDontShow");
     const [seeCloseActivity, setSeeCloseActivity] = useState("closeActivity");
     const [wrongActivitys, setWrongActivityes] = useState(0);
+    const [rigthAnswer, setRigthAnswer] = useState("")
     let currentActivity = activities[currentIndex];
     const [showAlerts, setshowAlerts] = useState(false);
     const now =  Date.now()
+    const router = useRouter();
 
     useEffect(() => {
         if (props.dataLevel) {
@@ -68,18 +71,21 @@ export default function Activy(props: dataActivity) {
                 alertButtons: ["Proxima pergunta"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
             }
+
             nextActivity()
         }
     }
 
     async function getActivity() {
-        console.log(props.dataLevel.levelId)
         try {
             const indexLevel = props.dataLevel.levelId;
             const endpoint = `/api/apiLevels?idLevel=${indexLevel}&action=getDataActivity`; 
             const response = await fetch(endpoint, { method: "GET", cache: "reload" });
             const data = await response.json();
         if (response.status === 200) {
+            const dataAnswer = data[0]
+            const tmp_answer = dataAnswer.answer
+            setRigthAnswer(tmp_answer)
             setActivities(data);  
             setSeeIntro("boxIntroDontShow");
             setSeeActivity("boxActivity");
@@ -102,10 +108,13 @@ export default function Activy(props: dataActivity) {
         if (wrongActivitys >= 2){
             setshowAlerts(true)
             dataAlerts = {
-                alertType: 4,
-                alertText: `burro!`,
-                alertButtons: ["começar do inicio"],
-                alertsCommans: [()=>{setshowAlerts(false)}]
+                alertType: 1,
+                alertText: `Infelizmente você errou algumas questões, mas não fique triste podemos começar de novo!`,
+                alertButtons: [`recomeçar nível ${props.dataLevel.levelId}`, "ir para o caminho de níveis"],
+                alertsCommans: [
+                    ()=>{setshowAlerts(false), props.dataLevel.activityComand[0](), props.comandNextLevel(props.dataLevel.levelId), setSeeLevelConclusion("boxLevelConclusionDontShow")}, 
+                    ()=>{setshowAlerts(false), props.dataLevel.activityComand[0]()}
+                ]
             }
         }else{
             if(props.dataLevel.levelRepeat === false){
@@ -146,7 +155,7 @@ export default function Activy(props: dataActivity) {
     }
 
     return (
-        <div className="activity">
+        <div className={`activity${props.dataLevel.levelId}`}>
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
                 <MenuTop menuOptions={false}/>
             <div className="boxActivityContent">
@@ -179,30 +188,43 @@ export default function Activy(props: dataActivity) {
                 {props.dataLevel.levelRepeat == false ?
                     <>
                         <div className={seeLevelStamp}>
-                            <div>Parabéns! Você foi muito bem</div>
-                            <Image className="IntroAnimalPhoto" alt="Animal" height={100} width={100} src={`/images/${props.dataLevel.levelStampPhoto}`} />
-                            <div>Você conquistou um selo!</div>
-                            <button className="" onClick={seeDescription}>Saiba mais sobre o selo</button>
+                            <div className="SeeStamp">
+                                <h1 className="introDescText">Parabéns! Você foi muito bem</h1>
+                            </div>
+                            <div className="seeStampImgBox">
+                                <Image className="seeStampImg" alt="Animal" height={100} width={100} src={`/images/${props.dataLevel.levelStampPhoto}`} />
+                                <div className="seeStampAnswer">{rigthAnswer}</div>
+                            </div>
+                            <div className="SeeStamp">
+                                <h1 className="introDescText">Você conquistou um selo!</h1>
+                            </div>
+                            <button className="buttonSeeStamp" onClick={seeDescription}>Saiba mais sobre o selo</button>
                         </div>
                         <div className={seeAnimalDescription}>
-                            <div>{props.dataLevel.levelAnimalDesc}</div>
+                            <div className="animalDescriptionText">{props.dataLevel.levelAnimalDesc}</div>
                             <Image className="IntroAnimalPhoto" alt="Animal" height={100} width={100} src={`/images/${props.dataLevel.levelStampPhoto}`} />
-                            <button onClick={()=>{saveProgress(), setAnimalDescription("boxAnimalDescriptionDontShow"),setSeeLevelConclusion("boxLevelConclusion")}}>concluir nivel</button>
+                            <button className="buttonAnimalDescription" onClick={()=>{saveProgress(), setAnimalDescription("boxAnimalDescriptionDontShow"),setSeeLevelConclusion("boxLevelConclusion")}}>concluir nivel</button>
                         </div>
                         <div className={seeLevelConclusion}>
-                            <div>Ver selos</div>
                             <div>
-                                <h1>você completou</h1>
-                                <h1>{`/10`}</h1>
+                                <Image className="levelConclusionStampImg" alt="Selos" height={100} width={100} src="/images/seeStamp.png" onClick={()=>router.push("/stamp")}/>
                             </div>
-                            <button onClick={()=>{props.dataLevel.activityComand[0](), props.comandNextLevel(props.dataLevel.levelId+1), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Próxima ativiade</button>
-                            <button onClick={()=>{props.dataLevel.activityComand[0](), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Ir para o caminho de níveis</button>
+                            <div className="levelConclusionProgress">
+                                <h1 className="levelConclusionProgressText1">Você completou:</h1>
+                                <h1 className="levelConclusionProgressText2">{`${props.dataLevel.levelId} / 10`}</h1>
+                            </div>
+                            <div className="levelConclusionButtons">
+                                <button className="buttonConclusionButton1" onClick={()=>{props.dataLevel.activityComand[0](), props.comandNextLevel(props.dataLevel.levelId+1), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Próxima ativiade</button>
+                                <button className="buttonConclusionButton2" onClick={()=>{props.dataLevel.activityComand[0](), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Ir para o caminho de níveis</button>
+                            </div>
                         </div>
                     </>:
                     <>
                         <div className={seeLevelConclusion}>
-                            <div>Ver selos</div>
-                            <button onClick={()=>{props.dataLevel.activityComand[0](), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Ir para o caminho de níveis</button>
+                            <div className="boxLevelConclusionRepeat">
+                                <Image className="levelConclusionStampRepeat" alt="Selos" height={100} width={100} src="/images/seeStamp.png" onClick={()=>router.push("/stamp")}/>
+                                <button className="buttonConclusionButton2" onClick={()=>{props.dataLevel.activityComand[0](), setSeeLevelConclusion("boxLevelConclusionDontShow")}}>Ir para o caminho de níveis</button>
+                            </div>
                         </div>
                     </>
                 }

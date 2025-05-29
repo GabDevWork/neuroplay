@@ -16,14 +16,17 @@ interface dataStamp{
     studentId: number,
     stampId: number,
     aniName: string,
-    stampPhoto: string
+    stampPhoto: string,
+    aniDesc: string
 }
 
 export default function Stamp(){
 
+    const [seeAnimalStamp, setSeeAnimalStamp] = useState([true, false])
     const [showAlerts, setshowAlerts] = useState(false)
     const [nameAnimal, setNameAnimal] = useState<string[]>([])
     const [photoStamp, setPhotoStmp] = useState<string[]>([])
+    const [descAnimal, setDescAnimal] = useState<string[]>([])
     const [stampQtd, setStampQtd] = useState(-1);
     const [numStamps, setNumStamps] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
 
@@ -34,6 +37,18 @@ export default function Stamp(){
         }
     }, [])
 
+    function seeTab(index: number){
+        const tmp_seeAnimalStamp = [...seeAnimalStamp]
+        for(let i = 0; i < tmp_seeAnimalStamp.length; i++){
+            if (i == index){
+                tmp_seeAnimalStamp[i] = true;
+            }else {
+                tmp_seeAnimalStamp[i] = false;
+            }
+        }
+        setSeeAnimalStamp(tmp_seeAnimalStamp)
+    }
+
     async function getProgressStamp(idUser: string){
         try{
             const endpoint = `/api/apiProgress?idStudent=${idUser}&action=getProgressStamp`; 
@@ -41,16 +56,18 @@ export default function Stamp(){
             const data = await response.json();
             setStampQtd(data.length);
             if(response.status === 200){
-                let tmp_name:string[] = [""], tmp_photo:string[] = [""]
+                let tmp_name:string[] = [""], tmp_photo:string[] = [""], tmp_desc:string[] = [""]
                 let tmp_num = numStamps
                 data.map((u:dataStamp, index:number)=>{
                     tmp_name[index] = u.aniName;
                     tmp_photo[index] = u.stampPhoto;
                     tmp_num[index] = u.progressId;
+                    tmp_desc[index] = u.aniDesc
                 })
                 setPhotoStmp(tmp_photo);
                 setNameAnimal(tmp_name);
                 setNumStamps(tmp_num);
+                setDescAnimal(tmp_desc);
             }
             else{
                 setshowAlerts(true)
@@ -83,21 +100,50 @@ export default function Stamp(){
                 </div>
             </div>
             <div className="stamp">
+                <div className="tabAnimalStamp">
+                    <div className={`tabStamp ${seeAnimalStamp[0] ? "tabStampSelect":""}`} onClick={()=>seeTab(0)}>Selos</div>
+                    <div className={`tabAnimal ${seeAnimalStamp[1] ? "tabAnimalSelect":""}`} onClick={()=>seeTab(1)}>Animais</div>
+                </div>
                 <div className="stampBox">
-                    <div className="rowStamp">
-                        {numStamps.map((i, index)=>(
-                            <div className="stampContent">
-                                <div className="stampItem">
-                                    {i != 0 ?
-                                        <Image alt="" className="stampImage" height={100} width={100} src={`/images/${photoStamp[index]}`}/>
-                                        :""
-                                    }
+                    {seeAnimalStamp[0] ?
+                        <div className="rowStamp">
+                            {numStamps.map((i, index)=>(
+                                <div className="stampContent">
+                                    <div className="stampItem">
+                                        {i != 0 ?
+                                            <Image alt="" className="stampImage" height={100} width={100} src={`/images/${photoStamp[index]}`}/>
+                                            :"?"
+                                        }
+                                    </div>
+                                    {i != 0 ?`${nameAnimal[index]}`:`Nível ${index+1}`}
                                 </div>
-                                {nameAnimal[index]}
-                            </div>
-                        ))
-                        }
-                    </div>
+                            ))
+                            }
+                        </div>
+                    : seeAnimalStamp[1] ?
+                        <div className="rowAnimal">
+                            {numStamps.map((i, index)=>(
+                                <div className="animalContent">
+                                    <div className="stampItem">
+                                        {i != 0 ?
+                                            <Image alt="" className="stampImage" height={100} width={100} src={`/images/${photoStamp[index]}`}/>
+                                            :"?"
+                                        }
+                                    </div>
+                                    <div className="animalDescription">
+                                        {i != 0 ?
+                                            <div className="nameAnimal">
+                                                {`${nameAnimal[index]}:`}
+                                            </div>
+                                            :`Desbloqueie o nível ${index+1}`
+                                        }
+                                        <div>{descAnimal[index]}</div>
+                                    </div>
+                                </div>
+                            ))
+                            }
+                        </div>
+                    :""}
                 </div>
             </div>
         </div>

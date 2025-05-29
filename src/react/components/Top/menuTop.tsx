@@ -43,10 +43,14 @@ export default function MenuTop(props: DataMenu){
               <Image src="/images/menu.svg" alt="logo" width={30} height={30} className="optionsImg" onClick={()=>{seeMenu()}}/>
             }
             <div className={`MenuDropDown${seeMenuDropDown}`}>
-              <h1 className={`option${seeMenuDropDown}`} onClick={()=>router.push("/home/homeStudent")}>Niveis</h1>
-              <h1 className={`option${seeMenuDropDown}`} onClick={()=>router.push("/perfil")}>Perfil</h1>
-              <h1 className={`option${seeMenuDropDown}`} onClick={()=>router.push("/stamp")}>Selos</h1>
-              <h1 className={`option${seeMenuDropDown}`} onClick={()=>router.push("/")}>Sair</h1>
+              {seeMenuDropDown == "Select" ?
+                <>
+                  <h1 className="optionSelect" onClick={()=>router.push("/home/homeStudent")}>Niveis</h1>
+                  <h1 className="optionSelect" onClick={()=>router.push("/perfil")}>Perfil</h1>
+                  <h1 className="optionSelect" onClick={()=>router.push("/stamp")}>Selos</h1>
+                  <h1 className="optionSelect" onClick={()=>router.push("/")}>Sair</h1>
+                </>:""
+              }
             </div>
           </div>
       </div>

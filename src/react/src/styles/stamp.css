@@ -8,6 +8,48 @@
     justify-content: start;
 }
 
+ @media (max-width: 380px) {
+    .stampBox{
+        border-radius: 0px 0px 15px 15px !important;
+    }
+ }
+
+ @media (max-width: 900px) {
+    .medalStamps{
+        top: 130 !important; 
+        height: 100px !important;
+        width: 300px !important;
+        flex-direction: row !important;
+        justify-content: start !important;
+    }
+
+    .circleMedal{
+        height: 100% !important;
+        width: 30% !important;
+        z-index: 0 !important;
+        margin-left: 80px !important;
+    }
+
+    .squareMedal{
+        width: 100px !important;
+        min-height: 50px !important;
+        margin-top: 0px !important;
+        margin-left: 135px !important;
+        padding-right: 10px !important;
+        justify-content: end !important;
+        align-items: center !important;
+    }
+
+    .tabAnimalStamp{
+        margin-top: 150px !important;
+    }
+
+    .rowStamp, .rowAnimal{
+        margin-top: 20px !important;
+    }
+
+ }
+
 .medalStamps{
     position: absolute;
     top: 115; 
@@ -61,17 +103,52 @@
     min-height: 87vh;
 }
 
+.tabAnimalStamp{
+    margin-top: 70px;
+    width: 80%;
+    display: flex;
+}
+
+.tabStampSelect, .tabAnimalSelect{
+    background-color: #5a86ff !important;
+    color: #fff !important;
+    z-index: 100 !important;
+}
+
+.tabAnimal, .tabStamp{
+    width: 150px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #bff19c;
+    border-radius: 15px 15px 0px 0px;
+    cursor: pointer;
+    transition: 0.5s;
+    color: #07a7da;
+    font-weight: bold;
+}
+
+.tabAnimal:hover, .tabStamp:hover{
+    width: 150px;
+    height: 30px;
+    background-color: #5a86ff;
+    color: #fff !important;
+    transition: 0.5s;
+}
+
 .stampBox{
     background-color: #5a86ff;
-    margin-top: 90px;
+    box-shadow: 0px 5px 15px 0px #8f8f8f;
     width: 80%;
-    min-height: 80%;
-    border-radius: 15px;
+    height: 50%;
+    border-radius: 0px 15px 15px 15px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: start;
     margin-bottom: 50px;
+    overflow-y: auto;
 }
 
 .rowStamp{
@@ -80,10 +157,25 @@
     justify-content: center;
     align-items: center;
     max-width: 80%;
+    height: 250px;
     gap: 15px;
     flex-wrap: wrap;
     margin-top: 100px;
     margin-bottom: 100px;    
+}
+
+.rowAnimal{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    height: 353px;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 .stampContent{
@@ -92,12 +184,27 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.animalContent{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #fff;
+    font-weight: bold;
+    width: 90%;
 }
 
 .stampItem {
   width: 90px;
   height: 90px;
   background-color: rgba(0,0,0,0.7);
+  color: #bbb;
+  font-size: 30px;
   border-radius: 100%;
   overflow: hidden;
   display: flex;
@@ -105,6 +212,23 @@
   justify-content: center;
   cursor: pointer;
   margin: 0px 5px 0px 5px;
+}
+
+.animalDescription{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 90%;
+    border-radius: 10px;
+    background-color: rgba(255,255,255, 0.3);
+    color: #222;
+    padding: 10px;
+}
+
+.nameAnimal{
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .stampImage{
