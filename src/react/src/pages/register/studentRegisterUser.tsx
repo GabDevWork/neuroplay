@@ -21,6 +21,7 @@ export default function StudentRegisterUser(){
   const [userStudent, setUserStudent] = useState("")
   const [idStudent, setIdStudent] = useState("");
   const router = useRouter()
+  const now =  Date.now()
 
   useEffect(() => {
         const storedId = localStorage.getItem("id_student");
@@ -100,10 +101,19 @@ export default function StudentRegisterUser(){
     }
   }
 
+  const editDate=()=>{
+    const date = new Date(now);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   const RegisterUserStudent = async () => {
+    const date = editDate();
     try{
       const idReq = "4";
-      const endpoint = `/api/apiRegisterStudent?idReq=${idReq}&id=${idStudent}&user=${userStudent}&password=${passworStudent}`; 
+      const endpoint = `/api/apiRegisterStudent?idReq=${idReq}&id=${idStudent}&user=${userStudent}&password=${passworStudent}&date=${date}`; 
       const response = await fetch(endpoint, {method: "POST", cache: "reload"})
       if(response.status === 200){
         localStorage.removeItem("id_student");

@@ -36,7 +36,9 @@ export default function Activy(props: dataActivity) {
     const [seeLevelConclusion, setSeeLevelConclusion] = useState("boxLevelConclusionDontShow");
     const [seeCloseActivity, setSeeCloseActivity] = useState("closeActivity");
     const [wrongActivitys, setWrongActivityes] = useState(0);
-    const [rigthAnswer, setRigthAnswer] = useState("")
+    const [rigthAnswer, setRigthAnswer] = useState("");
+    const [answerAudio, setAnswerAudio] = useState("");
+    const [anotherOptionAudio, setAnotherOptionAudio] = useState("");
     let currentActivity = activities[currentIndex];
     const [showAlerts, setshowAlerts] = useState(false);
     const now =  Date.now()
@@ -48,6 +50,23 @@ export default function Activy(props: dataActivity) {
             setCurrentIndex(0);
         }
     }, [props.dataLevel]);
+
+    const playAudioLevel = () => {
+        const audio = new Audio(`/assets/${props.dataLevel.levelAudio}`);
+        audio.play();
+    };
+
+    const playAudioOptions = (option: string) => {
+        if (option === currentActivity.answer){
+            console.log(answerAudio);
+            const audio = new Audio(`/assets/${answerAudio}`);
+            audio.play();
+        }else{
+            console.log(anotherOptionAudio);
+            const audio = new Audio(`/assets/${anotherOptionAudio}`);
+            audio.play();
+        }
+    };
 
     function checkAnswer(option: string) {
         if (option === currentActivity.answer) {
@@ -89,6 +108,8 @@ export default function Activy(props: dataActivity) {
             setActivities(data);  
             setSeeIntro("boxIntroDontShow");
             setSeeActivity("boxActivity");
+            setAnswerAudio(dataAnswer.answerAudio);
+            // setAnotherOptionAudio(dataAnswer.anotherOptionAudio);
             }
         } catch (error) {
             console.error("Error parsing response:", error);
@@ -155,7 +176,7 @@ export default function Activy(props: dataActivity) {
     }
 
     return (
-        <div className={`activity${props.dataLevel.levelId}`}>
+        <div className='activity'>
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
                 <MenuTop menuOptions={false}/>
             <div className="boxActivityContent">
@@ -166,7 +187,7 @@ export default function Activy(props: dataActivity) {
                     </div>
                     <div className="IntroDesc">
                         <h1 className="introDescText">Escute o seu som:</h1>
-                        <Image className="introDescAudio" alt="Animal" height={100} width={100} src="/images/volume_up.svg"/>
+                        <Image className="introDescAudio" alt="Animal" height={100} width={100} onClick={playAudioLevel} src="/images/volume_up.svg"/>
                     </div>
                     <button className="buttonIntro" onClick={getActivity}>Começar</button>
                 </div>
@@ -176,10 +197,10 @@ export default function Activy(props: dataActivity) {
                             <>
                                 <div className="activityQuestion"><h1 className="activityQuestionText">{currentActivity.question}</h1></div>
                                 <div className="questionsOptions">
-                                    {currentActivity.optionA != ''?<div className="Option" onClick={()=> checkAnswer(currentActivity.optionA)}>{currentActivity.optionA}</div>:''}
-                                    {currentActivity.optionB != ''?<div className="Option" onClick={()=> checkAnswer(currentActivity.optionB)}>{currentActivity.optionB}</div>:''}
-                                    {currentActivity.optionC != ''?<div className="Option" onClick={()=> checkAnswer(currentActivity.optionC)}>{currentActivity.optionC}</div>:''}
-                                    {currentActivity.optionD != ''?<div className="Option" onClick={()=> checkAnswer(currentActivity.optionD)}>{currentActivity.optionD}</div>:''}
+                                    {currentActivity.optionA != ''?<div className="Option" onClick={()=> {checkAnswer(currentActivity.optionA), playAudioOptions(currentActivity.optionA)}}>{currentActivity.optionA}</div>:''}
+                                    {currentActivity.optionB != ''?<div className="Option" onClick={()=> {checkAnswer(currentActivity.optionB), playAudioOptions(currentActivity.optionB)}}>{currentActivity.optionB}</div>:''}
+                                    {currentActivity.optionC != ''?<div className="Option" onClick={()=> {checkAnswer(currentActivity.optionC), playAudioOptions(currentActivity.optionC)}}>{currentActivity.optionC}</div>:''}
+                                    {currentActivity.optionD != ''?<div className="Option" onClick={()=> {checkAnswer(currentActivity.optionD), playAudioOptions(currentActivity.optionD)}}>{currentActivity.optionD}</div>:''}
                                 </div>
                             </>
                         )

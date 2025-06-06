@@ -13,6 +13,7 @@
 @import url(homeStudent.css);
 @import url(activity.css);
 @import url(stamp.css);
+@import url(redefinePassword.css);
 
 :root {
   --background: #ffffff;

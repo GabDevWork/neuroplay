@@ -14,12 +14,16 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
             a.ani_name AS aName,
             a.ani_desc AS aDesc,
             a.ani_photo AS aPhoto,
-            s.sta_photo AS sPhoto
+            s.sta_photo AS sPhoto,
+            act.act_ansAudio AS answerAudio
           FROM levels l
           JOIN animal a ON l.lev_ani_id = a.ani_id
           JOIN stamp s ON l.lev_sta_id = s.sta_id
+          JOIN activity act ON l.lev_id = act.act_lev_id
           WHERE 
-            l.lev_id = ?;
+            l.lev_id = ?
+          GROUP BY 
+            answerAudio;
           `,[idLevel]
         );
         connection.release();
@@ -30,6 +34,7 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
             animal_description: dataActivitys.aDesc,
             animal_photo: dataActivitys.aPhoto,
             stamp_photo: dataActivitys.sPhoto,
+            lev_audio: dataActivitys.answerAudio
           }
           return res.status(200).json(dataReturn)
         }
@@ -42,13 +47,15 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
       try{
         const connection = await pool.getConnection();
         const [rows_activitys]:any[] = await connection.query(`
-          SELECT 
+         SELECT 
             act.act_question As question,
             act.act_optionA AS optionA,
             act.act_optionB AS optionB,
             act.act_optionC AS optionC,
             act.act_optionD AS optionD,
-            act.act_answer AS answer
+            act.act_answer AS answer,
+            act.act_ansAudio AS answerAudio,
+            act.act_anotherOptionAudio AS anotherOptionAudio
           FROM activity act 
           JOIN levels l ON act.act_lev_id = l.lev_id
           WHERE 

@@ -51,7 +51,7 @@ export default async function RegisterStudent(req: NextApiRequest, res: NextApiR
       }
     }
     if (idReq == "4"){
-      const {id, user, password} = req.query;
+      const {id, user, password, date} = req.query;
       try{
         const connection = await pool.getConnection();
         const [rowsUser]:any[] = await connection.query(`
@@ -73,14 +73,34 @@ export default async function RegisterStudent(req: NextApiRequest, res: NextApiR
             connection.release();
             if (rows_user.serverStatus === 2){
               const connection = await pool.getConnection();
+
               const [resultID_progress]:any[] = await connection.query("SELECT MAX(prog_id) AS lastId FROM progress");
               const lastId = (resultID_progress)[0].lastId || 0;
               const newIdProgress = lastId + 1; 
+
               const [resultID_levels]:any[] = await connection.query('SELECT MIN(lev_id) AS firstId FROM levels;');
               const firtsID = (resultID_levels)[0].firstId || 0;
+
+              const [resultAni]:any[] = await connection.query("SELECT MAX(progAni_id) AS lastId FROM progress_animal");
+              const lastIdAni = (resultAni)[0].lastId || 0;
+              const newIdAni = lastIdAni + 1; 
+
+              const [resultSta]:any[] = await connection.query("SELECT MAX(progAni_id) AS lastId FROM progress_animal");
+              const lastIdSta = (resultSta)[0].lastId || 0;
+              const newIdSta = lastIdSta + 1; 
+
               const [rows_progress]:any[] = await connection.query(`
-                INSERT INTO progress (prog_id, prog_stu_id, prog_lev_id) VALUES (?, ?, ?)`,[newIdProgress, id, firtsID]
+                INSERT INTO progress (prog_id, prog_stu_id, prog_lev_id, prog_date) VALUES (?, ?, ?, ?)`,[newIdProgress, id, firtsID, date]
               );
+
+              const [progress_animal]:any[] = await connection.query(`
+                INSERT INTO progress_animal (progAni_id, progAni_prog_id, progAni_ani_id, progAni_date) VALUES (?, ?, ?, ?);`,[newIdAni, newIdProgress, firtsID, date]
+              );
+
+              const [progress_stamp]:any[] = await connection.query(`
+                INSERT INTO progress_stamp (progSta_id, progSta_prog_id, progSta_sta_id, progSta_date) VALUES (?, ?, ?, ?);`,[newIdSta, newIdProgress, firtsID, date]
+              );
+
               connection.release();
             }
             res.status(200).json({message:"ok"})
@@ -95,7 +115,7 @@ export default async function RegisterStudent(req: NextApiRequest, res: NextApiR
       }
     }
     if (idReq == "5"){
-      const {idProfessional, nameChild, ageChild, diagnosticChild, userChild, passwordChild} = req.query;
+      const {idProfessional, nameChild, ageChild, diagnosticChild, userChild, passwordChild, date} = req.query;
       try{
         const connection = await pool.getConnection();
         const [rowsUser]:any[] = await connection.query(`
@@ -122,16 +142,35 @@ export default async function RegisterStudent(req: NextApiRequest, res: NextApiR
             const [resultID_progress]:any[] = await connection.query("SELECT MAX(prog_id) AS lastId FROM progress");
             const lastId = (resultID_progress)[0].lastId || 0;
             const newIdProgress = lastId + 1; 
+
             const [resultID_levels]:any[] = await connection.query('SELECT MIN(lev_id) AS firstId FROM levels;');
             const firtsID = (resultID_levels)[0].firstId || 0;
+
+            const [resultAni]:any[] = await connection.query("SELECT MAX(progAni_id) AS lastId FROM progress_animal");
+            const lastIdAni = (resultAni)[0].lastId || 0;
+            const newIdAni = lastIdAni + 1; 
+
+            const [resultSta]:any[] = await connection.query("SELECT MAX(progAni_id) AS lastId FROM progress_animal");
+            const lastIdSta = (resultSta)[0].lastId || 0;
+            const newIdSta = lastIdSta + 1; 
+
             const [rows_progress]:any[] = await connection.query(`
-              INSERT INTO progress (prog_id, prog_stu_id, prog_lev_id) VALUES (?, ?, ?)`,[newIdProgress, newId, firtsID]
+              INSERT INTO progress (prog_id, prog_stu_id, prog_lev_id, prog_date) VALUES (?, ?, ?, ?)`,[newIdProgress, newId, firtsID, date]
             );
+
+            const [progress_animal]:any[] = await connection.query(`
+              INSERT INTO progress_animal (progAni_id, progAni_prog_id, progAni_ani_id, progAni_date) VALUES (?, ?, ?, ?);`,[newIdAni, newIdProgress, firtsID, date]
+            );
+
+            const [progress_stamp]:any[] = await connection.query(`
+              INSERT INTO progress_stamp (progSta_id, progSta_prog_id, progSta_sta_id, progSta_date) VALUES (?, ?, ?, ?);`,[newIdSta, newIdProgress, firtsID, date]
+            );
+
+            connection.release();
           }else{
           res.status(400).json({message: "Bad Request"});
           }
         }
-        connection.release();
         res.status(200).json({message: "Ok"});
       }catch(error){
         console.error(error)

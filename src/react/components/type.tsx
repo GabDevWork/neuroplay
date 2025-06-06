@@ -1,5 +1,6 @@
 export type TypeDataAlerts = {
     alertType: number,
+    alertTitle?: string,
     alertText: string,
     alertButtons: string[],
     alertsCommans: (()=> void)[],
@@ -12,6 +13,7 @@ export type TypeDataLevel = {
     levelAnimalDesc: string,
     levelAnimalPhoto: string,
     levelStampPhoto: string,
+    levelAudio: string,
     levelRepeat: boolean,
     activityComand: (()=> (void))[],
 }

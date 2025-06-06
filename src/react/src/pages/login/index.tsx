@@ -88,7 +88,7 @@ export default function Login(){
                 <button className="signinFacebook">
                     <Image className="facebookIcon" alt="google" height={20} width={20} src={"/images/facebbok_icon.png"}/>
                     Entrar com o facebook</button>
-                <h1 className="textRecoverPass">Esqueceu a senha</h1>
+                <h1 className="textRecoverPass" onClick={()=>router.push("/redefinePassword")}>Esqueceu a senha</h1>
                 <h1 className="textFirstAccess" onClick={()=>router.push("/register")}>Primeiro acesso</h1>
             </div>
         </div>

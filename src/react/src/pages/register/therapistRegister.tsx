@@ -100,11 +100,19 @@ export default function TherapistRegister(){
         }
     }
     else{
-        registerTeacher();
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 1,
+            alertTitle: "Compromisso com a Privacidade e a Proteção de Dados",
+            alertText: "Como profissional responsável pelo cuidado de crianças, estou plenamente comprometido com a segurança e a privacidade das informações pessoais sob minha responsabilidade. Declaro estar de acordo com a Lei Geral de Proteção de Dados (LGPD) e garanto que nenhum dado das crianças será compartilhado com terceiros sem o consentimento legalmente exigido. A responsabilidade pelo uso, armazenamento e proteção desses dados é inteiramente minha, prezando sempre por um ambiente seguro, ético e respeitoso para todas as famílias.",
+            alertButtons: ["Concordo com o termo de responsabilidade"],
+            alertsCommans: [()=>{registerTherapist()}]
+        }
     }
   }
 
-  const registerTeacher = async () => {
+  const registerTherapist = async () => {
+    setshowAlerts(false)
     try{
         const descricao = "Terapeuta"
         const endpoint = `/api/apiRegisterProfessional?nome=${nameTherapist}&descricao=${descricao}&email=${emailTherapist}&username=${userTherapist}&password=${passwordTherapist}`; 

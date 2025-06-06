@@ -101,11 +101,19 @@ export default function TeacherRegister(){
         }
     }
     else{
-        registerTeacher();
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 1,
+            alertTitle: "Compromisso com a Privacidade e a Proteção de Dados",
+            alertText: "Como profissional responsável pelo cuidado de crianças, estou plenamente comprometido com a segurança e a privacidade das informações pessoais sob minha responsabilidade. Declaro estar de acordo com a Lei Geral de Proteção de Dados (LGPD) e garanto que nenhum dado das crianças será compartilhado com terceiros sem o consentimento legalmente exigido. A responsabilidade pelo uso, armazenamento e proteção desses dados é inteiramente minha, prezando sempre por um ambiente seguro, ético e respeitoso para todas as famílias.",
+            alertButtons: ["Concordo com o termo de responsabilidade"],
+            alertsCommans: [()=>{registerTeacher()}]
+        }
     }
   }
 
   const registerTeacher = async () => {
+    setshowAlerts(false)
     try{
         const descricao = "Professor"
         const endpoint = `/api/apiRegisterProfessional?nome=${nameTeacher}&descricao=${descricao}&email=${emailTeacher}&username=${userTeacher}&password=${passwordTeacher}`; 

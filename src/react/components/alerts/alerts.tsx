@@ -28,7 +28,10 @@ export default function Alerts(props: AlertsProps){
                 <div>
                     <Image alt="" src={imgIcon} width={100} height={100}/>
                 </div>
-                <div>
+                {props.dataAlert.alertTitle != undefined ?
+                    <div className="boxtextAlert">{props.dataAlert.alertTitle}</div>:""
+                }
+                <div className="boxtextAlert">
                     {props.dataAlert.alertText}
                 </div>
                 <div className="boxButtonAlerts">

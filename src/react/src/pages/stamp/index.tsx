@@ -54,8 +54,8 @@ export default function Stamp(){
             const endpoint = `/api/apiProgress?idStudent=${idUser}&action=getProgressStamp`; 
             const response = await fetch(endpoint, {method: "GET", cache: "reload"})
             const data = await response.json();
-            setStampQtd(data.length);
             if(response.status === 200){
+                setStampQtd(data.length);
                 let tmp_name:string[] = [""], tmp_photo:string[] = [""], tmp_desc:string[] = [""]
                 let tmp_num = numStamps
                 data.map((u:dataStamp, index:number)=>{
@@ -69,7 +69,16 @@ export default function Stamp(){
                 setNumStamps(tmp_num);
                 setDescAnimal(tmp_desc);
             }
-            else{
+            else if(response.status === 401){
+                setStampQtd(0);
+                setshowAlerts(true)
+                dataAlerts = {
+                    alertType: 1,
+                    alertText: "Você ainda não possui selos, comece completando o nível 1",
+                    alertButtons: ["Ok"],
+                    alertsCommans: [()=>{setshowAlerts(false)}]
+                }
+            }else{
                 setshowAlerts(true)
                 dataAlerts = {
                     alertType: 5,

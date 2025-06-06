@@ -87,6 +87,7 @@ export default function Home(){
                         levelAnimalDesc: data.animal_description,
                         levelAnimalPhoto: data.animal_photo,
                         levelStampPhoto: data.stamp_photo,
+                        levelAudio: data.lev_audio,
                         levelRepeat: false,
                         activityComand: [()=>{setShowActivity(false)}],
                     });
@@ -121,6 +122,7 @@ export default function Home(){
                     levelAnimalDesc: data.animal_description,
                     levelAnimalPhoto: data.animal_photo,
                     levelStampPhoto: data.stamp_photo,
+                    levelAudio: data.lev_audio,
                     levelRepeat: true,
                     activityComand: [()=>{setShowActivity(false)}],
                 });
