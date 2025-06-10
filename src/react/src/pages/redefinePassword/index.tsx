@@ -14,11 +14,57 @@ let dataAlerts:TypeDataAlerts ={
 
 export default function RedefinePassword(){
 
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
-  const [userVerificated, setUserVerificated] = useState(false);
-  const router = useRouter();
-  const [showAlerts, setshowAlerts] = useState(false);
+    const [password, setPassword] = useState("");
+    const [validatedpassword, setvalidatedpasswoord] = useState("")
+    const [user, setUser] = useState("");
+    const [userVerificated, setUserVerificated] = useState(false);
+    const [role, setRole] = useState("");
+    const [idUser, setIdUser] = useState(-1)
+    const router = useRouter();
+    const [showAlerts, setshowAlerts] = useState(false);
+    const [messagePassword, setMessagePassword] = useState("");
+
+    const checkPasswordMatch = (password: string, confirmPassword: string) => {
+        if (password.length < 8 && confirmPassword.length < 8) {
+            setMessagePassword("❌ Digite pelo menos 8 caracteres");
+        } else if (password === confirmPassword && password !== ""){
+            setMessagePassword("✔ Senhas conferem");
+        }    
+        else {
+            setMessagePassword("❌ As senhas não conferem");
+        }
+    }
+
+    function AuthenticationsAlerts(){
+        if (password != validatedpassword){
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 2,
+                alertText: "Senhas não conferem",
+                alertButtons: ["Editar"],
+                alertsCommans: [()=>{setshowAlerts(false)}]
+            }
+        }else if (password == "" && validatedpassword == ""){
+        setshowAlerts(true)
+        dataAlerts = {
+            alertType: 2,
+            alertText: "Cadastre uma senha",
+            alertButtons: ["Editar"],
+            alertsCommans: [()=>{setshowAlerts(false)}]
+        }
+        }
+        else if (password.length < 8){
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 2,
+                alertText: "A senha deve conter pelo menos 8 caracteres",
+                alertButtons: ["Editar"],
+                alertsCommans: [()=>{setshowAlerts(false)}]
+            }
+        }else{
+            redefinePassword()
+        }
+    }
 
   const verifyUser = async()=>{
     try{
@@ -28,6 +74,8 @@ export default function RedefinePassword(){
         if(response.status === 200){
             setUserVerificated(true);
             setshowAlerts(true)
+            setRole(data.role)
+            setIdUser(data.id)
             dataAlerts = {
                 alertType: 1,
                 alertText: "Agora defina uma senha com pelo menos 8 caracteres",
@@ -56,13 +104,24 @@ export default function RedefinePassword(){
     }
   }  
 
-    const redefinePassword = async()=>{
+    async function redefinePassword(){
     try{
-        const endpont = `/api/apiRedefinePassword?username=${user}&password=${password}`;
+        let endpont = "";
+        if(role == "Profissional"){
+            endpont = `/api/apiRedefinePassword?userId=${idUser}&password=${password}&action=redefinePassProfessional`;
+        }else if (role == "Estudante"){
+            endpont = `/api/apiRedefinePassword?userId=${idUser}&password=${password}&action=redefinePassStudent`;
+        }
         const response=await fetch(endpont,{method: "POST", cache:"reload"})
         const data = await response.json();
         if(response.status === 200){
-            
+            setshowAlerts(true)
+            dataAlerts = {
+                alertType: 3,
+                alertText: "Senha redefinida com sucesso!",
+                alertButtons: ["Ir para login"],
+                alertsCommans: [()=>{router.push("/login")}]
+            }
         }else{
             setshowAlerts(true)
             dataAlerts = {
@@ -104,18 +163,23 @@ export default function RedefinePassword(){
                     <div className="redefinePasswordBoxPassContent">
                         <div className="redefinePasswordBoxPass">
                             <h1 className="textRedefinePassword">Senha</h1>
-                            <input type="password" className="redefinePasswordInput" value={password} onChange={(evt)=>{setPassword(evt.target.value)}} onKeyDown={(e) => 
+                            <input type="password" className="redefinePasswordInput" value={password} onChange={(evt)=>{const newPassword = evt.target.value;setPassword(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                            <h1 className="textRedefinePasswordValidated">Confirme a senha</h1>
+                            <input type="password" className="redefinePasswordValidatedInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(password, newConfirmPassword);}} onKeyDown={(e) => 
                                 {
                                     if (e.key === 'Enter') {
-                                        redefinePassword()
+                                        AuthenticationsAlerts()
                                     }
                                 }}>
                             </input>
                         </div>
-                        <button className="buttonRedefinePassword" onClick={redefinePassword}>Redefinir senha</button>
+                        <div className="MessageValidatedRedefinePassword">
+                            <h1 className="textMessageValidatedRedefinePassword" style={{ color: password !== validatedpassword ? "red" : password.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>
+                        </div>
+                        <button className="buttonRedefinePassword" onClick={()=>{AuthenticationsAlerts()}}>Redefinir senha</button>
                     </div>
                 }
-                <div className="buttonRedefinePassLogin">
+                <div className="buttonRedefinePassLogin" onClick={()=>{router.push("/login")}}>
                     Lembrei minha senha
                 </div>
             </div>
