@@ -14,16 +14,18 @@ let dataAlerts:TypeDataAlerts ={
 
 export default function TeacherRegister(){
 
-  const router = useRouter()
-  const [nameTeacher, setNameTeacher] = useState("")
-  const [emailTeacher, setEmailTeacher] = useState("")
-  const [userTeacher, setUserTeacher] = useState("")
-  const [passwordTeacher, setpasswordTeacher] = useState("")
-  const [validatedpassword, setvalidatedpasswoord] = useState("")
-  const [showAlerts, setshowAlerts] = useState(false)
-  const [messagePassword, setMessagePassword] = useState("");
-  const [messageEmail, setMessageEmail] = useState("");
-  const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    const router = useRouter()
+    const [nameTeacher, setNameTeacher] = useState("")
+    const [emailTeacher, setEmailTeacher] = useState("")
+    const [userTeacher, setUserTeacher] = useState("")
+    const [passwordTeacher, setpasswordTeacher] = useState("")
+    const [validatedpassword, setvalidatedpasswoord] = useState("")
+    const [showAlerts, setshowAlerts] = useState(false)
+    const [messagePassword, setMessagePassword] = useState("");
+    const [messageEmail, setMessageEmail] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
 
 
   const checkPasswordMatch = (password: string, confirmPassword: string) => {
@@ -183,17 +185,27 @@ export default function TeacherRegister(){
                 </div>
                 <div>
                     <h1 className="textTeacherPassword">Senha</h1>
-                    <input type="password" className="passwordTeacherInput" value={passwordTeacher} onChange={(evt)=>{const newPassword = evt.target.value;setpasswordTeacher(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                    <div className="passwordTeacherBox">
+                        <input type={showPassword ? "text" : "password"} className="passwordTeacherInput" value={passwordTeacher} onChange={(evt)=>{const newPassword = evt.target.value;setpasswordTeacher(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                        <span onClick={() => setShowPassword(!showPassword)} style={{ cursor: "pointer" }}>
+                            <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                        </span>
+                    </div>
                 </div>
                 <div>
                     <h1 className="textTeacherPasswordValidated">Confirme sua senha</h1>
-                    <input type="password" className="passwordValidatedTeacherInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTeacher, newConfirmPassword);}} onKeyDown={(e) => 
-                        {
-                            if (e.key === 'Enter') {
-                                AuthenticationsAlerts()
-                            }
-                        }}>
-                    </input>
+                    <div className="passwordTeacherBox">
+                        <input type={showConfirmPassword ? "text" : "password"} className="passwordValidatedTeacherInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTeacher, newConfirmPassword);}} onKeyDown={(e) => 
+                            {
+                                if (e.key === 'Enter') {
+                                    AuthenticationsAlerts()
+                                }
+                            }}>
+                        </input>
+                        <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} style={{ cursor: "pointer" }}>
+                            <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showConfirmPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                        </span>
+                    </div>
                 </div>
                 <div className="MessageValidatedPasswordTeacher">
                     <h1 className="textMessageValidatedPasswordTeacher" style={{ color: passwordTeacher !== validatedpassword ? "red" : passwordTeacher.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>

@@ -66,6 +66,11 @@
     font-size: 20px;
     margin-top: 20px;
   }
+
+  .studentPasswordBox{
+    width: 340px;
+    border-bottom: 2px solid #000; 
+  }
   
   .userStudantInput{
       height: 20px;
@@ -78,19 +83,17 @@
 
   .passStudantInput{
       height: 20px;
-      width: 340px;
+      width: 93%;
       border: none; 
       outline: none;
-      border-bottom: 2px solid #000; 
       font-size: 20px;
   }
 
   .confirmPassStudantInput{
     height: 20px;
-    width: 340px;
+    width: 93%;
     border: none; 
     outline: none;
-    border-bottom: 2px solid #000; 
     font-size: 20px;
 }
 
@@ -109,8 +112,8 @@
   height: 35px;
   width: 230px;
   border-radius: 50px;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 05px;
   background: #1246ff;
   color: #fff;
   outline: none;

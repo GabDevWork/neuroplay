@@ -14,16 +14,18 @@ let dataAlerts:TypeDataAlerts ={
 
 export default function TherapistRegister(){
 
-  const router = useRouter()
-  const [nameTherapist, setNameTherapist] = useState("")
-  const [emailTherapist, setEmailTherapist] = useState("")
-  const [userTherapist, setUserTherapist] = useState("")
-  const [passwordTherapist, setpasswordTherapist] = useState("")
-  const [validatedpassword, setvalidatedpasswoord] = useState("")
-  const [showAlerts, setshowAlerts] = useState(false)
-  const [messagePassword, setMessagePassword] = useState("");
-  const [messageEmail, setMessageEmail] = useState("");
-  const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    const router = useRouter()
+    const [nameTherapist, setNameTherapist] = useState("")
+    const [emailTherapist, setEmailTherapist] = useState("")
+    const [userTherapist, setUserTherapist] = useState("")
+    const [passwordTherapist, setpasswordTherapist] = useState("")
+    const [validatedpassword, setvalidatedpasswoord] = useState("")
+    const [showAlerts, setshowAlerts] = useState(false)
+    const [messagePassword, setMessagePassword] = useState("");
+    const [messageEmail, setMessageEmail] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
 
   const checkPasswordMatch = (password: string, confirmPassword: string) => {
     if (password.length < 8 && confirmPassword.length < 8) {
@@ -182,17 +184,27 @@ export default function TherapistRegister(){
                 </div>
                 <div>
                     <h1 className="textTherapistPassword">Senha</h1>
-                    <input type="password" className="passwordTherapistInput" value={passwordTherapist} onChange={(evt)=>{const newPassword = evt.target.value;setpasswordTherapist(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                    <div className="passwordTherapistBox">
+                        <input type={showPassword ? "text" : "password"} className="passwordTherapistInput" value={passwordTherapist} onChange={(evt)=>{const newPassword = evt.target.value;setpasswordTherapist(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                        <span onClick={() => setShowPassword(!showPassword)} style={{ cursor: "pointer" }}>
+                            <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                        </span>
+                    </div>
                 </div>
                 <div>
                     <h1 className="textTherapistPasswordValidated">Senha</h1>
-                    <input type="password" className="passwordValidatedTherapistInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTherapist, newConfirmPassword);}} onKeyDown={(e) => 
-                        {
-                            if (e.key === 'Enter') {
-                                AuthenticationsAlerts()
-                            }
-                        }}>
-                    </input>
+                    <div className="passwordTherapistBox">
+                        <input type={showConfirmPassword ? "text" : "password"} className="passwordValidatedTherapistInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passwordTherapist, newConfirmPassword);}} onKeyDown={(e) => 
+                            {
+                                if (e.key === 'Enter') {
+                                    AuthenticationsAlerts()
+                                }
+                            }}>
+                        </input>
+                        <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} style={{ cursor: "pointer" }}>
+                            <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showConfirmPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                        </span>
+                    </div>
                 </div>
                 <div className="MessageValidatedPasswordTherapist">
                     <h1 className="textMessageValidatedPasswordTherapist" style={{ color: passwordTherapist !== validatedpassword ? "red" : passwordTherapist.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>

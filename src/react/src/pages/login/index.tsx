@@ -14,10 +14,11 @@ let dataAlerts:TypeDataAlerts ={
 
 export default function Login(){
 
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
-  const router = useRouter();
-  const [showAlerts, setshowAlerts] = useState(false);
+    const [password, setPassword] = useState("");
+    const [user, setUser] = useState("");
+    const router = useRouter();
+    const [showAlerts, setshowAlerts] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
   const LoginUser = async()=>{
     try{
@@ -71,13 +72,18 @@ export default function Login(){
                 </div>
                 <div>
                     <h1 className="textPassword">Senha</h1>
-                    <input type="password" className="passwordInput" value={password} onChange={(evt)=>{setPassword(evt.target.value)}} onKeyDown={(e) => 
-                        {
-                            if (e.key === 'Enter') {
-                                LoginUser()
-                            }
-                        }}>
-                    </input>
+                    <div className="passwordBox">
+                        <input type={showPassword ? "text" : "password"} className="passwordInput" value={password} onChange={(evt)=>{setPassword(evt.target.value)}} onKeyDown={(e) => 
+                            {
+                                if (e.key === 'Enter') {
+                                    LoginUser()
+                                }
+                            }}>
+                        </input>
+                        <span onClick={() => setShowPassword(!showPassword)} style={{ cursor: "pointer" }}>
+                            <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                        </span>
+                    </div>
                 </div>
                 <button className="buttonEnter" onClick={()=>{LoginUser()}}>Entrar
                 </button>

@@ -97,12 +97,16 @@
         margin-top: 10px;
     }
 
+    .passwordTeacherBox{
+        border-bottom: 2px solid #000; 
+        width: 340px;
+    }
+
     .passwordTeacherInput{
         height: 20px;
-        width: 340px;
+        width: 93%;
         border: none; 
         outline: none;
-        border-bottom: 2px solid #000; 
     }
 
     .textTeacherPasswordValidated{
@@ -112,10 +116,9 @@
 
     .passwordValidatedTeacherInput{
         height: 20px;
-        width: 340px;
+        width: 93%;
         border: none; 
         outline: none;
-        border-bottom: 2px solid #000; 
     }
 
     .MessageValidatedPasswordTeacher{

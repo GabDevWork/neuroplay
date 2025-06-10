@@ -92,12 +92,16 @@
         margin-top: 10px;
     }
 
+    .passwordTherapistBox{
+        border-bottom: 2px solid #000; 
+        width: 340px;
+    }
+
     .passwordTherapistInput{
         height: 20px;
-        width: 340px;
+        width: 93%;
         border: none; 
         outline: none;
-        border-bottom: 2px solid #000; 
     }
 
     .textTherapistPasswordValidated{
@@ -107,10 +111,9 @@
 
     .passwordValidatedTherapistInput{
         height: 20px;
-        width: 340px;
+        width: 93%;
         border: none; 
         outline: none;
-        border-bottom: 2px solid #000; 
     }
 
     .MessageValidatedPasswordTherapist{

@@ -23,6 +23,9 @@ export default function RedefinePassword(){
     const router = useRouter();
     const [showAlerts, setshowAlerts] = useState(false);
     const [messagePassword, setMessagePassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
     const checkPasswordMatch = (password: string, confirmPassword: string) => {
         if (password.length < 8 && confirmPassword.length < 8) {
@@ -163,15 +166,25 @@ export default function RedefinePassword(){
                     <div className="redefinePasswordBoxPassContent">
                         <div className="redefinePasswordBoxPass">
                             <h1 className="textRedefinePassword">Senha</h1>
-                            <input type="password" className="redefinePasswordInput" value={password} onChange={(evt)=>{const newPassword = evt.target.value;setPassword(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                            <div className="redefinePasswordInputBox">
+                                <input type={showPassword ? "text" : "password"}  className="redefinePasswordInput" value={password} onChange={(evt)=>{const newPassword = evt.target.value;setPassword(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                                <span onClick={() => setShowPassword(!showPassword)} style={{ cursor: "pointer" }}>
+                                    <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                                </span>
+                            </div>
                             <h1 className="textRedefinePasswordValidated">Confirme a senha</h1>
-                            <input type="password" className="redefinePasswordValidatedInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(password, newConfirmPassword);}} onKeyDown={(e) => 
-                                {
-                                    if (e.key === 'Enter') {
-                                        AuthenticationsAlerts()
-                                    }
-                                }}>
-                            </input>
+                            <div className="redefinePasswordInputBox">
+                                <input type={showConfirmPassword ? "text" : "password"}  className="redefinePasswordInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(password, newConfirmPassword);}} onKeyDown={(e) => 
+                                    {
+                                        if (e.key === 'Enter') {
+                                            AuthenticationsAlerts()
+                                        }
+                                    }}>
+                                </input>
+                                <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} style={{ cursor: "pointer" }}>
+                                    <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showConfirmPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                                </span>
+                            </div>
                         </div>
                         <div className="MessageValidatedRedefinePassword">
                             <h1 className="textMessageValidatedRedefinePassword" style={{ color: password !== validatedpassword ? "red" : password.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>

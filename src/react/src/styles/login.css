@@ -64,12 +64,16 @@
     margin-top: 10px;
 }
 
+.passwordBox{
+    width: 340px;
+    border-bottom: 2px solid #000; 
+}
+
 .passwordInput{
     height: 20px;
-    width: 340px;
+    width: 92%;
     border: none; 
     outline: none;
-    border-bottom: 2px solid #000; 
 }
 
 .buttonEnter{

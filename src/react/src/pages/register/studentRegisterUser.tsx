@@ -20,6 +20,8 @@ export default function StudentRegisterUser(){
   const [messagePassword, setMessagePassword] = useState("");
   const [userStudent, setUserStudent] = useState("")
   const [idStudent, setIdStudent] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter()
   const now =  Date.now()
 
@@ -163,15 +165,25 @@ export default function StudentRegisterUser(){
               <h1 className="textStudentUser">Digite seu usuário:</h1>
               <input type="text" className="userStudantInput" value={userStudent} onChange={(evt)=>{setUserStudent(evt.target.value)}}></input>
               <h1 className="textStudentPassword">Digite sua senha:</h1>
-              <input type="password" className="passStudantInput" value={passworStudent} onChange={(evt)=>{const newPassword = evt.target.value;setpasswordStudent(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+              <div className="studentPasswordBox">
+                <input type={showPassword ? "text" : "password"}  className="passStudantInput" value={passworStudent} onChange={(evt)=>{const newPassword = evt.target.value;setpasswordStudent(newPassword);checkPasswordMatch(newPassword, validatedpassword);}}></input>
+                <span onClick={() => setShowPassword(!showPassword)} style={{ cursor: "pointer" }}>
+                  <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                </span>
+              </div>
               <h1 className="textStudentPassword">Confirme sua senha:</h1>
-              <input type="password" className="confirmPassStudantInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passworStudent, newConfirmPassword);}} onKeyDown={(e) => 
+              <div className="studentPasswordBox">
+                <input type={showConfirmPassword ? "text" : "password"}  className="confirmPassStudantInput" value={validatedpassword} onChange={(evt)=>{const newConfirmPassword = evt.target.value;setvalidatedpasswoord(newConfirmPassword);checkPasswordMatch(passworStudent, newConfirmPassword);}} onKeyDown={(e) => 
                 {
                   if (e.key === 'Enter') {
                     AuthenticationsAlerts()
                   }
                 }}>
-              </input>
+                </input>
+                <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} style={{ cursor: "pointer" }}>
+                  <Image alt="" className="redefinePasswordImage" height={100} width={100} src={showConfirmPassword ? "/images/visibility.svg" : "/images/visibility_off.svg"}/>
+                </span>
+              </div>
               <div className="MessageValidatedPasswordStudente">
                   <h1 className="textMessageValidatedPasswordStudent" style={{ color: passworStudent !== validatedpassword ? "red" : passworStudent.length < 8 && validatedpassword.length < 8 ? "red" : "green" }}>{messagePassword}</h1>
               </div>
