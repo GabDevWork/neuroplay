@@ -49,23 +49,35 @@ _Indicar o nome da criança_
 
 ## 5.4. Telas dos Niveis
 
-_Descrição da tela relativa à atividade 1._
+_Tela dos níveis disponíveis no aplicativo._
 
-[`Tela da atividade 1`](images/)
+![Tela de Nível](./images/niveis.png)
 
-_Descrição da tela relativa à atividade 2._
+_Tela com os selos adquidos com o passar dos níveis._
 
-[`Tela da atividade 2`](images/)
+![Tela de Selo](./images/selo.png)
 
 ## 5.5. Telas das Atividades
 
-_Descrição da tela relativa à atividade 1._
+_Tela inicial da atividade._
 
-[`Tela da atividade 1`](images/)
+![Tela da atividade 1](./images/atividade.png)
 
-_Descrição da tela relativa à atividade 2._
+_Tela da atividade._
 
-[`Tela da atividade 2`](images/)
+![Tela da atividade 2](./images/atividade1.png)
+
+_Tela da atividade._
+
+![Tela da atividade 3](./images/atividade2.png)
+
+_Tela da atividade._
+
+![Tela da atividade 4](./images/atividade3.png)
+
+_Tela da atividade._
+
+![Tela da atividade 5](./images/atividade4.png)
 
 
 
