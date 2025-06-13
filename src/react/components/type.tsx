@@ -14,6 +14,7 @@ export type TypeDataLevel = {
     levelAnimalPhoto: string,
     levelStampPhoto: string,
     levelAudio: string,
+    levelAudioDesc: string,
     levelRepeat: boolean,
     activityComand: (()=> (void))[],
 }

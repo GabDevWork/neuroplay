@@ -15,7 +15,8 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
             a.ani_desc AS aDesc,
             a.ani_photo AS aPhoto,
             s.sta_photo AS sPhoto,
-            act.act_ansAudio AS answerAudio
+            act.act_ansAudio AS answerAudio,
+            a.ani_descAudio AS levelAudioDesc
           FROM levels l
           JOIN animal a ON l.lev_ani_id = a.ani_id
           JOIN stamp s ON l.lev_sta_id = s.sta_id
@@ -34,7 +35,8 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
             animal_description: dataActivitys.aDesc,
             animal_photo: dataActivitys.aPhoto,
             stamp_photo: dataActivitys.sPhoto,
-            lev_audio: dataActivitys.answerAudio
+            lev_audio: dataActivitys.answerAudio,
+            aniDesc_audio: dataActivitys.levelAudioDesc
           }
           return res.status(200).json(dataReturn)
         }

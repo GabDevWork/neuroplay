@@ -17,6 +17,7 @@ interface ActivityItem {
     optionC: string;
     optionD: string;
     answer: string;
+    anotherOptionAudio: string
 }
 
 let dataAlerts:TypeDataAlerts ={
@@ -38,7 +39,7 @@ export default function Activy(props: dataActivity) {
     const [wrongActivitys, setWrongActivityes] = useState(0);
     const [rigthAnswer, setRigthAnswer] = useState("");
     const [answerAudio, setAnswerAudio] = useState("");
-    const [anotherOptionAudio, setAnotherOptionAudio] = useState("");
+    const [anotherOptionAudio, setAnotherOptionAudio] = useState([""]);
     let currentActivity = activities[currentIndex];
     const [showAlerts, setshowAlerts] = useState(false);
     const now =  Date.now()
@@ -56,16 +57,21 @@ export default function Activy(props: dataActivity) {
         audio.play();
     };
 
-    const playAudioOptions = (option: string) => {
+    const playAudioOptions = (option: string, index: number) => {
         if (option === currentActivity.answer){
-            console.log(answerAudio);
             const audio = new Audio(`/assets/${answerAudio}`);
             audio.play();
         }else{
-            console.log(anotherOptionAudio);
-            const audio = new Audio(`/assets/${anotherOptionAudio}`);
+            const tmp_audio = anotherOptionAudio[index]
+            const audio = new Audio(`/assets/${tmp_audio}`);
             audio.play();
         }
+    };
+
+    const playAudioAnimalDescription = () => {
+        console.log(props.dataLevel.levelAudioDesc)
+        const audio = new Audio(`/assets/${props.dataLevel.levelAudioDesc}`);
+        audio.play();
     };
 
     function checkAnswer(option: string) {
@@ -90,7 +96,6 @@ export default function Activy(props: dataActivity) {
                 alertButtons: ["Proxima pergunta"],
                 alertsCommans: [()=>{setshowAlerts(false)}]
             }
-
             nextActivity()
         }
     }
@@ -102,14 +107,18 @@ export default function Activy(props: dataActivity) {
             const response = await fetch(endpoint, { method: "GET", cache: "reload" });
             const data = await response.json();
         if (response.status === 200) {
-            const dataAnswer = data[0]
-            const tmp_answer = dataAnswer.answer
-            setRigthAnswer(tmp_answer)
-            setActivities(data);  
-            setSeeIntro("boxIntroDontShow");
-            setSeeActivity("boxActivity");
-            setAnswerAudio(dataAnswer.answerAudio);
-            // setAnotherOptionAudio(dataAnswer.anotherOptionAudio);
+                const dataAnswer = data[0]
+                const tmp_answer = dataAnswer.answer
+                setRigthAnswer(tmp_answer)
+                setActivities(data);  
+                setSeeIntro("boxIntroDontShow");
+                setSeeActivity("boxActivity");
+                setAnswerAudio(dataAnswer.answerAudio);
+                let tmp_anotherAudio: string[] = [''];
+                data.map((data: ActivityItem, index: number)=>{
+                    tmp_anotherAudio[index] = data.anotherOptionAudio
+                })
+                setAnotherOptionAudio(tmp_anotherAudio);
             }
         } catch (error) {
             console.error("Error parsing response:", error);
@@ -197,10 +206,38 @@ export default function Activy(props: dataActivity) {
                             <>
                                 <div className="activityQuestion"><h1 className="activityQuestionText">{currentActivity.question}</h1></div>
                                 <div className="questionsOptions">
-                                    {currentActivity.optionA != ''?<div className="Option" onClick={()=> {checkAnswer(currentActivity.optionA), playAudioOptions(currentActivity.optionA)}}>{currentActivity.optionA}</div>:''}
-                                    {currentActivity.optionB != ''?<div className="Option" onClick={()=> {checkAnswer(currentActivity.optionB), playAudioOptions(currentActivity.optionB)}}>{currentActivity.optionB}</div>:''}
-                                    {currentActivity.optionC != ''?<div className="Option" onClick={()=> {checkAnswer(currentActivity.optionC), playAudioOptions(currentActivity.optionC)}}>{currentActivity.optionC}</div>:''}
-                                    {currentActivity.optionD != ''?<div className="Option" onClick={()=> {checkAnswer(currentActivity.optionD), playAudioOptions(currentActivity.optionD)}}>{currentActivity.optionD}</div>:''}
+                                    {currentActivity.optionA != ''?
+                                        <div className="OptionBox">
+                                            <div className="option" onClick={()=> {checkAnswer(currentActivity.optionA)}}>
+                                                {currentActivity.optionA}
+                                            </div>
+                                            <Image className="introDescAudio" alt="Animal" height={100} width={100} onClick={()=>playAudioOptions(currentActivity.optionA, currentIndex)} src="/images/volume_up.svg"/>
+                                        </div>:''
+                                    }
+                                    {currentActivity.optionB != ''?
+                                        <div className="OptionBox">
+                                            <div className="option" onClick={()=> {checkAnswer(currentActivity.optionB)}}>
+                                                {currentActivity.optionB}
+                                            </div>
+                                            <Image className="introDescAudio" alt="Animal" height={100} width={100} onClick={()=>playAudioOptions(currentActivity.optionB, currentIndex)} src="/images/volume_up.svg"/>
+                                        </div>:''
+                                    }
+                                    {currentActivity.optionC != ''?
+                                        <div className="OptionBox">
+                                            <div className="option" onClick={()=> {checkAnswer(currentActivity.optionC)}}>
+                                                {currentActivity.optionC}
+                                            </div>
+                                            <Image className="introDescAudio" alt="Animal" height={100} width={100} onClick={()=>playAudioOptions(currentActivity.optionC, currentIndex)} src="/images/volume_up.svg"/>
+                                        </div>:''
+                                    }
+                                    {currentActivity.optionD != ''?
+                                        <div className="OptionBox">
+                                            <div className="option" onClick={()=> {checkAnswer(currentActivity.optionD)}}>
+                                                {currentActivity.optionD}
+                                            </div>
+                                            <Image className="introDescAudio" alt="Animal" height={100} width={100} onClick={()=>playAudioOptions(currentActivity.optionD, currentIndex)} src="/images/volume_up.svg"/>
+                                        </div>:''
+                                    }
                                 </div>
                             </>
                         )
@@ -222,7 +259,10 @@ export default function Activy(props: dataActivity) {
                             <button className="buttonSeeStamp" onClick={seeDescription}>Saiba mais sobre o selo</button>
                         </div>
                         <div className={seeAnimalDescription}>
-                            <div className="animalDescriptionText">{props.dataLevel.levelAnimalDesc}</div>
+                            <div className="animalDescriptionText">
+                                {props.dataLevel.levelAnimalDesc}
+                                <Image className="introDescAudio" alt="Animal" height={100} width={100} onClick={playAudioAnimalDescription} src="/images/volume_up.svg"/>
+                            </div>
                             <Image className="IntroAnimalPhoto" alt="Animal" height={100} width={100} src={`/images/${props.dataLevel.levelStampPhoto}`} />
                             <button className="buttonAnimalDescription" onClick={()=>{saveProgress(), setAnimalDescription("boxAnimalDescriptionDontShow"),setSeeLevelConclusion("boxLevelConclusion")}}>concluir nivel</button>
                         </div>

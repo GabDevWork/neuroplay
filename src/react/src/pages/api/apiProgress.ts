@@ -18,7 +18,8 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
                         ps.progSta_sta_id AS stampId,
                         sta.sta_photo AS stampPhoto,
                         ani.ani_name AS aniName,
-                        ani_desc AS aniDesc
+                        ani_desc AS aniDesc,
+                        ani.ani_descAudio AS aniDescAudio
                     FROM 
                         progress p
                     LEFT JOIN progress_stamp ps ON ps.progSta_prog_id = p.prog_id

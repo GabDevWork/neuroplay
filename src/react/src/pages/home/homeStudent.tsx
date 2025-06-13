@@ -49,7 +49,7 @@ export default function Home(){
                 }
             }
         }catch(error){
-        console.error("Error parsing response:", error);
+            console.error("Error parsing response:", error);
         }
     }
 
@@ -88,6 +88,7 @@ export default function Home(){
                         levelAnimalPhoto: data.animal_photo,
                         levelStampPhoto: data.stamp_photo,
                         levelAudio: data.lev_audio,
+                        levelAudioDesc: data.aniDesc_audio,
                         levelRepeat: false,
                         activityComand: [()=>{setShowActivity(false)}],
                     });
@@ -123,6 +124,7 @@ export default function Home(){
                     levelAnimalPhoto: data.animal_photo,
                     levelStampPhoto: data.stamp_photo,
                     levelAudio: data.lev_audio,
+                    levelAudioDesc: data.aniDesc_audio,
                     levelRepeat: true,
                     activityComand: [()=>{setShowActivity(false)}],
                 });
@@ -159,7 +161,7 @@ export default function Home(){
         <div className={`bodyHome${currentMap}`}>
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
             <div>
-                <MenuTop menuOptions={true}/>
+                <MenuTop perfilProf={false} perfilStud={true}/>
             </div>
             <div className="homeBox">
                 {currentMap != "1Map" ?

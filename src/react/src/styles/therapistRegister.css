@@ -150,19 +150,8 @@
   }
 
   .buttonRegisterTherapist:hover{
-      height: 35px;
-      width: 230px;
-      border-radius: 50px;
-      margin-top: 15px;
       background: #5e80fa;
       transition: 0.5s;
-      color: #fff;
-      outline: none;
-      border: none;
-      font-weight: bold;
-      font-size: 20px;
-      box-shadow: 0px 2px 2px 0px #474747;
-      cursor: pointer;
   }
   
   .textHaveAccessTherapist{

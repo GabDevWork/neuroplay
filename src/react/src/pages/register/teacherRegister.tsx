@@ -163,7 +163,7 @@ export default function TeacherRegister(){
     <div className="bodyTeacherRegister">
         {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
         <div>
-            <MenuTop menuOptions={false}/>
+            <MenuTop/>
         </div>
         <div className="registerAreaTeacher">
             <div className="registerTeacherLogo">

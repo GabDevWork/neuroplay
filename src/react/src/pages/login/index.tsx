@@ -59,7 +59,7 @@ export default function Login(){
     <div className="bodyLogin">
         {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
         <div>
-            <MenuTop menuOptions={false}/>
+            <MenuTop/>
         </div>
         <div className="signInArea">
             <div className="signInAreaLogo">

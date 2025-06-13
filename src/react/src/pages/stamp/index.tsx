@@ -17,7 +17,8 @@ interface dataStamp{
     stampId: number,
     aniName: string,
     stampPhoto: string,
-    aniDesc: string
+    aniDesc: string,
+    aniDescAudio: string
 }
 
 export default function Stamp(){
@@ -27,6 +28,7 @@ export default function Stamp(){
     const [nameAnimal, setNameAnimal] = useState<string[]>([])
     const [photoStamp, setPhotoStmp] = useState<string[]>([])
     const [descAnimal, setDescAnimal] = useState<string[]>([])
+    const [audioAnimal, setAudioAnimal] = useState<string[]>([])
     const [stampQtd, setStampQtd] = useState(-1);
     const [numStamps, setNumStamps] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
 
@@ -36,6 +38,11 @@ export default function Stamp(){
             getProgressStamp(storedId);
         }
     }, [])
+
+    const playAudioOptions = (animalAudio: string) => {
+        const audio = new Audio(`/assets/${animalAudio}`);
+        audio.play();
+    };
 
     function seeTab(index: number){
         const tmp_seeAnimalStamp = [...seeAnimalStamp]
@@ -56,18 +63,20 @@ export default function Stamp(){
             const data = await response.json();
             if(response.status === 200){
                 setStampQtd(data.length);
-                let tmp_name:string[] = [""], tmp_photo:string[] = [""], tmp_desc:string[] = [""]
+                let tmp_name:string[] = [""], tmp_photo:string[] = [""], tmp_desc:string[] = [""], tmp_audio:string[] = ['']
                 let tmp_num = numStamps
                 data.map((u:dataStamp, index:number)=>{
                     tmp_name[index] = u.aniName;
                     tmp_photo[index] = u.stampPhoto;
                     tmp_num[index] = u.progressId;
-                    tmp_desc[index] = u.aniDesc
+                    tmp_desc[index] = u.aniDesc;
+                    tmp_audio[index] = u.aniDescAudio
                 })
                 setPhotoStmp(tmp_photo);
                 setNameAnimal(tmp_name);
                 setNumStamps(tmp_num);
                 setDescAnimal(tmp_desc);
+                setAudioAnimal(tmp_audio);
             }
             else if(response.status === 401){
                 setStampQtd(0);
@@ -96,7 +105,7 @@ export default function Stamp(){
         <div className="bodyStamp">
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
             <div>
-                <MenuTop menuOptions={true}/>
+                <MenuTop perfilProf={false} perfilStud={true}/>
             </div>
             <div className="medalStamps">
                 <div className="circleMedal">
@@ -148,6 +157,10 @@ export default function Stamp(){
                                         }
                                         <div>{descAnimal[index]}</div>
                                     </div>
+                                    {i != 0 ?
+                                        <Image className="introDescAudio" alt="Animal" height={100} width={100} onClick={()=>playAudioOptions(audioAnimal[index])} src="/images/volume_up.svg"/>
+                                        :""
+                                    }
                                 </div>
                             ))
                             }
