@@ -34,7 +34,6 @@ export default function HomeProfessional(){
             if(response.status === 200){
                 setNameProfissional(data.prof_name);
                 setDescProfessional(data.prof_desc);
-                console.log(data.prof_name)
             }
             else{
                 setshowAlerts(true)
@@ -60,19 +59,19 @@ export default function HomeProfessional(){
                     {nameProfissional}
                 </div>
                 <div className="professionalOptions">
-                    <div className="studentsBox">
+                    <div className="studentsBox" onClick={()=>router.push("/studentsProfessional")}>
                         Alunos
                         <Image alt="" height={100} width={100} src={'/images/studentsProf.png'}/>
                     </div>
-                    <div className="addStudentsBox">
+                    <div className="addStudentsBox" onClick={()=>router.push("/addStudents")}>
                         Incluir alunos
                         <Image alt="" height={100} width={100} src={'/images/addStudentsProf.png'}/>
                     </div>
-                    <div className="progressBox">
+                    <div className="progressStudentsBox" onClick={()=>router.push("/progressStudents")}>
                         Progresso
                         <Image alt="" height={100} width={100} src={'/images/progressProf.png'}/>
                     </div>
-                    <div className="reportBox">
+                    <div className="reportStudentsBox" onClick={()=>router.push("/reportStudents")}>
                         Relatórios
                         <Image alt="" height={100} width={100} src={'/images/reportProf.png'}/>
                     </div>

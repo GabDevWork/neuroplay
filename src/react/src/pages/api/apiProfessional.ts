@@ -7,7 +7,6 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
         if(action === "getDataProfessional"){
             try{
                 const connection = await pool.getConnection();
-                console.log(idProfessional);
                 const [data]:any[] = await connection.query(`
                     SELECT 
                         prof_name,
@@ -36,7 +35,12 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
                 const connection = await pool.getConnection();
 
                 const [data]:any[] = await connection.query(`
-
+                    SELECT 
+                        stu_name,
+                        stu_age,
+                        stu_diagnostic,
+                        stu_user
+                    FROM student WHERE stu_prof_id = ?;
                 `,[idProfessional]
                 );
 

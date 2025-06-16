@@ -18,3 +18,16 @@ export type TypeDataLevel = {
     levelRepeat: boolean,
     activityComand: (()=> (void))[],
 }
+
+export type TypeStudentsData = {
+    stu_name: string,
+    stu_age: number,
+    stu_diagnostic: string,
+    stu_user: string,
+}
+
+export type TypeStudentsProgressData = {
+    stu_name: string,
+    prog_lev_id: number,
+    prog_date: string
+}

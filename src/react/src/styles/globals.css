@@ -16,6 +16,11 @@
 @import url(redefinePassword.css);
 @import url(homeProfessional.css);
 @import url(profileProf.css);
+@import url(studentsProfessional.css);
+@import url(studentsInfo.css);
+@import url(addStudents.css);
+@import url(progressStudents.css);
+@import url(reportStudents.css);
 
 :root {
   --background: #ffffff;

@@ -81,7 +81,7 @@
     box-shadow: 0px 5px 15px 0px #8d8d8d;
 }
 
-.progressBox{
+.progressStudentsBox{
     background-color: rgb(243, 223, 91);
     padding: 5px;
     border-radius: 10px;
@@ -97,7 +97,7 @@
     box-shadow: 0px 5px 15px 0px #8d8d8d;
 }
 
-.reportBox{
+.reportStudentsBox{
     background-color: rgb(216, 139, 129);
     padding: 5px;
     border-radius: 10px;
@@ -113,7 +113,7 @@
     box-shadow: 0px 5px 15px 0px #8d8d8d;
 }
 
-.studentsBox:hover, .addStudentsBox:hover, .progressBox:hover, .reportBox:hover{
+.studentsBox:hover, .addStudentsBox:hover, .reportStudentsBox:hover, .progressStudentsBox:hover{
     transform: scale(1.1);
     transition: 0.5s;
 }

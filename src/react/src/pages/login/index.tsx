@@ -87,13 +87,6 @@ export default function Login(){
                 </div>
                 <button className="buttonEnter" onClick={()=>{LoginUser()}}>Entrar
                 </button>
-                <button className="signinGoogle">
-                    <Image className="googleIcon" alt="google" height={20} width={20} src={"/images/google_icon.png"}/>
-                    Entrar com o Google
-                </button>
-                <button className="signinFacebook">
-                    <Image className="facebookIcon" alt="google" height={20} width={20} src={"/images/facebbok_icon.png"}/>
-                    Entrar com o facebook</button>
                 <h1 className="textRecoverPass" onClick={()=>router.push("/redefinePassword")}>Esqueceu a senha</h1>
                 <h1 className="textFirstAccess" onClick={()=>router.push("/register")}>Primeiro acesso</h1>
             </div>

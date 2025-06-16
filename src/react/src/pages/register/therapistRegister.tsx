@@ -162,7 +162,7 @@ export default function TherapistRegister(){
     <div className="bodytherapistRegister">
         {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
         <div>
-            <MenuTop menuOptions={false}/>
+            <MenuTop/>
         </div>
         <div className="registerAreaTherapist">
             <div className="registerTherapistLogo">

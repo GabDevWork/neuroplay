@@ -26,6 +26,7 @@ export default function ProfileProf(){
     const [emailProfessional, setemailProfessional] = useState("");
     const [professional, setProfessional] = useState("");
     const [passwordProfessional, setPasswordProfessional] = useState("");
+    const [hidePassword, setHidePassword] = useState(true);
 
     const [editNameProfissional, setEditNameProfissional] = useState("");
     const [editUserProfessional, setEditUserProfessional] = useState("");
@@ -39,7 +40,7 @@ export default function ProfileProf(){
         if (storedId) {
             getDataProfessional(storedId)
         }
-    }, [])
+    }, [showAlerts])
 
     async function getDataProfessional(idProf: string){
         try{
@@ -56,6 +57,8 @@ export default function ProfileProf(){
                 setProfessional(data.prof_desc)
                 setEditProfessional(data.prof_desc)
                 setProfId(data.prof_id)
+                setPasswordProfessional(data.prof_password)
+                setEditPasswordProfessional(data.prof_password)
                 if(data.prof_desc == "Professor"){
                     setOtherProfessional("Terapeuta")
                 }else if(data.prof_desc == "Terapeuta"){
@@ -79,6 +82,8 @@ export default function ProfileProf(){
     const checkPasswordMatch = (password: string) => {
         if (password.length < 8) {
             setMessagePassword("❌ Digite pelo menos 8 caracteres!");
+        }else{
+            setMessagePassword("✔ Senha válida")
         } 
     };
 
@@ -96,7 +101,7 @@ export default function ProfileProf(){
             setshowAlerts(true)
             dataAlerts = {
                 alertType: 5,
-                alertText: "Insira um valor válido no Nome",
+                alertText: "Insira um valor válido para o nome",
                 alertButtons: ["Editar"],
                 alertsCommans: [()=>{setshowAlerts(false), setEditInfo(false)}]
             }
@@ -148,7 +153,7 @@ export default function ProfileProf(){
 
     async function saveDataProfessional(idProf: number){
         try{
-            const endpoint = `/api/apiProfileProf?idProfessional=${idProf}&descProfissional=${editProfessional}&nameProfissional=${editNameProfissional}&userProfissional=${editUserProfessional}&emailProfissional=${editEmailProfessional}&action=saveDataProfessional`; 
+            const endpoint = `/api/apiProfileProf?idProfessional=${idProf}&userProfissional=${editUserProfessional}&emailProfissional=${editEmailProfessional}&passwordProfessional=${editPasswordProfessional}&action=saveDataProfessional`; 
             const response = await fetch(endpoint, {method: "POST", cache: "reload"})
             const data = await response.json();
             if(response.status === 200){
@@ -189,37 +194,55 @@ export default function ProfileProf(){
                     }
                 </div>
                 <div className="profileProfContent">
-                    {editInfo == false ? 
-                        <h1>{professional}</h1>: 
-                        <select className="profileProfessionalSelect">
-                            <option>{professional}</option>
-                            <option>{otherProfessional}</option>
-                        </select>
-                    }
+                    <div className="profileProfDesc">
+                        <h1>Profissão:</h1>
+                        <h1>{professional}</h1>
+                    </div>
                 </div>
                 <div className="profileProfContent">
-                    {editInfo == false ? 
-                        <h1>{nameProfissional}</h1>:
-                        <input className="profileProfessionalInput" placeholder={nameProfissional} value={editNameProfissional} onChange={(evt)=>{setEditNameProfissional(evt.target.value)}}></input>
-                    }
+                    <div className="profileProfDesc">
+                        <h1>Nome:</h1>
+                        <h1>{nameProfissional}</h1>
+                    </div>
                 </div>
                 <div className="profileProfContent">
-                    {editInfo == false ? 
-                        <h1>{userProfessional}</h1>: 
-                        <input className="profileProfessionalInput" placeholder={userProfessional} value={editUserProfessional} onChange={(evt)=>{setEditUserProfessional(evt.target.value)}}></input>
-                    }
+                    <div className="profileProfDesc">
+                        <h1>E-mail:</h1>
+                        {editInfo == false ?
+                            <h1>{emailProfessional}</h1>:
+                            <input className="profileProfessionalInput" placeholder={emailProfessional} value={editEmailProfessional} onChange={(evt)=>{setEditEmailProfessional(evt.target.value),checkEmail(evt.target.value)}}></input>
+                        }
+                    </div>
+                    {editInfo == true ? <h1 className="ValidatedEmailTeacher" style={{ color: messageEmail === "❌ E-mail inválido" ? "red" : "green" }}>{messageEmail}</h1>:""}
                 </div>
                 <div className="profileProfContent">
-                    {editInfo == false ?
-                        <h1>{emailProfessional}</h1>:
-                        <input className="profileProfessionalInput" placeholder={emailProfessional} value={editEmailProfessional} onChange={(evt)=>{setEditEmailProfessional(evt.target.value),checkEmail(evt.target.value)}}></input>
-                    }
-                    <h1 className="ValidatedEmailTeacher" style={{ color: messageEmail === "❌ E-mail inválido" ? "red" : "green" }}>{messageEmail}</h1>
+                    <div className="profileProfDesc">
+                        <h1>Usuário:</h1>
+                        {editInfo == false ? 
+                            <h1>{userProfessional}</h1>: 
+                            <input className="profileProfessionalInput" placeholder={userProfessional} value={editUserProfessional} onChange={(evt)=>{setEditUserProfessional(evt.target.value)}}></input>
+                        }
+                    </div>
+                </div>
+                <div className="profileProfContent">
+                    <div className="profileProfDesc">
+                        <h1>Senha:</h1>
+                        {editInfo == false ? 
+                            <h1>********</h1>: 
+                            <input type={hidePassword ? "password" : "text"} className="profileProfessionalInput" placeholder={passwordProfessional} value={editPasswordProfessional} onChange={(evt)=>{setEditPasswordProfessional(evt.target.value),checkPasswordMatch(evt.target.value)}}></input>
+                        }
+                        {editInfo == true ? 
+                            <span onClick={() => setHidePassword(!hidePassword)} style={{ cursor: "pointer" }}>
+                                <Image alt="" className="redefinePasswordImage" height={100} width={100} src={hidePassword ? "/images/visibility_off.svg" : "/images/visibility.svg"}/>
+                            </span>:""
+                        }
+                    </div>
+                    {editInfo == true ? <h1 className="textMessageValidatedPasswordTeacher" style={{ color: editPasswordProfessional.length < 8 ? "red" : "green" }}>{messagePassword}</h1>:""}
                 </div>
                 <div className="profileProfButtonBox">
                     {editInfo == false ? 
                         <button onClick={()=>setEditInfo(true)} className="profileProfButton">Editar informações</button>:
-                        <button onClick={()=>{setEditInfo(false), AuthenticationsAlerts()}} className="profileProfButton">Salvar</button>
+                        <button onClick={()=>{setEditInfo(false), AuthenticationsAlerts(), setHidePassword(true)}} className="profileProfButton">Salvar</button>
                     }
                 </div>
             </div>

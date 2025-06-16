@@ -12,7 +12,7 @@ let dataAlerts:TypeDataAlerts ={
     alertsCommans: [],
   }
 
-export default function ChildRegister(){
+export default function AddStudents(){
 
     const router = useRouter()
     const [idProfessional, setIdProfessional] = useState("");
@@ -98,10 +98,9 @@ export default function ChildRegister(){
                 dataAlerts = {
                     alertType: 3,
                     alertText: `${childName} Cadastrado(a) com sucesso`,
-                    alertButtons: ["Login", "Cadastrar mais crianças"],
-                    alertsCommans: [()=>{router.push("/login")}, ()=>{setshowAlerts(false)}]
+                    alertButtons: ["Ok"],
+                    alertsCommans: [()=>{setshowAlerts(false)}]
                 }
-                localStorage.removeItem("id");
             }
             else{
                 setshowAlerts(true)
@@ -118,18 +117,19 @@ export default function ChildRegister(){
     }
 
     return(
-        <div className="bodyChildRegister">
+        <div className="bodyAddStudents">
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
             <div>
-                <MenuTop/>
+                <MenuTop perfilProf={true}/>
             </div>
-            <div className="registerChildArea">
-                <div className="registerChildLogo">
-                    <Image className="registerChildLogoImg" alt="logo" height={100} width={100} src={"/images/logo.jpeg"}/>
+            <div className="addStudentsArea">
+                <div className="addStudentsInfo">
+                    <Image className="addStudentsInfoImg" alt="" height={100} width={100} src={'/images/addStudentsProf.png'}/>
+                    <h1>Adicionar Alunos</h1>
                 </div>
-                <div className="registerChildBox">
+                <div className="addStudentsContent">
                     <div>
-                        <h1 className="textNameChild">Nome Completo</h1>
+                        <h1 className="studentsBox_nameText">Nome Completo</h1>
                         <input type="text" className="nameChildInput" value={childName} onChange={(evt)=>{setChildName(evt.target.value)}}></input>
                     </div>
                     <div>
