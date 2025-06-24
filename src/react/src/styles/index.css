@@ -58,6 +58,7 @@
 .textAprender{
     color: #474747;
     display: flex;
+    text-align: center;
 } 
 
 .signInButton{

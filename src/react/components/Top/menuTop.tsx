@@ -51,7 +51,7 @@ export default function MenuTop(props: DataMenu){
                   {seeMenuDropDown == "Select" ?
                     <>
                       <h1 className="optionSelect" onClick={()=>router.push("/home/homeStudent")}>Niveis</h1>
-                      <h1 className="optionSelect" onClick={()=>router.push("/perfilStud")}>Perfil</h1>
+                      <h1 className="optionSelect" onClick={()=>router.push("/profile/profileStudent")}>Perfil</h1>
                       <h1 className="optionSelect" onClick={()=>router.push("/stamp")}>Selos</h1>
                       <h1 className="optionSelect" onClick={()=>router.push("/")}>Sair</h1>
                     </>:""

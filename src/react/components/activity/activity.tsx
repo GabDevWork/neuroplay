@@ -187,7 +187,7 @@ export default function Activy(props: dataActivity) {
     return (
         <div className='activity'>
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
-                <MenuTop menuOptions={false}/>
+                <MenuTop/>
             <div className="boxActivityContent">
                 <button className={seeCloseActivity} onClick={()=>{props.dataLevel.activityComand[0]()}}>Fechar atividade</button>
                 <div className={seeIntro}>

@@ -30,7 +30,7 @@ export default function Stamp(){
     const [descAnimal, setDescAnimal] = useState<string[]>([])
     const [audioAnimal, setAudioAnimal] = useState<string[]>([])
     const [stampQtd, setStampQtd] = useState(-1);
-    const [numStamps, setNumStamps] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+    const [numStamps, setNumStamps] = useState([0,0,0,0,0,0,0,0,0,0])
 
     useEffect(() => {
         const storedId = localStorage.getItem("id");
@@ -114,7 +114,7 @@ export default function Stamp(){
                     </div>
                 </div>
                 <div className="squareMedal">
-                    {`${stampQtd}/15`}
+                    {`${stampQtd}/10`}
                 </div>
             </div>
             <div className="stamp">

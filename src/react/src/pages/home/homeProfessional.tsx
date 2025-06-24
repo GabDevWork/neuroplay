@@ -17,7 +17,7 @@ export default function HomeProfessional(){
     const router = useRouter();
     const [showAlerts, setshowAlerts] = useState(false);
     const [nameProfissional, setNameProfissional] = useState("")
-    const [descProfessional, setDescProfessional] = useState("")
+    const [imgProfessional, setImgProfessional] = useState("")
 
     useEffect(() => {
         const storedId = localStorage.getItem("id");
@@ -33,7 +33,9 @@ export default function HomeProfessional(){
             const data = await response.json();
             if(response.status === 200){
                 setNameProfissional(data.prof_name);
-                setDescProfessional(data.prof_desc);
+                if(data.prof_profileImage != null || data.prof_profileImage != undefined || data.prof_profileImage != ''){
+                    setImgProfessional(data.prof_profileImage);
+                }
             }
             else{
                 setshowAlerts(true)
@@ -55,7 +57,7 @@ export default function HomeProfessional(){
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
             <div className="professionalContent">
                 <div className="professionalPerfil" onClick={()=>router.push("/profile/profileProf")}>
-                    <Image className="professionalImg" alt='' height={100} width={100} src={'/images/account_circle.svg'}/>
+                    <Image className="professionalImgPerfil" alt='' height={100} width={100} src={imgProfessional == '' ? '/images/account_circle.svg' : `/uploads/${imgProfessional}`}/>
                     {nameProfissional}
                 </div>
                 <div className="professionalOptions">

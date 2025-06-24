@@ -10,7 +10,7 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
                 const [data]:any[] = await connection.query(`
                     SELECT 
                         prof_name,
-                        prof_desc
+                        prof_profileImage
                     FROM
                         professional
                     WHERE 

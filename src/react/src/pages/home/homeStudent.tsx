@@ -148,9 +148,6 @@ export default function Home(){
         if (currentMap == "1Map"){
             setCurrentMap("2Map")
             setCardsActivities([6,7,8,9,10])
-        }else if(currentMap == "2Map" && comand == "next"){
-            setCurrentMap("3Map")
-            setCardsActivities([11,12,13,14,15])
         }else if (currentMap == "2Map" && comand == "previous"){
             setCurrentMap("1Map")
             setCardsActivities([1,2,3,4,5])
@@ -191,11 +188,11 @@ export default function Home(){
                     </div>
                 ))}
                 {currentMap != "1Map" ?
-                    <div className="previousPage">
+                    <div className="nextPage">
                         <Image className="nextPageImage" alt="seta" height={100} width={100} src={"/images/arrow_forward.svg"} onClick={()=>{ChangeMap("next")}}></Image>
                     </div>
                     :
-                    <div className="previousPage">
+                    <div className="nextPage">
                         <Image className="nextPageImage" alt="seta" height={100} width={100} src={"/images/arrow_right.svg"} onClick={()=>{ChangeMap("next")}}></Image>
                     </div>
                 }

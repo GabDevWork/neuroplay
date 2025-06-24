@@ -1,9 +1,10 @@
 import MenuTop from "../../../components/Top/menuTop"
 import Image from "next/image"
 // import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { TypeDataAlerts } from "../../../components/type";
 import Alerts from "../../../components/alerts/alerts";
+import path from "path";
 
 let dataAlerts:TypeDataAlerts ={
     alertType: 0,
@@ -18,7 +19,9 @@ export default function ProfileProf(){
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     const [messagePassword, setMessagePassword] = useState("");
     const [messageEmail, setMessageEmail] = useState("");
+    const inputAddImg = useRef<HTMLInputElement>(null);
 
+    const [profileImage, setProfileImage] = useState('')
     const [editInfo, setEditInfo] = useState(false);
     const [profId, setProfId] = useState(0);
     const [nameProfissional, setNameProfissional] = useState("");
@@ -27,6 +30,8 @@ export default function ProfileProf(){
     const [professional, setProfessional] = useState("");
     const [passwordProfessional, setPasswordProfessional] = useState("");
     const [hidePassword, setHidePassword] = useState(true);
+    const [fileImgProfile, setFileImgProfile] = useState<any>(null);
+    const [nameImgProfile, setNameImgProfile] = useState('')
 
     const [editNameProfissional, setEditNameProfissional] = useState("");
     const [editUserProfessional, setEditUserProfessional] = useState("");
@@ -40,7 +45,7 @@ export default function ProfileProf(){
         if (storedId) {
             getDataProfessional(storedId)
         }
-    }, [showAlerts])
+    }, [editInfo])
 
     async function getDataProfessional(idProf: string){
         try{
@@ -64,6 +69,7 @@ export default function ProfileProf(){
                 }else if(data.prof_desc == "Terapeuta"){
                     setOtherProfessional("Professor")
                 }
+                setProfileImage(data.prof_profileImage);
             }
             else{
                 setshowAlerts(true)
@@ -152,100 +158,175 @@ export default function ProfileProf(){
     }
 
     async function saveDataProfessional(idProf: number){
-        try{
-            const endpoint = `/api/apiProfileProf?idProfessional=${idProf}&userProfissional=${editUserProfessional}&emailProfissional=${editEmailProfessional}&passwordProfessional=${editPasswordProfessional}&action=saveDataProfessional`; 
-            const response = await fetch(endpoint, {method: "POST", cache: "reload"})
-            const data = await response.json();
-            if(response.status === 200){
-                setshowAlerts(true)
-                dataAlerts = {
-                    alertType: 3,
-                    alertText: "Dados salvos com sucesso!",
-                    alertButtons: ["Ok"],
-                    alertsCommans: [()=>{setshowAlerts(false), setEditInfo(false)}]
+        const resImg = await uploadImage(fileImgProfile, nameImgProfile);
+        if (resImg === 200){
+            try{
+                const endpoint = `/api/apiProfileProf?idProfessional=${idProf}&userProfissional=${editUserProfessional}&emailProfissional=${editEmailProfessional}&passwordProfessional=${editPasswordProfessional}&profileImage=${nameImgProfile}&action=saveDataProfessionalPhoto`; 
+                const response = await fetch(endpoint, {method: "POST", cache: "reload"})
+                const data = await response.json();
+                if(response.status === 200){
+                    setshowAlerts(true)
+                    dataAlerts = {
+                        alertType: 3,
+                        alertText: "Dados salvos com sucesso!",
+                        alertButtons: ["Ok"],
+                        alertsCommans: [()=>{setshowAlerts(false), setEditInfo(false)}]
+                    }
+                    setProfileImage(nameImgProfile);
+                    getDataProfessional(`${idProf}`)
                 }
-            }
-            else{
-                setshowAlerts(true)
-                dataAlerts = {
-                    alertType: 5,
-                    alertText: "Erro ao salvar dados, tente novamente mais tarde",
-                    alertButtons: ["Ok"],
-                    alertsCommans: [()=>{setshowAlerts(false), setEditInfo(false)}]
+                else{
+                    setshowAlerts(true)
+                    dataAlerts = {
+                        alertType: 5,
+                        alertText: "Erro ao salvar dados, tente novamente mais tarde",
+                        alertButtons: ["Ok"],
+                        alertsCommans: [()=>{setshowAlerts(false), setEditInfo(false)}]
+                    }
                 }
+            }catch(error){
+                console.error("Error parsing response:", error);
             }
-        }catch(error){
-            console.error("Error parsing response:", error);
+        }else{
+            try{
+                const endpoint = `/api/apiProfileProf?idProfessional=${idProf}&userProfissional=${editUserProfessional}&emailProfissional=${editEmailProfessional}&passwordProfessional=${editPasswordProfessional}&action=saveDataProfessional`; 
+                const response = await fetch(endpoint, {method: "POST", cache: "reload"})
+                const data = await response.json();
+                if(response.status === 200){
+                    setshowAlerts(true)
+                    dataAlerts = {
+                        alertType: 3,
+                        alertText: "Dados salvos com sucesso!",
+                        alertButtons: ["Ok"],
+                        alertsCommans: [()=>{setshowAlerts(false), setEditInfo(false)}]
+                    }
+                    setProfileImage(nameImgProfile);
+                    getDataProfessional(`${idProf}`)
+                }
+                else{
+                    setshowAlerts(true)
+                    dataAlerts = {
+                        alertType: 5,
+                        alertText: "Erro ao salvar dados, tente novamente mais tarde",
+                        alertButtons: ["Ok"],
+                        alertsCommans: [()=>{setshowAlerts(false), setEditInfo(false)}]
+                    }
+                }
+            }catch(error){
+                console.error("Error parsing response:", error);
+            }
         }
     }
 
- return (
-    <div className="bodyProfileProf">
-        {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
-        <div>
-            <MenuTop perfilProf={true} perfilStud={false}/>
-        </div>
-        <div className="profileProfArea">
-            <div className="profileProfBox">
-                <div className="profileProfImg">
-                    {editInfo == false ? 
-                        <Image className="professionalImg" alt='' height={100} width={100} src={'/images/account_circle.svg'}/>: 
-                        <Image className="professionalImg" alt='' height={100} width={100} src={'/images/account_circle.svg'}/>
-                    }
-                </div>
-                <div className="profileProfContent">
-                    <div className="profileProfDesc">
-                        <h1>Profissão:</h1>
-                        <h1>{professional}</h1>
-                    </div>
-                </div>
-                <div className="profileProfContent">
-                    <div className="profileProfDesc">
-                        <h1>Nome:</h1>
-                        <h1>{nameProfissional}</h1>
-                    </div>
-                </div>
-                <div className="profileProfContent">
-                    <div className="profileProfDesc">
-                        <h1>E-mail:</h1>
-                        {editInfo == false ?
-                            <h1>{emailProfessional}</h1>:
-                            <input className="profileProfessionalInput" placeholder={emailProfessional} value={editEmailProfessional} onChange={(evt)=>{setEditEmailProfessional(evt.target.value),checkEmail(evt.target.value)}}></input>
-                        }
-                    </div>
-                    {editInfo == true ? <h1 className="ValidatedEmailTeacher" style={{ color: messageEmail === "❌ E-mail inválido" ? "red" : "green" }}>{messageEmail}</h1>:""}
-                </div>
-                <div className="profileProfContent">
-                    <div className="profileProfDesc">
-                        <h1>Usuário:</h1>
+    const addImgIcon=(evt: any)=>{
+        const name=nameProfissional.replaceAll(" ","")
+        const docfiles=evt.target.files[0];
+        const nameImgAdd = docfiles.name;
+        const fileExtension = path.extname(nameImgAdd);
+        const newName = `${name}${profId}${fileExtension}`
+        setNameImgProfile(newName);
+        setFileImgProfile(docfiles);
+    }
+
+    async function uploadImage(image: File, nameImage: string){
+        const formData = new FormData();
+        if(image){
+            formData.append("file", image);
+            formData.append("name_file", nameImage);
+            let ret
+            try {
+                const response = await fetch("/api/apiUploadImage", {
+                    method: "POST",
+                    body: formData,
+                });
+                const textResponse = await response.text();
+                ret=textResponse
+                try {
+                    const dataResponse = JSON.parse(textResponse);
+                    return response.status;
+                } 
+                catch (error) {
+                    return "error"
+                }
+            } 
+            catch (error) {
+                console.error("Falha no upload:", error);
+                return "error"
+            }
+        }
+    }
+
+    const imageSource = (!profileImage || profileImage === "null" || profileImage === "undefined")
+    ? "/images/account_circle.svg"
+    : `/uploads/${profileImage}`;
+
+    return (
+        <div className="bodyProfileProf">
+            {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
+            <div>
+                <MenuTop perfilProf={true} perfilStud={false}/>
+            </div>
+            <div className="profileProfArea">
+                <div className="profileProfBox">
+                    <div className="profileProfImg">
                         {editInfo == false ? 
-                            <h1>{userProfessional}</h1>: 
-                            <input className="profileProfessionalInput" placeholder={userProfessional} value={editUserProfessional} onChange={(evt)=>{setEditUserProfessional(evt.target.value)}}></input>
+                            <div className="professionalImgBox"><Image className="professionalImg" alt='' height={100} width={100} src={imageSource}/></div>: 
+                            <input ref={inputAddImg} type="file" className="inputAddImage" accept=".svg, .png, .jpeg" onChange={(evt)=>addImgIcon(evt)}></input>
                         }
                     </div>
-                </div>
-                <div className="profileProfContent">
-                    <div className="profileProfDesc">
-                        <h1>Senha:</h1>
+                    <div className="profileProfContent">
+                        <div className="profileProfDesc">
+                            <h1>Profissão:</h1>
+                            <h1>{professional}</h1>
+                        </div>
+                    </div>
+                    <div className="profileProfContent">
+                        <div className="profileProfDesc">
+                            <h1>Nome:</h1>
+                            <h1>{nameProfissional}</h1>
+                        </div>
+                    </div>
+                    <div className="profileProfContent">
+                        <div className="profileProfDesc">
+                            <h1>E-mail:</h1>
+                            {editInfo == false ?
+                                <h1>{emailProfessional}</h1>:
+                                <input className="profileProfessionalInput" placeholder={emailProfessional} value={editEmailProfessional} onChange={(evt)=>{setEditEmailProfessional(evt.target.value),checkEmail(evt.target.value)}}></input>
+                            }
+                        </div>
+                        {editInfo == true ? <h1 className="ValidatedEmailTeacher" style={{ color: messageEmail === "❌ E-mail inválido" ? "red" : "green" }}>{messageEmail}</h1>:""}
+                    </div>
+                    <div className="profileProfContent">
+                        <div className="profileProfDesc">
+                            <h1>Usuário:</h1>
+                            {editInfo == false ? 
+                                <h1>{userProfessional}</h1>: 
+                                <input className="profileProfessionalInput" placeholder={userProfessional} value={editUserProfessional} onChange={(evt)=>{setEditUserProfessional(evt.target.value)}}></input>
+                            }
+                        </div>
+                    </div>
+                    <div className="profileProfContent">
+                        <div className="profileProfDesc">
+                            <h1>Senha:</h1>
+                            {editInfo == false ? 
+                                <h1>********</h1>: 
+                                <input type={hidePassword ? "password" : "text"} className="profileProfessionalInput" placeholder={passwordProfessional} value={editPasswordProfessional} onChange={(evt)=>{setEditPasswordProfessional(evt.target.value),checkPasswordMatch(evt.target.value)}}></input>
+                            }
+                            {editInfo == true ? 
+                                <span onClick={() => setHidePassword(!hidePassword)} style={{ cursor: "pointer" }}>
+                                    <Image alt="" className="redefinePasswordImage" height={100} width={100} src={hidePassword ? "/images/visibility_off.svg" : "/images/visibility.svg"}/>
+                                </span>:""
+                            }
+                        </div>
+                        {editInfo == true ? <h1 className="textMessageValidatedPasswordTeacher" style={{ color: editPasswordProfessional.length < 8 ? "red" : "green" }}>{messagePassword}</h1>:""}
+                    </div>
+                    <div className="profileProfButtonBox">
                         {editInfo == false ? 
-                            <h1>********</h1>: 
-                            <input type={hidePassword ? "password" : "text"} className="profileProfessionalInput" placeholder={passwordProfessional} value={editPasswordProfessional} onChange={(evt)=>{setEditPasswordProfessional(evt.target.value),checkPasswordMatch(evt.target.value)}}></input>
-                        }
-                        {editInfo == true ? 
-                            <span onClick={() => setHidePassword(!hidePassword)} style={{ cursor: "pointer" }}>
-                                <Image alt="" className="redefinePasswordImage" height={100} width={100} src={hidePassword ? "/images/visibility_off.svg" : "/images/visibility.svg"}/>
-                            </span>:""
+                            <button onClick={()=>setEditInfo(true)} className="profileProfButton">Editar informações</button>:
+                            <button onClick={()=>{setEditInfo(false), AuthenticationsAlerts(), setHidePassword(true)}} className="profileProfButton">Salvar</button>
                         }
                     </div>
-                    {editInfo == true ? <h1 className="textMessageValidatedPasswordTeacher" style={{ color: editPasswordProfessional.length < 8 ? "red" : "green" }}>{messagePassword}</h1>:""}
-                </div>
-                <div className="profileProfButtonBox">
-                    {editInfo == false ? 
-                        <button onClick={()=>setEditInfo(true)} className="profileProfButton">Editar informações</button>:
-                        <button onClick={()=>{setEditInfo(false), AuthenticationsAlerts(), setHidePassword(true)}} className="profileProfButton">Salvar</button>
-                    }
                 </div>
             </div>
         </div>
-    </div>
-  )}
+    )}

@@ -45,20 +45,22 @@ export default async function Login(req: NextApiRequest, res: NextApiResponse){
             try{
                 const connection = await pool.getConnection();
                 const [progress]:any[] = await connection.query(`
-                    SELECT 
-                        s.stu_name,
+                    WITH ultimos_progresso AS (
+                    SELECT
+                        pr.prog_stu_id,
                         pr.prog_lev_id,
-                        DATE_FORMAT(pr.prog_date, '%d/%m/%Y') AS prog_date 
+                        pr.prog_date,
+                        ROW_NUMBER() OVER (PARTITION BY pr.prog_stu_id ORDER BY pr.prog_date DESC, pr.prog_id DESC) AS rn
                     FROM progress pr
-                    JOIN student s ON pr.prog_stu_id = s.stu_id
-                    JOIN professional p ON s.stu_prof_id = p.prof_id
-                    JOIN (
-                        SELECT prog_stu_id, MAX(prog_date) AS ultima_data
-                        FROM progress
-                        GROUP BY prog_stu_id
-                    ) ultimos ON pr.prog_stu_id = ultimos.prog_stu_id AND pr.prog_date = ultimos.ultima_data
-                    WHERE s.stu_prof_id = ?
-                    ORDER BY p.prof_name, s.stu_name;
+                    )
+                    SELECT 
+                    s.stu_name,
+                    up.prog_lev_id,
+                    DATE_FORMAT(up.prog_date, '%d/%m/%Y') AS prog_date
+                    FROM ultimos_progresso up
+                    JOIN student s ON up.prog_stu_id = s.stu_id
+                    WHERE up.rn = 1 AND s.stu_prof_id = ?
+                    ORDER BY s.stu_name;
                     `,[idProfessional]
                 );
                 connection.release();

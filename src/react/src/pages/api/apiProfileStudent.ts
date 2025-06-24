@@ -2,14 +2,14 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import pool from '../../../components/db';
 
 export default async function ApiProfile(req: NextApiRequest, res: NextApiResponse){
-    const { action, idProfessional, userProfissional, emailProfissional, passwordProfessional, profileImage } = req.query;
+    const { action, idStudent, userStudent, passwordStudent, profileImage } = req.query;
     if(req.method === "GET"){
-        if(action === "getDataProfessional"){
+        if(action === "getDataStudent"){
             try{
                 const connection = await pool.getConnection();
                 const [data]:any[] = await connection.query(`
-                    SELECT * FROM professional WHERE prof_id = ?;
-                `,[idProfessional]
+                    SELECT * FROM student WHERE stu_id = ?;
+                `,[idStudent]
                 );
 
                 connection.release();
@@ -25,17 +25,16 @@ export default async function ApiProfile(req: NextApiRequest, res: NextApiRespon
             }
         }
     }else if (req.method === "POST"){
-        if(action === "saveDataProfessionalPhoto"){
+        if(action === "saveDataStudentPhoto"){
             try{
                 const connection = await pool.getConnection();
                 const [data]:any[] = await connection.query(`
-                    UPDATE professional SET 
-                    prof_email = ?,
-                    prof_user = ?,
-                    prof_password = ?,
-                    prof_profileImage = ?
-                    WHERE prof_id = ?;
-                `,[emailProfissional, userProfissional, passwordProfessional, profileImage, idProfessional]
+                    UPDATE student SET 
+                    stu_user = ?,
+                    stu_password = ?,
+                    stu_profileImage = ?
+                    WHERE stu_id = ?;
+                `,[ userStudent, passwordStudent, profileImage, idStudent]
                 );
 
                 connection.release();
@@ -44,16 +43,15 @@ export default async function ApiProfile(req: NextApiRequest, res: NextApiRespon
                 console.error("Erro na API de login:", error);
                 return res.status(500).json({ message: "Erro interno do servidor" });
             }
-        }else if(action === "saveDataProfessional"){
+        }else if(action === "saveDataStudent"){
             try{
                 const connection = await pool.getConnection();
                 const [data]:any[] = await connection.query(`
-                    UPDATE professional SET 
-                    prof_email = ?,
-                    prof_user = ?,
-                    prof_password = ?
-                    WHERE prof_id = ?;
-                `,[emailProfissional, userProfissional, passwordProfessional, idProfessional]
+                    UPDATE student SET 
+                    stu_user = ?,
+                    stu_password = ?
+                    WHERE stu_id = ?;
+                `,[ userStudent, passwordStudent, idStudent]
                 );
 
                 connection.release();
