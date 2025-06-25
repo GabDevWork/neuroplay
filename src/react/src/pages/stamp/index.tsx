@@ -142,9 +142,9 @@ export default function Stamp(){
                         <div className="rowAnimal">
                             {numStamps.map((i, index)=>(
                                 <div className="animalContent">
-                                    <div className="stampItem">
+                                    <div className="animalItem">
                                         {i != 0 ?
-                                            <Image alt="" className="stampImage" height={100} width={100} src={`/images/${photoStamp[index]}`}/>
+                                            <Image alt="" className="animalImage" height={100} width={100} src={`/images/${photoStamp[index]}`}/>
                                             :"?"
                                         }
                                     </div>

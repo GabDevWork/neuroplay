@@ -36,6 +36,7 @@ export default function HomeProfessional(){
                 if(data.prof_profileImage != null || data.prof_profileImage != undefined || data.prof_profileImage != ''){
                     setImgProfessional(data.prof_profileImage);
                 }
+                console.log(data)
             }
             else{
                 setshowAlerts(true)
@@ -57,7 +58,7 @@ export default function HomeProfessional(){
             {showAlerts&& <Alerts dataAlert={dataAlerts}/>}
             <div className="professionalContent">
                 <div className="professionalPerfil" onClick={()=>router.push("/profile/profileProf")}>
-                    <Image className="professionalImgPerfil" alt='' height={100} width={100} src={imgProfessional == '' ? '/images/account_circle.svg' : `/uploads/${imgProfessional}`}/>
+                    <Image className="professionalImgPerfil" alt='' height={100} width={100} src={imgProfessional == null ? '/images/account_circle.svg' : `/uploads/${imgProfessional}`}/>
                     {nameProfissional}
                 </div>
                 <div className="professionalOptions">

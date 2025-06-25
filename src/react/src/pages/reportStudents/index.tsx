@@ -59,9 +59,6 @@ export default function HomeProfessional(){
                 setDataQtdDiagnostic(data.qtdDiagnostic)
                 setDataQtdLevelStudents(data.qtdLevelStudents)
                 setDataQtdLevelDiagnostic(data.qtdLevelDiagnostic)
-
-                console.log(data.qtdLevelDiagnostic)
-                console.log(data.qtdLevelStudents)
             }
             else{
                 setshowAlerts(true)
