@@ -27,7 +27,7 @@
 
 |ID    | Descrição do Requisito                  | Prioridade |
 |------|-----------------------------------------|------------|
-|RF-001| Realizar Cadastro |    ALTA    | 
+|RF-001| Realizar cadastro |    ALTA    | 
 |RF-002| Disponibilizar jogos simples, intuitivos e objetivos  |    ALTA   |
 |RF-003| Utilizar cores mais leves  |    MÉDIA   |
 |RF-004| Salvar a progressão do aluno  |    ALTA   |
@@ -35,6 +35,9 @@
 |RF-006| Apresentar mensagens de erro ou sucesso, com mensagens encorajadoras   |    MÉDIA   |
 |RF-007| Apresentar atividades que ajudem na alfabetização   |    ALTA   |
 |RF-008| Permitir que o usuário recupere a senha  |    MÉDIA   |
+|RF-009| Adicionar novos alunos no perfil do profissional |    ALTA   |
+|RF-010| Disponibilizar relatórios dos alunos no perfil do profissional |    ALTA   |
+|RF-011| Poder atualizar foto e outras informações do perfil |    MÉDIA   |
 
 
 ### Requisitos não Funcionais
@@ -48,6 +51,7 @@
 |RNF-005| Deve ser devensolvido em código limpo e com boas práticas de desenvolvimento.          |    MÉDIA  | 
 |RNF-006| O sistema deve oferecer uma interface amigável e intuitiva para os usuários.            |    ALTA  | 
 |RNF-007| O sistema deve ser compatível com diferentes navegadores e sistemas operacionais.           |    BAIXA  | 
+|RNF-008| O sistema deve ser inclusivo, disponibilizando audio nas atividades e descrições           |    ALTA  | 
 
 
 
