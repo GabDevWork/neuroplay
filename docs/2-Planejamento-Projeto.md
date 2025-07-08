@@ -113,11 +113,11 @@ Atualizado em: 21/05/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Gabriel       | Figma Telas       | 21/05/2025     | 28/05/2025  | ⌛    |       |
-| Ludmilla        | Figma Telas    | 21/05/2025      | 28/05/2025 | ⌛    |                 |
-| Ingrid        | Atividades  | 21/05/2025      | 28/05/2025 | ⌛     |                 |
-| Henrique        | Atividades  |  21/05/2025     | 28/05/2025 | ⌛   |       |
-| Gabrielle        | Desenvolvimento Front |  21/05/2025    | 28/05/2025 | ⌛   |       |
+| Gabriel       | Figma Telas       | 21/05/2025     | 28/05/2025  | ✔️    |  30/04/2025     |
+| Ludmilla        | Figma Telas    | 21/05/2025      | 28/05/2025 | ✔️    |   30/04/2025    |
+| Ingrid        | Atividades  | 21/05/2025      | 28/05/2025 | ✔️     |    10/05/2025    |
+| Henrique        | Atividades  |  21/05/2025     | 28/05/2025 | ✔️   |  10/05/2025   |
+| Gabrielle        | Desenvolvimento Front |  21/05/2025    | 28/05/2025 | ✔️   |    20/05/2025   |
 
 Legenda:
 - ✔️: terminado
@@ -131,11 +131,11 @@ Atualizado em: 21/05/2025
 
 | Responsável   | Tarefa/Requisito | Iniciado em    | Prazo      | Status | Terminado em    |
 | :----         |    :----         |      :----:    | :----:     | :----: | :----:          |
-| Gabriel       | Figma Telas       | 21/05/2025     | 28/05/2025  | ⌛    |       |
-| Ludmilla        | Figma Telas    | 21/05/2025      | 28/05/2025 | ⌛    |                 |
-| Ingrid        | Atividades  | 21/05/2025      | 28/05/2025 | ⌛     |                 |
-| Henrique        | Atividades  |  21/05/2025     | 28/05/2025 | ⌛   |       |
-| Gabrielle        | Desenvolvimento Front |  21/05/2025    | 28/05/2025 | ⌛   |       |
+| Gabriel       | Figma Telas       | 21/05/2025     | 28/05/2025  | ✔️    |    30/04/2025   |
+| Ludmilla        | Figma Telas    | 21/05/2025      | 28/05/2025 | ✔️    |    30/04/2025   |
+| Ingrid        | Atividades  | 21/05/2025      | 28/05/2025 | ✔️     |   10/05/2025    |
+| Henrique        | Atividades  |  21/05/2025     | 28/05/2025 | ✔️   |    10/05/2025   |
+| Gabrielle        | Desenvolvimento Front |  21/05/2025    | 28/05/2025 | ✔️   |   20/05/2025    |
 
 Legenda:
 - ✔️: terminado
