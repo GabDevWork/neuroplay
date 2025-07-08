@@ -37,9 +37,9 @@
 
 - ### Sprint 5
 - _Scrum master_: Ingrid
-- Desenvolvedor _front-end_: AlunoX
-- Desenvolvedor _back-end_: AlunoK
-- Testes: AlunaZ
+- Desenvolvedor _front-end_: Gabrielle
+- Desenvolvedor _back-end_: Gabrielle
+- Testes: Gabrielle
 
   
 ## 2.2. Quadro de tarefas
