@@ -37,6 +37,7 @@ Com base no conceito de aplicação interativa, este projeto tem como propósito
 - Apoiar o aprendizado da leitura e escrita com atividades repetitivas que reforcem a fixação do conteúdo.
 - Cores mais leves e animações que ajudam a criança a navegar pela aplicação e que estimulem o seu interesse em continuar.
 - Recompensas com personagens na medida que a criança vai acertando e passando de nível.
+- Utilizar tecnologias inovadoras como reconhecimento voz para melhorar a acessibilidade e experiência da aplicação.
 
 
 ## 1.4 Justificativa
@@ -51,6 +52,18 @@ Dessarte, dentro do contexto de aprendizado da PUC Minas, esse projeto pode prop
 
 Além disso,  esse projeto promove desenvolvimento de tarefas por meio do apoio a atividades lúdicas e geração de contextos educativos,  criativos e inovadores na educação virtual. Por conseguinte, almeja-se progressivamente alcançar e manter um crescimento da renda superior à média nacional, contribuindo para o cumprimento dos ODS 4 (Educação de Qualidade) e 10 (Redução das Desigualdades).
 
+
+## 1.5 Inovações Tecnológicas
+
+Com o objetivo de tornar a aplicação mais moderna, acessível e eficiente, o projeto propõe a incorporação de tecnologias inovadoras que ampliam a experiência do usuário e garantem maior escalabilidade do sistema.
+
+Sendo elas:
+* **Banco de dados em nuvem:** garante o armazenamento seguro, maior escalabilidade, permitindo maior disponibilidade e integridade dos dados, além de facilitar o acesso remoto.
+* **Hospedagem em nuvem:** irá garantir maior estabilidade, desempenho e disponibilidade da aplicação, permitindo que o sistema suporte múltiplos acessos simultâneos com eficiência.
+* **Login por reconhecimento facial:** Tem como intuito facilitar e agilizar o acesso à aplicação para as crianças e seus responsáveis, reduzindo a necessidade de digitação e deixando a aplicação mais intuitiva. 
+* **Reconhecimento por voz:** permite a interação por comandos de voz, auxiliando crianças com dificuldades na leitura ou escrita, além de facilitar o acompanhamento por profissionais e tornar a experiência mais inclusiva e interativa.
+
+Essas inovações visam não apenas aprimorar a usabilidade do sistema, mas também promover acessibilidade, segurança e escalabilidade, alinhando o projeto às tendências tecnológicas atuais.
 
 ## 2 Público-Alvo
 
